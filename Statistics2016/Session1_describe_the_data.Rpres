@@ -1,0 +1,499 @@
+Session1: Describe the Data
+========================================================
+author: MRC Clinical Sciences Centre (http://mrccsc.github.io/)
+date: 12/July/2016
+width: 1440
+height: 1100
+autosize: true
+font-import: <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+font-family: 'Slabo 27px', serif;
+css:style.css
+
+Outline
+========================================================
+
+- Session1: data summary
+
+- Session2: hypothesis testing
+
+- Session3: linear regression and ANOVA
+
+Materials.
+========================================================
+id: materials
+
+All prerequisites, links to material and slides for this course can be found on github.
+* [Reproducible-R](http://mrccsc.github.io/Reproducible-R/)
+
+Or can be downloaded as a zip archive from here.
+* [Download zip](https://github.com/mrccsc/Reproducible-R/zipball/master)
+
+Materials. - Presentations, source code and practicals.
+========================================================
+
+Once the zip file in unarchived. All presentations as HTML slides and pages, their R code and HTML practical sheets will be available in the directories underneath.
+
+* **presentations/slides/**
+Presentations as an HTML slide show.
+* **presentations/singlepage/**
+Presentations as an HTML single page.
+* **presentations/rcode/**
+R code in presentations.
+* **exercises/**
+Practicals as HTML pages.
+* **answers/**
+Practicals with answers as HTML pages and R code solutions.
+
+Set the Working directory
+========================================================
+
+Before running any of the code in the practicals or slides we need to set the working directory to the folder we unarchived.
+
+You may navigate to the unarchived Reproducible-R folder in the Rstudio menu
+
+**Session -> Set Working Directory -> Choose Directory**
+
+or in the console.
+
+```{r,eval=F}
+setwd("/CSC/workshop/StatInR")
+# e.g. setwd("~/Downloads/StatInR")
+```
+
+Session1 - data summary
+========================================================
+
+- data type
+
+- spread of data
+
+- shape of data
+
+- distribution
+
+
+Data type
+========================================================
+
+data type
+
+- continuous
+
+eg. blood pressure, body weight, height ...
+
+- discrete
+
+eg. gender, hair colour, RNA-seq read count...
+
+
+Spread of data - Life expectancy example
+========================================================
+Life expectancies at Birth for the UK and Constituent Countries 1991-93 to 2010-12
+
+Data Source: Office for National Statistics
+
+Load data
+```{r}
+Life_exp<-read.csv("data/Life_expectancy_at_birth.csv",header=T)
+```
+
+Recap some basic R functions (1/6)
+========================================================
+- str(), head(), dim(), colnames() and summary() functions
+- more details please see "Reproducible R course" [# hyperlink to the course]
+
+
+Recap some basic R functions (2/6)
+========================================================
+
+head(): See the first 6 lines of an R object
+```{r}
+head(Life_exp)
+```
+
+Recap some basic R functions (3/6)
+========================================================
+
+str(): Compactly display the internal structure of an R object
+```{r}
+str(Life_exp)
+```
+
+Recap some basic R functions (4/6)
+========================================================
+see the how many rows and columns in "Life_exp"
+```{r}
+dim(Life_exp)
+```
+
+see column names of "Life_exp"
+```{r}
+colnames(Life_exp)
+```
+
+Recap some basic R functions (5/6)
+========================================================
+
+```{r}
+summary(Life_exp)
+```
+
+Recap some basic R functions (6/6)
+========================================================
+
+ftable(): Create ‘flat’ contingency tables
+```{r}
+ftable(Life_exp[,c("area","gender")])
+```
+
+Data shape - use "Life_exp$life.expectancy"
+========================================================
+
+- working with plots
+- more details please see "Reproducible R"
+
+
+Data shape - work with plots (1/6)
+========================================================
+Scatter plot
+```{r}
+plot(Life_exp$life.expectancy,ylab="Life expectancy (Years)")
+```
+
+Spread of data - work with plots (2/6)
+========================================================
+sort the data from min to max
+```{r}
+plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)")
+```
+
+
+Spread of data - work with plots (3/6)
+========================================================
+min(), max(), median(), range() and quantile() functions
+```{r}
+min.life.exp<-min(Life_exp$life.expectancy)
+max.life.exp<-max(Life_exp$life.expectancy)
+median.life.exp<-median(Life_exp$life.expectancy)
+mean.life.exp<-mean(Life_exp$life.expectancy)
+```
+```{r}
+c(min.life.exp, max.life.exp, median.life.exp, mean.life.exp)
+```
+```{r}
+range(Life_exp$life.expectancy)
+quantile(Life_exp$life.expectancy)
+```
+
+
+Spread of data - work with plots (4/6)
+========================================================
+Boxplot
+
+```{r, echo=FALSE}
+boxplot(Life_exp$life.expectancy,ylab="Life expectancy (Years)")
+abline(h=mean(Life_exp$life.expectancy),col="forestgreen",lwd=3)
+```
+***
+```{r}
+c(min.life.exp, max.life.exp)
+c(median.life.exp, mean.life.exp)
+quantile(Life_exp$life.expectancy)[c(2,4)]
+```
+
+
+Spread of data - work with plots (5/6)
+========================================================
+
+```{r, echo=FALSE}
+par(mfrow=c(1,2))
+  boxplot(Life_exp$life.expectancy,ylab="Life expectancy (Years)")
+  plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)")
+  points(x=c(1,median(1:nrow(Life_exp)),nrow(Life_exp)),
+         y=c(min(Life_exp$life.expectancy),
+             median(Life_exp$life.expectancy),max(Life_exp$life.expectancy)),
+         col="red",pch=16,cex=1.6)
+  abline(h=quantile(Life_exp$life.expectancy)[c(2,4)],
+         v=quantile(c(1:nrow(Life_exp)))[c(2,4)],col="pink")
+par(mfrow=c(1,1))
+```
+
+Spread of data -  work with plots (6/6)
+========================================================
+summary()
+```{r}
+summary(Life_exp$life.expectancy)
+```
+range(): show the minimum and maximum
+```{r}
+range(Life_exp$life.expectancy)
+```
+IQR(): show the interquartile range, i.e. 3rd quartile-1st quartile
+```{r}
+IQR(Life_exp$life.expectancy)
+```
+
+Spread of data - Variance and Standard deviation
+========================================================
+
+$$
+  \begin{aligned}
+  \bar{x} & = \frac{{\displaystyle\sum_{i=1}^n}x_i}n \\
+  \\ \\
+  Variance & =\frac{{\displaystyle\sum_{i=1}^n}(\left|x_i-\overline x\right|)^2}{n-1} \\
+  \\ \\
+  Stan dard\;deviation & =\sqrt{Variance} \\
+  \\ \\
+  \end{aligned}
+$$
+```{r}
+var.life.exp<-sum((Life_exp$life.expectancy-mean.life.exp)^2)/(nrow(Life_exp)-1)
+sd.life.exp<-sqrt(var.life.exp)
+c(var.life.exp, sd.life.exp)
+```
+
+Spread of data - var() and sd() function
+========================================================
+```{r}
+var(Life_exp$life.expectancy)
+sd(Life_exp$life.expectancy)
+```
+
+
+Data shape - histogram
+========================================================
+
+```{r}
+hist(Life_exp$life.expectancy,breaks=10)
+```
+
+Data shape - histogram
+========================================================
+
+```{r}
+hist(Life_exp$life.expectancy,breaks=10,freq = F)
+lines(density(Life_exp$life.expectancy),col="red")
+
+```
+
+Data shape - histogram
+========================================================
+
+```{r,echo=F}
+par(mfrow=c(2,1))
+  hist(Life_exp$life.expectancy,breaks=10,freq = F,xlim=range(Life_exp$life.expectancy))
+  lines(density(Life_exp$life.expectancy),col="red",lwd=3)
+  boxplot(Life_exp$life.expectancy,ylab="Life expectancy (Years)",horizontal=T, ylim=range(Life_exp$life.expectancy))
+  abline(v=mean(Life_exp$life.expectancy),col="forestgreen",lwd=3)
+par(mfrow=c(1,1))
+```
+
+Data shape - histogram
+========================================================
+
+```{r}
+Eng.life.exp<-Life_exp[Life_exp$area=="England",]
+boxplot(life.expectancy~area,data=Life_exp,las=2, cex.axis=0.6)
+boxplot(life.expectancy~gender*area,data=Life_exp,col=(c("gold","darkgreen")),
+        las=2, cex.axis=0.6)
+
+```
+Time for an exercise!
+========================================================
+
+Exercise on vectors can be found [here]
+
+Answers to exercise.
+========================================================
+
+Answers can be found here  [here]
+
+R code for solutions can be found here  [here]
+
+
+Distributions
+========================================================
+- Binomial distribution
+- Normal distribution
+
+
+Distributions
+========================================================
+R comes with functions for extracting information from most common distibutions types. An example of standard R functions for dealing with distibution can be seen here using the normal distributions.
+
+- pnorm - cumulative distribution for x
+- qnorm - inverse of pnorm (from probability gives x)
+- dnorm - distribution density
+- rnorm - random number from normal distribution
+
+Distributions
+========================================================
+Similar functions are available for other distibution types including:
+
+- pbinom (binomial)
+- pnbinom (negative binomial),
+- phyper (hypergeometric)
+- pt (T distribution)
+
+
+Binomial distribution
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Poisson distribution
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Normal distribution
+========================================================
+
+pdf (probability density function), cdf (cumulative distribution function)
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Normal distribution example 1 (1/2)
+========================================================
+We can use rnorm to generate random values following a normal distribution.
+
+Here we produce 10 normally distributed numeric values with mean 8 and standard deviation of 3
+
+```{r}
+rnorm(10,mean=8,sd=3)
+```
+
+Normal distribution example 1 (2/2)
+========================================================
+We can also use these functions to interrogate values assuming a normal distribution for the data.
+
+The probablity of a value being exactly 8 for a distribution of mean 8 and standard deviation 3.
+
+```{r}
+dnorm(8,mean=8,sd=3)
+```
+
+Normal distribution example 2
+========================================================
+The probablity of a value being less than 8 for a distribution of mean 8 and standard deviation 3.
+```{r}
+pnorm(8,mean=8,sd=3)
+```
+The value for which i have a 50 percent being greater than given a normal distribution of mean 8 and standard deviation 3.
+
+```{r}
+qnorm(0.5,mean=8,sd=3)
+```
+
+Correlation
+=========================================================
+
+A common task in statistical analysis is to investigate the relationship between pairs of numeric vectors.
+
+This can be done by identifying the correlation between numeric vectors using the **cor()** function in R.
+
+In this example we use cor() to identify the Pearson correlation between two variables.  The **method** argument may be set to make use of different correlation methods.
+
+- Perfectly posively correlated vectors will return 1
+- Perfectly negatively correlated vectors will return -1
+- Vectors showing no or little correlation will be close to 0.
+
+Correlation between vectors
+=========================================================
+
+```{r}
+x <- rnorm(100,10,2)
+z <- rnorm(100,10,2)
+y <- x
+cor(x,y) #
+cor(x,-y)
+cor(x,z)
+```
+***
+```{r,echo=F}
+par(mfrow=c(3,1))
+plot(x,y) #
+plot(x,-y)
+plot(x,z)
+
+par(mfrow=c(1,1))
+```
+
+
+Correlation over a matrix
+=========================================================
+left: 70%
+Often we wish to apply correlation analysis to all columns or rows in a matrix in a pair-wise manner. To do this in R, we can simply pass the **cor()** function a single argument of the numeric matrix of interest. The **cor()** function will then perform all pair-wise correlations between columns.
+```{r}
+minRep <- rbind(cbind(matrix(rnorm(12,4),ncol=3,byrow = T),matrix(c(rnorm(9,4),rnorm(3,8)),ncol=3,byrow = T)),
+cbind(matrix(rnorm(12,10),ncol=3,byrow = T),matrix(c(rnorm(6,3),rnorm(6,10)),ncol=3,byrow = T)))
+colnames(minRep) <- paste0(c("Sample_"),
+                      1:5,".",sort(rep(c("hi","low"),3)))
+minRepdf <- data.frame(Gene_Name=paste("Gene",letters[1:8],sep="_"),minRep)
+
+table(minRepdf)
+```
+
+
+Correlation over a matrix
+=========================================================
+```{r,echo=F}
+kable(minRep[1:2,])
+```
+
+```{r,eval=F}
+cor(minRep)[1:2,2:5]
+```
+```{r,echo=F}
+cor(minRep)[1:2,2:5,drop=F]
+```
+
+Visualising correlation
+=========================================================
+
+```{r,eval=F,echo=T,fig.width=4,fig.height=3,dpi=300,out.width="1920px",height="1080px"}
+image(cor(minRep),axes=F)
+axis(1,at=seq(0,1,length.out=6), colnames(minRep))
+axis(2,at=seq(0,1,length.out=6), colnames(minRep))
+```
+***
+```{r,eval=T,echo=F,fig.width=4,fig.height=3,dpi=300,out.width="1920px",height="1080px"}
+image(cor(minRep),axes=F)
+axis(1,at=seq(0,1,length.out=6),gsub(".*_","",colnames(minRep)),las=2)
+axis(2,at=seq(0,1,length.out=6),rev(gsub(".*_","",colnames(minRep))),las=2)
+```
+
+
+Slide With Code
+========================================================
+
+```{r}
+
+```
+
+
+Slide With Code
+========================================================
+
+```{r}
+
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```
