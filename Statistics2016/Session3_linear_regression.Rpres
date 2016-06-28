@@ -1,0 +1,155 @@
+Session3: Linear Regression
+========================================================
+author: MRC CSC Bioinformatics Core
+date: 12/July/2016
+
+First Slide
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Regression and linear models
+=========================================================
+
+We have seen how we can find the correlation between two sets of variables using cor() function.
+
+R also provides a comprehensive set of tools for regression analysis including the well used linear modeling function lm()
+
+To fit a linear regression we use a similar set of arguments as passed to the t-test fuction in the previous slide.
+
+```{r,echo=T,prompt=T}
+lmExample <- read.table("data/lmExample.txt",h=T,sep="\t")
+```
+```{r,echo=T,prompt=T}
+lmResult <- lm(Y~X,data=lmExample)
+plot(Y~X,data=lmExample,main="Line of best fit with lm()",
+     xlim=c(0,150),ylim=c(0,200))
+abline(lmResult,col="red",lty=3,lwd=3)
+```
+
+Statistics (21/26) The lm() function
+=========================================================
+
+The lm() function fits a linear regression to your data and provides useful information on the generated fit.
+
+In the example below we fit a linear model using  lm() on the lmExample dataset with column Y as the dependent variable and column X as the explanatory variable.
+
+```{r,echo=T,prompt=T}
+lmResult <- lm(Y~X,data=lmExample)
+lmResult
+```
+
+Printing the result from lm() shows the call to lm() and the coefficients including the intercept.
+
+Statistics (22/26) - Plotting line of best fit.
+=========================================================
+
+From the previous slides we now know the formula for the line.
+
+**Y = 7.001 + 1.972*X**
+
+We can add the line of best fit using **abline()**
+
+```{r,echo=T,prompt=T}
+plot(Y~X,data=lmExample,main="Line of best fit with lm()",
+     xlim=c(0,100),ylim=c(0,200))
+abline(lmResult,col="red",lty=3,lwd=3)
+```
+
+Statistics (23/26) - Interpreting output of lm()
+=========================================================
+As we have seen, printing the model result provides the intercept and slope of line.
+
+To get some more information on the model we can use the summary() function
+
+```{r,prompt=T}
+summary(lmResult)
+```
+
+
+Statistics (24/26) - Residuals
+=========================================================
+
+```{r,prompt=T,echo=F}
+summary(lmResult)
+```
+
+***
+The **residuals** are the difference between the predicted and actual values.
+To retrieve the residuals we can access the slot or use the resid() function.
+
+```{r,prompt=T,echo=T}
+summary(resid(lmResult))
+summary(lmResult$residual)
+```
+Ideally you would want your residuals to be normally distributed around 0.
+
+Statistics (25/26) - R-squared
+=========================================================
+
+```{r,prompt=T,echo=F}
+summary(lmResult)
+```
+
+The **R-squared** value represents the proportion of variability in the response variable that is explained by the explanatory variable.
+
+A high **R-squared** here indicates that the line fits closely to the data.
+
+Statistics (26/26) - F-statistics.
+=========================================================
+
+```{r,prompt=T}
+summary(lmResult)
+```
+
+The results from linear models also provides a measure of significance for a variable not being relevant.
+
+Statistics (Extra) - A fit line
+=========================================================
+
+![alt text](imgs/fittedline.png)
+
+Statistics (Extra) - Calculating R-squared
+=========================================================
+
+![alt text](imgs/rsquared.png)
+
+Statistics (Extra) - Calculating R-squared
+=========================================================
+
+```{r,prompt=F}
+SSE <- sum(resid(lmResult)^2)
+TSS <- sum((lmExample$Y - mean(lmExample$Y))^2)
+1- SSE/TSS
+summary(lmResult)$r.squared
+```
+
+Statistics (Extra) - Calculating F-stat
+=========================================================
+
+![alt text](imgs/fstatistic.png)
+
+Statistics (Extra) - Calculating F-stat
+=========================================================
+
+```{r,prompt=F}
+MSE <- mean(lmResult$residuals^2)
+RSS <- sum((predict(lmResult) - mean(lmExample$Y))^2)
+
+summary(lmResult)$fstatistic
+
+```
+
+
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```

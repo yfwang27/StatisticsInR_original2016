@@ -1,0 +1,194 @@
+Session2: Hypothesis Test
+========================================================
+author: MRC CSC Bioinformatics Core
+date: 12/July/2016
+
+Hypothesis test
+========================================================
+
+- parametric test:
+
+e.g. t-test
+
+- non-parametric test:
+
+e.g. Wilcoxon test
+
+
+Statistical tests
+========================================================
+
+On top of descriptive statistics, R has several statistical tests covering a range of problems and data types.
+
+Some common tests include:
+
+- var.test() - Comparing 2 variances (Fisher's F test)
+- t.test() - Comparing 2 sample means with normal errors (Student's t-test)
+- wilcox.test() - Comparing 2 means with non-normal errors (Wilcoxon's rank test)
+- fisher.test() - Testing for independence of 2 variables in a contingency table (Fisher's exact test)
+
+Confidence Interval (CI)
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+t-test example - Load data (1/2)
+========================================================
+
+We use "PlantGrowth" as example
+```{r}
+PlantGrowth
+```
+
+t-test example - Load data (2/2)
+========================================================
+
+Convert the input data into the proper format
+```{r}
+#install.packages("tidyr")
+PlantGrowth$replicates<-c(rep(c(1:10),3))
+library("tidyr")
+PlantGrowth_wide<-spread(PlantGrowth, group, weight)
+
+```
+
+t-test example - Calculating variance
+========================================================
+
+First we can specify the columns of interest using $ and calculate their variance using var().
+```{r}
+var(PlantGrowth_wide$ctrl)
+var(PlantGrowth_wide$trt1)
+var(PlantGrowth_wide$trt2)
+```
+
+t-test example - Comparing variance
+========================================================
+
+Now we can test for any differences in variances between ctrl and trt1 and ctrl and trt2 with an F-test using the var.test() function.
+```{r}
+var.test(PlantGrowth_wide$ctrl,PlantGrowth_wide$trt1)
+var.test(PlantGrowth_wide$ctrl,PlantGrowth_wide$trt2)
+```
+
+R objects (s3 and s4)
+========================================================
+Left:30% The data type holding the result var.test() is a little more complex than the data types we have looked.
+
+In R, special objects (S3 or S4 objects) can be created which have methods associated to them. The result from var.test is an object of class htest.
+
+Since we have not come across this before, in order to discover its structure we can use the str() function with the object of interest as the argument.
+```{r}
+result <- var.test(PlantGrowth_wide$ctrl, PlantGrowth_wide$trt1)
+str(result)
+```
+
+R objects (s3 and s4)
+========================================================
+Now we know the structure and class of the htest object we can access the slots containing information we want just as with a named list.
+
+The p-value
+```{r}
+result$p.value
+```
+The statistic
+```{r}
+result$statistic
+```
+The data used in function call
+```{r}
+result$data.name
+```
+
+t-test example - Equal Variance
+========================================================
+We have ascertained that ctrl and trt1 have similar variances. We can therefore perform a standard t-test to assess the significance of differences between these groups.
+```{r}
+Result <- t.test(PlantGrowth_wide$ctrl,PlantGrowth_wide$trt1,alternative ="two.sided", var.equal = T)
+Result
+```
+
+t-test example - Unequal Variance
+========================================================
+To compare groups of unequal variance then the var.equal argument may be set to FALSE (which is the default).
+
+note: [see exercise]
+
+T-test example. Specifying a formula
+========================================================
+The same result to that shown could be achieved by specifying a formula for the comparison. Here we wish to compare ctrl versus trt1 so we could simply specify the formula and the data to be used.
+```{r}
+data4formula<-PlantGrowth[PlantGrowth$group!="trt2",]
+result_formula <- t.test(weight~group,data4formula,alternative ="two.sided", var.equal = T)
+result_formula
+```
+
+
+ANOVA
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Wilcoxon test
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+First Slide
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+First Slide
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+First Slide
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Slide With Code
+========================================================
+
+```{r}
+summary(cars)
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```
