@@ -6,6 +6,10 @@ date: 12/July/2016
 Hypothesis test
 ========================================================
 
+- SD (standard deviation) and SE (standard error; standard error of sample mean)
+
+- (CI) Confidence Interval
+
 - parametric test:
 
 e.g. t-test
@@ -13,6 +17,60 @@ e.g. t-test
 - non-parametric test:
 
 e.g. Wilcoxon test
+
+- chi-square test; Fisher's exact test
+
+
+Test of significance in ratio
+========================================================
+
+[example: EU referendum reuslt 2016]
+
+
+Hypothesis test in propotion
+========================================================
+
+[example: EU referendum reuslt 2016]
+[data/EU-referendum-result-data.csv]
+
+```r
+vote.leave=17410742
+vote.remain=16141241
+total.vote=vote.leave+vote.remain
+prop.test(vote.leave, 33551983, p=0.5, alternative = "less")
+```
+
+```
+
+	1-sample proportions test with continuity correction
+
+data:  vote.leave out of 33551983, null probability 0.5
+X-squared = 48034, df = 1, p-value = 1
+alternative hypothesis: true p is less than 0.5
+95 percent confidence interval:
+ 0.0000000 0.5190603
+sample estimates:
+        p 
+0.5189184 
+```
+
+```r
+prop.test(vote.remain, 33551983, p=0.5, alternative = "less")
+```
+
+```
+
+	1-sample proportions test with continuity correction
+
+data:  vote.remain out of 33551983, null probability 0.5
+X-squared = 48034, df = 1, p-value < 2.2e-16
+alternative hypothesis: true p is less than 0.5
+95 percent confidence interval:
+ 0.0000000 0.4812235
+sample estimates:
+        p 
+0.4810816 
+```
 
 
 Statistical tests
