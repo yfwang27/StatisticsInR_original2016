@@ -288,6 +288,31 @@ par(mfrow=c(2,1))
 par(mfrow=c(1,1))
 ```
 
+
+Data shape - violin plot
+========================================================
+
+```{r,echo=F}
+install.packages("vioplot")
+```
+```{r,echo=F}
+par(mfrow=c(2,1))
+  hist(Life_exp$life.expectancy,breaks=10,freq = F,xlim=range(Life_exp$life.expectancy))
+  lines(density(Life_exp$life.expectancy),col="red",lwd=3)
+  boxplot(Life_exp$life.expectancy,ylab="Life expectancy (Years)",horizontal=T, ylim=range(Life_exp$life.expectancy))
+  abline(v=mean(Life_exp$life.expectancy),col="forestgreen",lwd=3)
+par(mfrow=c(1,1))
+```
+***
+```{r}
+library("vioplot")
+boxplot(Life_exp$life.expectancy,ylab="Life expectancy (Years)",horizontal=T, ylim=range(Life_exp$life.expectancy))
+
+vioplot(Life_exp$life.expectancy,ylim=range(Life_exp$life.expectancy),horizontal = T)
+
+```
+
+
 Data shape - histogram
 ========================================================
 

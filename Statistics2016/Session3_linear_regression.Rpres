@@ -1,17 +1,18 @@
 Session3: Linear Regression
 ========================================================
-author: MRC CSC Bioinformatics Core
+author: MRC Clinical Sciences Centre (http://mrccsc.github.io/)
 date: 12/July/2016
+width: 1440
+height: 1100
+autosize: true
+font-import: <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+font-family: 'Slabo 27px', serif;
+css:style.css
 
-First Slide
+Experimental design
 ========================================================
 
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
+[something to do with lm and ]
 
 Regression and linear models
 =========================================================
