@@ -178,7 +178,7 @@ mean(iris_versi$Petal.Length)
 ***
 
 ```r
-plot(iris_versi$Petal.Length)
+plot(iris_versi$Petal.Length, ylab="Petal Length of Iris.versicolor")
 abline(h=mean(iris_versi$Petal.Length),
        col="forestgreen",lwd=3)
 ```
@@ -207,7 +207,7 @@ $$
 
 Regression and linear models (/)
 =========================================================
-Zoom in [just see 3 data points]
+Zoom in [just see first 4 data points]
 
 ![plot of chunk unnamed-chunk-11](Session3_linear_regression-figure/unnamed-chunk-11-1.png)
 ***
@@ -221,10 +221,26 @@ $$
 $$
 - square of the residuals
 $$
-  Error_i^2
+  \begin{aligned}
+  Error_i^2  = (y_i - \bar{y})^2
+  \end{aligned}
 $$
 - sum of the square of the residuals (SSE)
+$$
+  \begin{aligned}
 
+  SSE  = \sum_{i=1}^{n}(y_i-\bar{y})^2
+  \end{aligned}
+$$
+
+
+Regression and linear models (/)
+=========================================================
+Use the "iris_versi" Petal.Width to predict Petal.Length
+
+![plot of chunk unnamed-chunk-12](Session3_linear_regression-figure/unnamed-chunk-12-1.png)
+***
+![plot of chunk unnamed-chunk-13](Session3_linear_regression-figure/unnamed-chunk-13-1.png)
 
 Regression and linear models (/)
 =========================================================
@@ -259,7 +275,7 @@ Regression and linear models
 > abline(lmResult,col="red",lty=3,lwd=3)
 ```
 
-![plot of chunk unnamed-chunk-14](Session3_linear_regression-figure/unnamed-chunk-14-1.png)
+![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
 
 Statistics (21/26) The lm() function
 =========================================================
@@ -302,7 +318,7 @@ We can add the line of best fit using **abline()**
 > abline(lmResult,col="red",lty=3,lwd=3)
 ```
 
-![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
+![plot of chunk unnamed-chunk-18](Session3_linear_regression-figure/unnamed-chunk-18-1.png)
 
 Statistics (23/26) - Interpreting output of lm()
 =========================================================
@@ -504,4 +520,4 @@ summary(lmResult)$fstatistic
 Slide With Plot
 ========================================================
 
-![plot of chunk unnamed-chunk-24](Session3_linear_regression-figure/unnamed-chunk-24-1.png)
+![plot of chunk unnamed-chunk-26](Session3_linear_regression-figure/unnamed-chunk-26-1.png)

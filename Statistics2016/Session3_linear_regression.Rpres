@@ -100,7 +100,7 @@ mean(iris_versi$Petal.Length)
 ```
 ***
 ```{r}
-plot(iris_versi$Petal.Length)
+plot(iris_versi$Petal.Length, ylab="Petal Length of Iris.versicolor")
 abline(h=mean(iris_versi$Petal.Length),
        col="forestgreen",lwd=3)
 ```
@@ -112,7 +112,7 @@ Try to use the mean of total Petal.Length first
 
 ```{r,echo=F}
 diff_df<-iris_versi$Petal.Length-mean(iris_versi$Petal.Length)
-plot(iris_versi$Petal.Length)
+plot(iris_versi$Petal.Length,ylab="Petal Length of Iris.versicolor")
 abline(h=mean(iris_versi$Petal.Length),
        col="forestgreen",lwd=3)
 
@@ -135,21 +135,21 @@ $$
 
 Regression and linear models (/)
 =========================================================
-Zoom in [just see 3 data points]
+Zoom in [just see first 4 data points]
 
 ```{r,echo=F}
 diff_df<-iris_versi$Petal.Length-mean(iris_versi$Petal.Length)
-plot(iris_versi$Petal.Length[c(2:4)],xlim=c(0.5,4.5), ylim=c(2,6))
+plot(iris_versi$Petal.Length[c(1:4)],xlim=c(0,5.5), ylim=c(2,6.5))
 abline(h=mean(iris_versi$Petal.Length),
        col="forestgreen",lwd=3)
 
-rect(xleft=c(1:3),ybottom=mean(iris_versi$Petal.Length),
-     xright=c(1:3)+abs(diff_df[c(2:4)]),
-     ytop=mean(iris_versi$Petal.Length)+diff_df[c(2:4)],
+rect(xleft=c(1:4),ybottom=mean(iris_versi$Petal.Length),
+     xright=c(1:4)+abs(diff_df[c(1:4)]),
+     ytop=mean(iris_versi$Petal.Length)+diff_df[c(1:4)],
      density=30,col = "blue")
 
-segments(x0=c(1:3),y0=iris_versi$Petal.Length[c(2:4)],
-         x1=c(1:3),y1=mean(iris_versi$Petal.Length),col="pink",lwd=3)
+segments(x0=c(1:4),y0=iris_versi$Petal.Length[c(1:4)],
+         x1=c(1:4),y1=mean(iris_versi$Petal.Length),col="pink",lwd=3)
 ```
 ***
 In this case, the expected values is  $$ mean  = \bar{y} $$
@@ -162,10 +162,39 @@ $$
 $$
 - square of the residuals
 $$
-  Error_i^2
+  \begin{aligned}
+  Error_i^2  = (y_i - \bar{y})^2
+  \end{aligned}
 $$
 - sum of the square of the residuals (SSE)
+$$
+  \begin{aligned}
 
+  SSE  = \sum_{i=1}^{n}(y_i-\bar{y})^2
+  \end{aligned}
+$$
+
+
+Regression and linear models (/)
+=========================================================
+Use the "iris_versi" Petal.Width to predict Petal.Length
+
+```{r,echo=F}
+plot(iris_versi$Petal.Length,ylab="Petal Length of Iris.versicolor")
+abline(h=mean(iris_versi$Petal.Length),
+       col="forestgreen",lwd=3)
+title("Scatter plot of Iris.versicolor Petal.Width")
+```
+***
+```{r,echo=F}
+plot(iris_versi$Petal.Width,iris_versi$Petal.Length,
+     xlab="Petal Width of Iris.versicolor",
+     ylab="Petal Length of Iris.versicolor")
+abline(lm(iris_versi$Petal.Length~iris_versi$Petal.Width,data=iris_versi),
+       col="blueviolet",lwd=3)
+title("Scatter plot of Iris.versicolor Petal.Width vs Petal.Length")
+
+```
 
 Regression and linear models (/)
 =========================================================
