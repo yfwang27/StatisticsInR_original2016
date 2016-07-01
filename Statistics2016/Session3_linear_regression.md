@@ -1,19 +1,122 @@
 Session3: Linear Regression
 ========================================================
-author: MRC CSC Bioinformatics Core
+author: MRC Clinical Sciences Centre (http://mrccsc.github.io/)
 date: 12/July/2016
+width: 1440
+height: 1100
+autosize: true
+font-import: <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+font-family: 'Slabo 27px', serif;
+css:style.css
 
-First Slide
+Outline
+========================================================
+- correlation
+
+- linear regression
+
+
+Dataset - use the "iris" data (1/3)
+========================================================
+We have used the "iris" data for the [Intermediate R course]. We are going to work on this data again for this session.
+
+Dataset - use the "iris" data (2/3)
+========================================================
+Some basic checks
+
+```r
+class(iris)
+```
+
+```
+[1] "data.frame"
+```
+
+```r
+str(iris)
+```
+
+```
+'data.frame':	150 obs. of  5 variables:
+ $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+ $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+ $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+ $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+ $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+```
+***
+
+```r
+head(iris)
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+
+Dataset - use the "iris" data (3/3)
+========================================================
+[*intermediate R; add a link to the intermediate R]
+
+```r
+# library("dplyr")
+# tbl_df()
+```
+
+Correlation (1/)
+========================================================
+- pearson
+
+- spearman
+
+Correlation (2/)
 ========================================================
 
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
+```r
+cor(iris[,1:4])
+```
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+```
+             Sepal.Length Sepal.Width Petal.Length Petal.Width
+Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
+Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
+Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
+Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000
+```
 
-Regression and linear models
+Correlation (3/)
+========================================================
+
+```r
+pairs(iris[,1:4])
+```
+
+![plot of chunk unnamed-chunk-5](Session3_linear_regression-figure/unnamed-chunk-5-1.png)
+
+Correlation (4/)
+========================================================
+[probably find an example that requires the spearman method]
+
+```r
+cor(iris[,1:4],method="spearman")
+```
+
+```
+             Sepal.Length Sepal.Width Petal.Length Petal.Width
+Sepal.Length    1.0000000  -0.1667777    0.8818981   0.8342888
+Sepal.Width    -0.1667777   1.0000000   -0.3096351  -0.2890317
+Petal.Length    0.8818981  -0.3096351    1.0000000   0.9376668
+Petal.Width     0.8342888  -0.2890317    0.9376668   1.0000000
+```
+
+Regression and linear models (1/)
 =========================================================
 
 We have seen how we can find the correlation between two sets of variables using cor() function.
@@ -21,6 +124,68 @@ We have seen how we can find the correlation between two sets of variables using
 R also provides a comprehensive set of tools for regression analysis including the well used linear modeling function lm()
 
 To fit a linear regression we use a similar set of arguments as passed to the t-test fuction in the previous slide.
+
+Regression and linear models (/)
+=========================================================
+Using the Petal.Width from iris data as example
+
+We could like to use the current information to predict the width of a petal from Iris.versicolor
+
+```r
+head(iris)
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+
+Regression and linear models (/)
+=========================================================
+Try to use the mean of total Petal.Length first
+
+```r
+mean(iris$Petal.Length)
+```
+
+```
+[1] 3.758
+```
+
+```r
+plot(iris$Petal.Length)
+abline(h=mean(iris$Petal.Length),col="forestgreen",lwd=3)
+```
+
+![plot of chunk unnamed-chunk-8](Session3_linear_regression-figure/unnamed-chunk-8-1.png)
+
+
+Regression and linear models (/)
+=========================================================
+
+
+```r
+lm(formula = Petal.Width ~ Petal.Length, data = iris)
+```
+
+```
+
+Call:
+lm(formula = Petal.Width ~ Petal.Length, data = iris)
+
+Coefficients:
+ (Intercept)  Petal.Length  
+     -0.3631        0.4158  
+```
+
+Regression and linear models
+=========================================================
 
 
 ```r
@@ -34,7 +199,7 @@ To fit a linear regression we use a similar set of arguments as passed to the t-
 > abline(lmResult,col="red",lty=3,lwd=3)
 ```
 
-![plot of chunk unnamed-chunk-2](Session3_linear_regression-figure/unnamed-chunk-2-1.png)
+![plot of chunk unnamed-chunk-11](Session3_linear_regression-figure/unnamed-chunk-11-1.png)
 
 Statistics (21/26) The lm() function
 =========================================================
@@ -77,7 +242,7 @@ We can add the line of best fit using **abline()**
 > abline(lmResult,col="red",lty=3,lwd=3)
 ```
 
-![plot of chunk unnamed-chunk-4](Session3_linear_regression-figure/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-13](Session3_linear_regression-figure/unnamed-chunk-13-1.png)
 
 Statistics (23/26) - Interpreting output of lm()
 =========================================================
@@ -279,4 +444,4 @@ summary(lmResult)$fstatistic
 Slide With Plot
 ========================================================
 
-![plot of chunk unnamed-chunk-12](Session3_linear_regression-figure/unnamed-chunk-12-1.png)
+![plot of chunk unnamed-chunk-21](Session3_linear_regression-figure/unnamed-chunk-21-1.png)

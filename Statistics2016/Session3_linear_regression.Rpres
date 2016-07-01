@@ -9,12 +9,65 @@ font-import: <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel=
 font-family: 'Slabo 27px', serif;
 css:style.css
 
-Experimental design
+Outline
 ========================================================
+- correlation
 
-[something to do with lm and ]
+- linear regression
 
-Regression and linear models
+
+Dataset - use the "iris" data (1/3)
+========================================================
+We have used the "iris" data for the [Intermediate R course]. We are going to work on this data again for this session.
+
+Dataset - use the "iris" data (2/3)
+========================================================
+Some basic checks
+```{r}
+class(iris)
+str(iris)
+```
+***
+```{r}
+head(iris)
+```
+
+
+Dataset - use the "iris" data (3/3)
+========================================================
+[*intermediate R; add a link to the intermediate R]
+```{r}
+# library("dplyr")
+# tbl_df()
+
+```
+
+Correlation (1/)
+========================================================
+- pearson
+
+- spearman
+
+Correlation (2/)
+========================================================
+```{r}
+cor(iris[,1:4])
+```
+
+Correlation (3/)
+========================================================
+```{r}
+pairs(iris[,1:4])
+```
+
+Correlation (4/)
+========================================================
+[probably find an example that requires the spearman method]
+```{r}
+cor(iris[,1:4],method="spearman")
+```
+
+Regression and linear models (1/)
 =========================================================
 
 We have seen how we can find the correlation between two sets of variables using cor() function.
@@ -22,6 +75,36 @@ We have seen how we can find the correlation between two sets of variables using
 R also provides a comprehensive set of tools for regression analysis including the well used linear modeling function lm()
 
 To fit a linear regression we use a similar set of arguments as passed to the t-test fuction in the previous slide.
+
+Regression and linear models (/)
+=========================================================
+Using the Petal.Width from iris data as example
+
+We could like to use the current information to predict the width of a petal from Iris.versicolor
+```{r}
+head(iris)
+```
+
+
+Regression and linear models (/)
+=========================================================
+Try to use the mean of total Petal.Length first
+```{r}
+mean(iris$Petal.Length)
+plot(iris$Petal.Length)
+abline(h=mean(iris$Petal.Length),col="forestgreen",lwd=3)
+```
+
+
+Regression and linear models (/)
+=========================================================
+
+```{r}
+lm(formula = Petal.Width ~ Petal.Length, data = iris)
+```
+
+Regression and linear models
+=========================================================
 
 ```{r,echo=T,prompt=T}
 lmExample <- read.table("data/lmExample.txt",h=T,sep="\t")

@@ -1,10 +1,10 @@
 PackratFormat: 1.4
 PackratVersion: 0.4.7.1
-RVersion: 3.3.0
-Repos: BioCsoft=https://bioconductor.org/packages/3.3/bioc,
-    BioCann=https://bioconductor.org/packages/3.3/data/annotation,
-    BioCexp=https://bioconductor.org/packages/3.3/data/experiment,
-    BioCextra=https://bioconductor.org/packages/3.3/extra,
+RVersion: 3.2.2
+Repos: BioCsoft=https://bioconductor.org/packages/3.2/bioc,
+    BioCann=https://bioconductor.org/packages/3.2/data/annotation,
+    BioCexp=https://bioconductor.org/packages/3.2/data/experiment,
+    BioCextra=https://bioconductor.org/packages/3.2/extra,
     CRAN=https://cran.rstudio.com/
 
 Package: digest
