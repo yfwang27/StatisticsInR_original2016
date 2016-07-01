@@ -185,7 +185,7 @@ plot(iris_versi$Petal.Width,iris_versi$Petal.Length,
      xlab="Petal Width of Iris.versicolor (x)",
      ylab="Petal Length of Iris.versicolor (y)")
 abline(lm(iris_versi$Petal.Length~iris_versi$Petal.Width,data=iris_versi),
-       col="blueviolet",lwd=3)
+       col="blueviolet",lwd=3, lty=3)
 title("Scatter plot of Iris.versicolor Petal.Width vs Petal.Length")
 
 ```
@@ -220,43 +220,30 @@ lmResult
 
 Regression and linear models (/)
 =========================================================
+```{r}
+summary(lmResult)
+```
+
+Regression and linear models (/)
+=========================================================
+```{r}
+lmResult$coefficients
+```
+From the $coefficients of object lmResult, we know the equation for the best fit is
+
+**Y = 1.781275 + 1.869325 *X**
+
+We can add the line of best fit using **abline()**
+***
 ```{r,echo=F}
 plot(iris_versi$Petal.Width,iris_versi$Petal.Length,xlim=c(0,1.8),ylim=c(0,5),
      xlab="Petal Width of Iris.versicolor (x)",
      ylab="Petal Length of Iris.versicolor (y)")
 abline(lm(iris_versi$Petal.Length~iris_versi$Petal.Width,data=iris_versi),
-       col="blueviolet",lwd=3)
+       col="blueviolet",lwd=3, lty=3)
 title("Scatter plot of Iris.versicolor Petal.Width vs Petal.Length")
-
 ```
 
-
-Regression and linear models
-=========================================================
-
-```{r,echo=T,prompt=T}
-lmExample <- read.table("data/lmExample.txt",h=T,sep="\t")
-```
-```{r,echo=T,prompt=T}
-lmResult <- lm(Y~X,data=lmExample)
-plot(Y~X,data=lmExample,main="Line of best fit with lm()",
-     xlim=c(0,150),ylim=c(0,200))
-abline(lmResult,col="red",lty=3,lwd=3)
-```
-
-Statistics (21/26) The lm() function
-=========================================================
-
-The lm() function fits a linear regression to your data and provides useful information on the generated fit.
-
-In the example below we fit a linear model using  lm() on the lmExample dataset with column Y as the dependent variable and column X as the explanatory variable.
-
-```{r,echo=T,prompt=T}
-lmResult <- lm(Y~X,data=lmExample)
-lmResult
-```
-
-Printing the result from lm() shows the call to lm() and the coefficients including the intercept.
 
 Statistics (22/26) - Plotting line of best fit.
 =========================================================
@@ -359,9 +346,15 @@ summary(lmResult)$fstatistic
 
 
 
-Slide With Plot
-========================================================
+Regression and linear models
+=========================================================
 
-```{r, echo=FALSE}
-plot(cars)
+```{r,echo=T,prompt=T}
+lmExample <- read.table("data/lmExample.txt",h=T,sep="\t")
+```
+```{r,echo=T,prompt=T}
+lmResult <- lm(Y~X,data=lmExample)
+plot(Y~X,data=lmExample,main="Line of best fit with lm()",
+     xlim=c(0,150),ylim=c(0,200))
+abline(lmResult,col="red",lty=3,lwd=3)
 ```

@@ -281,50 +281,51 @@ Coefficients:
 
 Regression and linear models (/)
 =========================================================
-![plot of chunk unnamed-chunk-14](Session3_linear_regression-figure/unnamed-chunk-14-1.png)
-
-
-Regression and linear models
-=========================================================
-
 
 ```r
-> lmExample <- read.table("data/lmExample.txt",h=T,sep="\t")
-```
-
-```r
-> lmResult <- lm(Y~X,data=lmExample)
-> plot(Y~X,data=lmExample,main="Line of best fit with lm()",
-+      xlim=c(0,150),ylim=c(0,200))
-> abline(lmResult,col="red",lty=3,lwd=3)
-```
-
-![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
-
-Statistics (21/26) The lm() function
-=========================================================
-
-The lm() function fits a linear regression to your data and provides useful information on the generated fit.
-
-In the example below we fit a linear model using  lm() on the lmExample dataset with column Y as the dependent variable and column X as the explanatory variable.
-
-
-```r
-> lmResult <- lm(Y~X,data=lmExample)
-> lmResult
+summary(lmResult)
 ```
 
 ```
 
 Call:
-lm(formula = Y ~ X, data = lmExample)
+lm(formula = Petal.Length ~ Petal.Width, data = iris_versi)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.8375 -0.1441 -0.0114  0.1984  0.6755 
 
 Coefficients:
-(Intercept)            X  
-      7.001        1.972  
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   1.7813     0.2838   6.276 9.48e-08 ***
+Petal.Width   1.8693     0.2117   8.828 1.27e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2931 on 48 degrees of freedom
+Multiple R-squared:  0.6188,	Adjusted R-squared:  0.6109 
+F-statistic: 77.93 on 1 and 48 DF,  p-value: 1.272e-11
 ```
 
-Printing the result from lm() shows the call to lm() and the coefficients including the intercept.
+Regression and linear models (/)
+=========================================================
+
+```r
+lmResult$coefficients
+```
+
+```
+(Intercept) Petal.Width 
+   1.781275    1.869325 
+```
+From the $coefficients of object lmResult, we know the equation for the best fit is
+
+**Y = 1.781275 + 1.869325 *X**
+
+We can add the line of best fit using **abline()**
+***
+![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
+
 
 Statistics (22/26) - Plotting line of best fit.
 =========================================================
@@ -336,212 +337,24 @@ From the previous slides we now know the formula for the line.
 We can add the line of best fit using **abline()**
 
 
-```r
-> plot(Y~X,data=lmExample,main="Line of best fit with lm()",
-+      xlim=c(0,100),ylim=c(0,200))
-> abline(lmResult,col="red",lty=3,lwd=3)
-```
-
-![plot of chunk unnamed-chunk-18](Session3_linear_regression-figure/unnamed-chunk-18-1.png)
-
-Statistics (23/26) - Interpreting output of lm()
-=========================================================
-As we have seen, printing the model result provides the intercept and slope of line.
-
-To get some more information on the model we can use the summary() function
 
 
-```r
-> summary(lmResult)
-```
-
-```
-
-Call:
-lm(formula = Y ~ X, data = lmExample)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--5.0150 -2.3688 -0.2079  2.6068  5.0538 
-
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  7.00053    0.93207   7.511 3.91e-13 ***
-X            1.97218    0.01325 148.894  < 2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 2.858 on 398 degrees of freedom
-Multiple R-squared:  0.9824,	Adjusted R-squared:  0.9823 
-F-statistic: 2.217e+04 on 1 and 398 DF,  p-value: < 2.2e-16
-```
 
 
-Statistics (24/26) - Residuals
-=========================================================
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ```
-
-Call:
-lm(formula = Y ~ X, data = lmExample)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--5.0150 -2.3688 -0.2079  2.6068  5.0538 
-
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  7.00053    0.93207   7.511 3.91e-13 ***
-X            1.97218    0.01325 148.894  < 2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 2.858 on 398 degrees of freedom
-Multiple R-squared:  0.9824,	Adjusted R-squared:  0.9823 
-F-statistic: 2.217e+04 on 1 and 398 DF,  p-value: < 2.2e-16
+Error in eval(expr, envir, enclos) : object 'lmExample' not found
 ```
-
-***
-The **residuals** are the difference between the predicted and actual values.
-To retrieve the residuals we can access the slot or use the resid() function.
-
-
-```r
-> summary(resid(lmResult))
-```
-
-```
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
--5.0150 -2.3690 -0.2079  0.0000  2.6070  5.0540 
-```
-
-```r
-> summary(lmResult$residual)
-```
-
-```
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
--5.0150 -2.3690 -0.2079  0.0000  2.6070  5.0540 
-```
-Ideally you would want your residuals to be normally distributed around 0.
-
-Statistics (25/26) - R-squared
-=========================================================
-
-
-```
-
-Call:
-lm(formula = Y ~ X, data = lmExample)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--5.0150 -2.3688 -0.2079  2.6068  5.0538 
-
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  7.00053    0.93207   7.511 3.91e-13 ***
-X            1.97218    0.01325 148.894  < 2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 2.858 on 398 degrees of freedom
-Multiple R-squared:  0.9824,	Adjusted R-squared:  0.9823 
-F-statistic: 2.217e+04 on 1 and 398 DF,  p-value: < 2.2e-16
-```
-
-The **R-squared** value represents the proportion of variability in the response variable that is explained by the explanatory variable.
-
-A high **R-squared** here indicates that the line fits closely to the data.
-
-Statistics (26/26) - F-statistics.
-=========================================================
-
-
-```r
-> summary(lmResult)
-```
-
-```
-
-Call:
-lm(formula = Y ~ X, data = lmExample)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--5.0150 -2.3688 -0.2079  2.6068  5.0538 
-
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  7.00053    0.93207   7.511 3.91e-13 ***
-X            1.97218    0.01325 148.894  < 2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 2.858 on 398 degrees of freedom
-Multiple R-squared:  0.9824,	Adjusted R-squared:  0.9823 
-F-statistic: 2.217e+04 on 1 and 398 DF,  p-value: < 2.2e-16
-```
-
-The results from linear models also provides a measure of significance for a variable not being relevant.
-
-Statistics (Extra) - A fit line
-=========================================================
-
-![alt text](imgs/fittedline.png)
-
-Statistics (Extra) - Calculating R-squared
-=========================================================
-
-![alt text](imgs/rsquared.png)
-
-Statistics (Extra) - Calculating R-squared
-=========================================================
-
-
-```r
-SSE <- sum(resid(lmResult)^2)
-TSS <- sum((lmExample$Y - mean(lmExample$Y))^2)
-1- SSE/TSS
-```
-
-```
-[1] 0.982364
-```
-
-```r
-summary(lmResult)$r.squared
-```
-
-```
-[1] 0.982364
-```
-
-Statistics (Extra) - Calculating F-stat
-=========================================================
-
-![alt text](imgs/fstatistic.png)
-
-Statistics (Extra) - Calculating F-stat
-=========================================================
-
-
-```r
-MSE <- mean(lmResult$residuals^2)
-RSS <- sum((predict(lmResult) - mean(lmExample$Y))^2)
-
-summary(lmResult)$fstatistic
-```
-
-```
-   value    numdf    dendf 
-22169.41     1.00   398.00 
-```
-
-
-
-Slide With Plot
-========================================================
-
-![plot of chunk unnamed-chunk-26](Session3_linear_regression-figure/unnamed-chunk-26-1.png)
