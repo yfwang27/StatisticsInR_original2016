@@ -422,83 +422,7 @@ The value for which i have a 50 percent being greater than given a normal distri
 qnorm(0.5,mean=8,sd=3)
 ```
 
-Correlation
-=========================================================
 
-A common task in statistical analysis is to investigate the relationship between pairs of numeric vectors.
-
-This can be done by identifying the correlation between numeric vectors using the **cor()** function in R.
-
-In this example we use cor() to identify the Pearson correlation between two variables.  The **method** argument may be set to make use of different correlation methods.
-
-- Perfectly posively correlated vectors will return 1
-- Perfectly negatively correlated vectors will return -1
-- Vectors showing no or little correlation will be close to 0.
-
-Correlation between vectors
-=========================================================
-
-```{r}
-x <- rnorm(100,10,2)
-z <- rnorm(100,10,2)
-y <- x
-cor(x,y) #
-cor(x,-y)
-cor(x,z)
-```
-***
-```{r,echo=F}
-par(mfrow=c(3,1))
-plot(x,y) #
-plot(x,-y)
-plot(x,z)
-
-par(mfrow=c(1,1))
-```
-
-
-Correlation over a matrix
-=========================================================
-left: 70%
-Often we wish to apply correlation analysis to all columns or rows in a matrix in a pair-wise manner. To do this in R, we can simply pass the **cor()** function a single argument of the numeric matrix of interest. The **cor()** function will then perform all pair-wise correlations between columns.
-```{r}
-minRep <- rbind(cbind(matrix(rnorm(12,4),ncol=3,byrow = T),matrix(c(rnorm(9,4),rnorm(3,8)),ncol=3,byrow = T)),
-cbind(matrix(rnorm(12,10),ncol=3,byrow = T),matrix(c(rnorm(6,3),rnorm(6,10)),ncol=3,byrow = T)))
-colnames(minRep) <- paste0(c("Sample_"),
-                      1:5,".",sort(rep(c("hi","low"),3)))
-minRepdf <- data.frame(Gene_Name=paste("Gene",letters[1:8],sep="_"),minRep)
-
-table(minRepdf)
-```
-
-
-Correlation over a matrix
-=========================================================
-```{r,echo=F}
-kable(minRep[1:2,])
-```
-
-```{r,eval=F}
-cor(minRep)[1:2,2:5]
-```
-```{r,echo=F}
-cor(minRep)[1:2,2:5,drop=F]
-```
-
-Visualising correlation
-=========================================================
-
-```{r,eval=F,echo=T,fig.width=4,fig.height=3,dpi=300,out.width="1920px",height="1080px"}
-image(cor(minRep),axes=F)
-axis(1,at=seq(0,1,length.out=6), colnames(minRep))
-axis(2,at=seq(0,1,length.out=6), colnames(minRep))
-```
-***
-```{r,eval=T,echo=F,fig.width=4,fig.height=3,dpi=300,out.width="1920px",height="1080px"}
-image(cor(minRep),axes=F)
-axis(1,at=seq(0,1,length.out=6),gsub(".*_","",colnames(minRep)),las=2)
-axis(2,at=seq(0,1,length.out=6),rev(gsub(".*_","",colnames(minRep))),las=2)
-```
 
 
 Slide With Code
@@ -509,16 +433,3 @@ Slide With Code
 ```
 
 
-Slide With Code
-========================================================
-
-```{r}
-
-```
-
-Slide With Plot
-========================================================
-
-```{r, echo=FALSE}
-plot(cars)
-```

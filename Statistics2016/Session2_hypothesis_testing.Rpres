@@ -38,14 +38,24 @@ Hypothesis test in propotion
 
 [example: EU referendum reuslt 2016]
 [data/EU-referendum-result-data.csv]
+Is the leave vote more than the 50%?
 ```{r}
 vote.leave=17410742
 vote.remain=16141241
 total.vote=vote.leave+vote.remain
-binom.test(vote.leave, total.vote, p=0.5, alternative = "less")
-prop.test(vote.remain, total.vote, p=0.5, alternative = "less")
+
+
 ```
 
+Hypothesis test in propotion
+========================================================
+
+$$H_0:\text{ Leave vote is more than 50%}
+\\
+H_a:\text{ Leave vote is no more than 50%}$$
+```{r}
+binom.test(vote.leave, total.vote, p=0.5, alternative = "less")
+```
 
 Statistical tests
 ========================================================

@@ -1,7 +1,13 @@
 Session2: Hypothesis Test
 ========================================================
-author: MRC CSC Bioinformatics Core
+author: MRC Clinical Sciences Centre (http://mrccsc.github.io/)
 date: 12/July/2016
+width: 1440
+height: 1100
+autosize: true
+font-import: <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+font-family: 'Slabo 27px', serif;
+css:style.css
 
 Hypothesis test
 ========================================================
@@ -32,46 +38,39 @@ Hypothesis test in propotion
 
 [example: EU referendum reuslt 2016]
 [data/EU-referendum-result-data.csv]
+Is the leave vote more than the 50%?
 
 ```r
 vote.leave=17410742
 vote.remain=16141241
 total.vote=vote.leave+vote.remain
-prop.test(vote.leave, 33551983, p=0.5, alternative = "less")
+```
+
+Hypothesis test in propotion
+========================================================
+
+$$H_0:\text{ Leave vote is more than 50%}
+\\
+H_a:\text{ Leave vote is no more than 50%}$$
+
+```r
+binom.test(vote.leave, total.vote, p=0.5, alternative = "less")
 ```
 
 ```
 
-	1-sample proportions test with continuity correction
+	Exact binomial test
 
-data:  vote.leave out of 33551983, null probability 0.5
-X-squared = 48034, df = 1, p-value = 1
-alternative hypothesis: true p is less than 0.5
+data:  vote.leave and total.vote
+number of successes = 17411000, number of trials = 33552000,
+p-value = 1
+alternative hypothesis: true probability of success is less than 0.5
 95 percent confidence interval:
  0.0000000 0.5190603
 sample estimates:
-        p 
-0.5189184 
+probability of success 
+             0.5189184 
 ```
-
-```r
-prop.test(vote.remain, 33551983, p=0.5, alternative = "less")
-```
-
-```
-
-	1-sample proportions test with continuity correction
-
-data:  vote.remain out of 33551983, null probability 0.5
-X-squared = 48034, df = 1, p-value < 2.2e-16
-alternative hypothesis: true p is less than 0.5
-95 percent confidence interval:
- 0.0000000 0.4812235
-sample estimates:
-        p 
-0.4810816 
-```
-
 
 Statistical tests
 ========================================================
@@ -82,6 +81,7 @@ Some common tests include:
 
 - var.test() - Comparing 2 variances (Fisher's F test)
 - t.test() - Comparing 2 sample means with normal errors (Student's t-test)
+- binom.test() - Performs an exact test of a simple null hypothesis about the probability of success in a Bernoulli experiment.
 - wilcox.test() - Comparing 2 means with non-normal errors (Wilcoxon's rank test)
 - fisher.test() - Testing for independence of 2 variables in a contingency table (Fisher's exact test)
 

@@ -69,12 +69,103 @@ Dataset - use the "iris" data (3/3)
 # library("dplyr")
 # tbl_df()
 ```
+Correlation
+=========================================================
+
+A common task in statistical analysis is to investigate the relationship between pairs of numeric vectors.
+
+This can be done by identifying the correlation between numeric vectors using the **cor()** function in R.
+
+In this example we use cor() to identify the Pearson correlation between two variables.  The **method** argument may be set to make use of different correlation methods.
+
+- Perfectly posively correlated vectors will return 1
+- Perfectly negatively correlated vectors will return -1
+- Vectors showing no or little correlation will be close to 0.
 
 Correlation (1/)
 ========================================================
 - pearson
 
 - spearman
+
+Correlation between vectors
+=========================================================
+
+
+```r
+x <- rnorm(100,10,2)
+z <- rnorm(100,10,2)
+y <- x
+cor(x,y) #
+```
+
+```
+[1] 1
+```
+
+```r
+cor(x,-y)
+```
+
+```
+[1] -1
+```
+
+```r
+cor(x,z)
+```
+
+```
+[1] -0.02925834
+```
+***
+![plot of chunk unnamed-chunk-5](Session3_linear_regression-figure/unnamed-chunk-5-1.png)
+
+
+Correlation over a matrix
+=========================================================
+left: 70%
+Often we wish to apply correlation analysis to all columns or rows in a matrix in a pair-wise manner. To do this in R, we can simply pass the **cor()** function a single argument of the numeric matrix of interest. The **cor()** function will then perform all pair-wise correlations between columns.
+
+```r
+minRep <- rbind(cbind(matrix(rnorm(12,4),ncol=3,byrow = T),
+                      matrix(c(rnorm(9,4),rnorm(3,8)),ncol=3,byrow = T)),
+                cbind(matrix(rnorm(12,10),ncol=3,byrow = T),
+                      matrix(c(rnorm(6,3),rnorm(6,10)),ncol=3,byrow = T)))
+colnames(minRep) <- paste0(c("Sample_"),
+                      1:5,".",sort(rep(c("hi","low"),3)))
+minRepdf <- data.frame(Gene_Name=paste("Gene",letters[1:8],sep="_"),minRep)
+
+#kable(minRepdf)
+```
+
+
+Correlation over a matrix
+=========================================================
+
+
+
+```r
+cor(minRep)[1:2,2:5]
+```
+
+```
+            Sample_2.hi Sample_3.hi Sample_4.low Sample_5.low
+Sample_1.hi   0.8602114   0.8332101  -0.07057442   0.06962917
+Sample_2.hi   1.0000000   0.9211826   0.02168039   0.17749482
+```
+
+Visualising correlation
+=========================================================
+
+
+```r
+image(cor(minRep),axes=F)
+axis(1,at=seq(0,1,length.out=6), colnames(minRep))
+axis(2,at=seq(0,1,length.out=6), colnames(minRep))
+```
+***
+<img src="Session3_linear_regression-figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="1920px" />
 
 Correlation (2/)
 ========================================================
@@ -90,6 +181,8 @@ Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
 Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
 Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000
 ```
+***
+<img src="Session3_linear_regression-figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="820px" />
 
 Correlation (3/)
 ========================================================
@@ -98,7 +191,7 @@ Correlation (3/)
 pairs(iris[,1:4])
 ```
 
-![plot of chunk unnamed-chunk-5](Session3_linear_regression-figure/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-14](Session3_linear_regression-figure/unnamed-chunk-14-1.png)
 
 Correlation (4/)
 ========================================================
@@ -183,14 +276,14 @@ abline(h=mean(iris_versi$Petal.Length),
        col="forestgreen",lwd=3)
 ```
 
-![plot of chunk unnamed-chunk-9](Session3_linear_regression-figure/unnamed-chunk-9-1.png)
+![plot of chunk unnamed-chunk-18](Session3_linear_regression-figure/unnamed-chunk-18-1.png)
 
 
 Regression and linear models (/)
 =========================================================
 Try to use the mean of total Petal.Length first
 
-![plot of chunk unnamed-chunk-10](Session3_linear_regression-figure/unnamed-chunk-10-1.png)
+![plot of chunk unnamed-chunk-19](Session3_linear_regression-figure/unnamed-chunk-19-1.png)
 ***
 In this case, the expected values is  $$ mean  = \bar{y} $$
 - residuals (Error)
@@ -209,7 +302,7 @@ Regression and linear models (/)
 =========================================================
 Zoom in [just see first 4 data points]
 
-![plot of chunk unnamed-chunk-11](Session3_linear_regression-figure/unnamed-chunk-11-1.png)
+![plot of chunk unnamed-chunk-20](Session3_linear_regression-figure/unnamed-chunk-20-1.png)
 ***
 In this case, the expected values is  $$ mean  = \bar{y} $$
 - residuals (Error)
@@ -238,7 +331,7 @@ Regression and linear models (/)
 =========================================================
 Use the "iris_versi" Petal.Width to predict Petal.Length
 
-![plot of chunk unnamed-chunk-12](Session3_linear_regression-figure/unnamed-chunk-12-1.png)
+![plot of chunk unnamed-chunk-21](Session3_linear_regression-figure/unnamed-chunk-21-1.png)
 ***
 $$
   x = \text{independent or explanatory variable}
@@ -324,7 +417,7 @@ From the $coefficients of object lmResult, we know the equation for the best fit
 
 We can add the line of best fit using **abline()**
 ***
-![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
+![plot of chunk unnamed-chunk-25](Session3_linear_regression-figure/unnamed-chunk-25-1.png)
 
 
 Statistics (22/26) - Plotting line of best fit.
