@@ -1,4 +1,4 @@
-Session3: Linear Regression
+Session3: Correlation and Linear Regression
 ========================================================
 author: MRC Clinical Sciences Centre (http://mrccsc.github.io/)
 date: 12/July/2016
@@ -115,7 +115,7 @@ cor(x,z)
 ```
 
 ```
-[1] -0.04009353
+[1] 0.07574555
 ```
 ***
 ![plot of chunk unnamed-chunk-5](Session3_linear_regression-figure/unnamed-chunk-5-1.png)

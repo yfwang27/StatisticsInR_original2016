@@ -26,6 +26,7 @@ e.g. Wilcoxon test
 
 - chi-square test; Fisher's exact test
 
+- ANOVA
 
 Test of significance in ratio
 ========================================================
