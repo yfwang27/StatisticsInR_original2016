@@ -32,7 +32,6 @@ str(iris)
 head(iris)
 ```
 
-
 Dataset - use the "iris" data (3/3)
 ========================================================
 [*intermediate R; add a link to the intermediate R]
@@ -41,7 +40,7 @@ Dataset - use the "iris" data (3/3)
 # tbl_df()
 
 ```
-Correlation
+Correlation (1/8)
 =========================================================
 
 A common task in statistical analysis is to investigate the relationship between pairs of numeric vectors.
@@ -54,13 +53,13 @@ In this example we use cor() to identify the Pearson correlation between two var
 - Perfectly negatively correlated vectors will return -1
 - Vectors showing no or little correlation will be close to 0.
 
-Correlation (1/)
+Correlation (2/8)
 ========================================================
 - pearson
 
 - spearman
 
-Correlation between vectors
+Correlation between vectors (3/8)
 =========================================================
 
 ```{r}
@@ -82,74 +81,48 @@ par(mfrow=c(1,1))
 ```
 
 
-Correlation over a matrix
+Correlation over a matrix (4/8)
 =========================================================
 left: 70%
 Often we wish to apply correlation analysis to all columns or rows in a matrix in a pair-wise manner. To do this in R, we can simply pass the **cor()** function a single argument of the numeric matrix of interest. The **cor()** function will then perform all pair-wise correlations between columns.
 ```{r}
-minRep <- rbind(cbind(matrix(rnorm(12,4),ncol=3,byrow = T),
-                      matrix(c(rnorm(9,4),rnorm(3,8)),ncol=3,byrow = T)),
-                cbind(matrix(rnorm(12,10),ncol=3,byrow = T),
-                      matrix(c(rnorm(6,3),rnorm(6,10)),ncol=3,byrow = T)))
-colnames(minRep) <- paste0(c("Sample_"),
-                      1:5,".",sort(rep(c("hi","low"),3)))
-minRepdf <- data.frame(Gene_Name=paste("Gene",letters[1:8],sep="_"),minRep)
+iris4cor<-iris[,1:4]
+colnames(iris4cor)<-gsub("(.+)(\\.)(\\w{3})(.+)","\\1\\2\\3",colnames(iris4cor))
+head(iris4cor)
 
-#kable(minRepdf)
 ```
 
-
-Correlation over a matrix
+Correlation over a matrix (5/8)
 =========================================================
-```{r,echo=F}
-#kbale(minRep[1:2,])
-```
-
-```{r,eval=F}
-cor(minRep)[1:2,2:5]
-```
-```{r,echo=F}
-cor(minRep)[1:2,2:5,drop=F]
-```
-
-Visualising correlation
-=========================================================
-
-```{r,eval=F,echo=T,fig.width=4,fig.height=3,dpi=300,out.width="1920px",height="1080px"}
-image(cor(minRep),axes=F)
-axis(1,at=seq(0,1,length.out=6), colnames(minRep))
-axis(2,at=seq(0,1,length.out=6), colnames(minRep))
-```
-***
-```{r,eval=T,echo=F,fig.width=4,fig.height=3,dpi=300,out.width="1920px",height="1080px"}
-image(cor(minRep),axes=F)
-axis(1,at=seq(0,1,length.out=6),gsub(".*_","",colnames(minRep)),las=2)
-axis(2,at=seq(0,1,length.out=6),rev(gsub(".*_","",colnames(minRep))),las=2)
-```
-
-Correlation (2/)
-========================================================
 ```{r}
-cor(iris[,1:4])
+cor(iris4cor)
+```
+
+Correlation (6/8)
+========================================================
+left: 70%
+```{r}
+cor(iris4cor)
 ```
 ***
 ```{r,eval=T,echo=F,fig.width=4,fig.height=4,dpi=300,out.width="820px",height="820px"}
-image(cor(iris[,1:4]),axes=F)
-axis(1,at=seq(0,1,length.out=4),gsub(".*_","",colnames(iris[,1:4])),las=2)
-axis(2,at=seq(0,1,length.out=4),rev(gsub(".*_","",colnames(iris[,1:4]))),las=2)
+image(cor(iris4cor),axes=F)
+mtext(colnames(iris4cor),side=2,at=seq(0,1,length.out=4),las=1,cex=0.8)
+mtext(colnames(iris4cor),side=1,at=seq(0,1,length.out=4),las=2,cex=0.8)
+
 ```
 
-Correlation (3/)
+Correlation (7/8)
 ========================================================
 ```{r}
-pairs(iris[,1:4])
+pairs(iris4cor)
 ```
 
-Correlation (4/)
+Correlation (8/8)
 ========================================================
 [probably find an example that requires the spearman method]
 ```{r}
-cor(iris[,1:4],method="spearman")
+
 ```
 
 Regression and linear models (1/)
@@ -161,7 +134,7 @@ R also provides a comprehensive set of tools for regression analysis including t
 
 To fit a linear regression we use a similar set of arguments as passed to the t-test fuction in the previous slide.
 
-Regression and linear models (/)
+Regression and linear models (2/)
 =========================================================
 Using the Petal.Width from iris data as example
 
@@ -175,7 +148,7 @@ str(iris_versi)
 ```
 
 
-Regression and linear models (/)
+Regression and linear models (3/)
 =========================================================
 Try to use the mean of total Petal.Length first
 ```{r}
@@ -191,12 +164,12 @@ abline(h=mean(iris_versi$Petal.Length),
 ```
 
 
-Regression and linear models (/)
+Regression and linear models (4/)
 =========================================================
 Try to use the mean of total Petal.Length first
 
 ```{r,echo=F}
-diff_df<-iris_versi$Petal.Length-mean(iris_versi$Petal.Length)
+
 plot(iris_versi$Petal.Length,ylab="Petal Length of Iris.versicolor")
 abline(h=mean(iris_versi$Petal.Length),
        col="forestgreen",lwd=3)
@@ -214,11 +187,10 @@ $$
   \\ \\
   \end{aligned}
 $$
-- square of the residuals
-- sum of the square of the residuals (SSE)
 
 
-Regression and linear models (/)
+
+Regression and linear models (5/)
 =========================================================
 Zoom in [just see first 4 data points]
 
@@ -303,13 +275,15 @@ lmResult
 ```
 
 
-Regression and linear models (/)
+Interpreting output of lm()
 =========================================================
+As we have seen, printing the model result provides the intercept and slope of line.
+To get some more information on the model we can use the summary() function
 ```{r}
 summary(lmResult)
 ```
 
-Regression and linear models (/)
+Regression and linear models - coefficients (/)
 =========================================================
 ```{r}
 lmResult$coefficients
@@ -329,41 +303,9 @@ abline(lm(iris_versi$Petal.Length~iris_versi$Petal.Width,data=iris_versi),
 title("Scatter plot of Iris.versicolor Petal.Width vs Petal.Length")
 ```
 
-
-Statistics (22/26) - Plotting line of best fit.
+Regression and linear models - residuals
 =========================================================
 
-From the previous slides we now know the formula for the line.
-
-**Y = 7.001 + 1.972*X**
-
-We can add the line of best fit using **abline()**
-
-```{r,echo=T,prompt=T}
-plot(Y~X,data=lmExample,main="Line of best fit with lm()",
-     xlim=c(0,100),ylim=c(0,200))
-abline(lmResult,col="red",lty=3,lwd=3)
-```
-
-Statistics (23/26) - Interpreting output of lm()
-=========================================================
-As we have seen, printing the model result provides the intercept and slope of line.
-
-To get some more information on the model we can use the summary() function
-
-```{r,prompt=T}
-summary(lmResult)
-```
-
-
-Statistics (24/26) - Residuals
-=========================================================
-
-```{r,prompt=T,echo=F}
-summary(lmResult)
-```
-
-***
 The **residuals** are the difference between the predicted and actual values.
 To retrieve the residuals we can access the slot or use the resid() function.
 
@@ -373,24 +315,24 @@ summary(lmResult$residual)
 ```
 Ideally you would want your residuals to be normally distributed around 0.
 
-Statistics (25/26) - R-squared
+Regression and linear models - R-squared
 =========================================================
-
+Left: 70%
 ```{r,prompt=T,echo=F}
 summary(lmResult)
 ```
+***
+- The **R-squared** value represents the proportion of variability in the response variable that is explained by the explanatory variable.
 
-The **R-squared** value represents the proportion of variability in the response variable that is explained by the explanatory variable.
+- A high **R-squared** here indicates that the line fits closely to the data.
 
-A high **R-squared** here indicates that the line fits closely to the data.
-
-Statistics (26/26) - F-statistics.
+Regression and linear models - F-statistics.
 =========================================================
-
-```{r,prompt=T}
+Left: 70%
+```{r,prompt=T,echo=F}
 summary(lmResult)
 ```
-
+***
 The results from linear models also provides a measure of significance for a variable not being relevant.
 
 Statistics (Extra) - A fit line
@@ -408,7 +350,7 @@ Statistics (Extra) - Calculating R-squared
 
 ```{r,prompt=F}
 SSE <- sum(resid(lmResult)^2)
-TSS <- sum((lmExample$Y - mean(lmExample$Y))^2)
+TSS <- sum((iris_versi$Petal.Length - mean(iris_versi$Petal.Length))^2)
 1- SSE/TSS
 summary(lmResult)$r.squared
 ```
@@ -421,25 +363,11 @@ Statistics (Extra) - Calculating F-stat
 Statistics (Extra) - Calculating F-stat
 =========================================================
 
-```{r,prompt=F}
+```{r,prompt=T}
 MSE <- mean(lmResult$residuals^2)
-RSS <- sum((predict(lmResult) - mean(lmExample$Y))^2)
+RSS <- sum((predict(lmResult) - mean(iris_versi$Petal.Length))^2)
 
 summary(lmResult)$fstatistic
 
 ```
 
-
-
-Regression and linear models
-=========================================================
-
-```{r,echo=T,prompt=T}
-lmExample <- read.table("data/lmExample.txt",h=T,sep="\t")
-```
-```{r,echo=T,prompt=T}
-lmResult <- lm(Y~X,data=lmExample)
-plot(Y~X,data=lmExample,main="Line of best fit with lm()",
-     xlim=c(0,150),ylim=c(0,200))
-abline(lmResult,col="red",lty=3,lwd=3)
-```

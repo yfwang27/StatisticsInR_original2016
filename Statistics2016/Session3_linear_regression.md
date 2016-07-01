@@ -60,7 +60,6 @@ head(iris)
 6          5.4         3.9          1.7         0.4  setosa
 ```
 
-
 Dataset - use the "iris" data (3/3)
 ========================================================
 [*intermediate R; add a link to the intermediate R]
@@ -69,7 +68,7 @@ Dataset - use the "iris" data (3/3)
 # library("dplyr")
 # tbl_df()
 ```
-Correlation
+Correlation (1/8)
 =========================================================
 
 A common task in statistical analysis is to investigate the relationship between pairs of numeric vectors.
@@ -82,13 +81,13 @@ In this example we use cor() to identify the Pearson correlation between two var
 - Perfectly negatively correlated vectors will return -1
 - Vectors showing no or little correlation will be close to 0.
 
-Correlation (1/)
+Correlation (2/8)
 ========================================================
 - pearson
 
 - spearman
 
-Correlation between vectors
+Correlation between vectors (3/8)
 =========================================================
 
 
@@ -116,98 +115,79 @@ cor(x,z)
 ```
 
 ```
-[1] -0.02925834
+[1] -0.04009353
 ```
 ***
 ![plot of chunk unnamed-chunk-5](Session3_linear_regression-figure/unnamed-chunk-5-1.png)
 
 
-Correlation over a matrix
+Correlation over a matrix (4/8)
 =========================================================
 left: 70%
 Often we wish to apply correlation analysis to all columns or rows in a matrix in a pair-wise manner. To do this in R, we can simply pass the **cor()** function a single argument of the numeric matrix of interest. The **cor()** function will then perform all pair-wise correlations between columns.
 
 ```r
-minRep <- rbind(cbind(matrix(rnorm(12,4),ncol=3,byrow = T),
-                      matrix(c(rnorm(9,4),rnorm(3,8)),ncol=3,byrow = T)),
-                cbind(matrix(rnorm(12,10),ncol=3,byrow = T),
-                      matrix(c(rnorm(6,3),rnorm(6,10)),ncol=3,byrow = T)))
-colnames(minRep) <- paste0(c("Sample_"),
-                      1:5,".",sort(rep(c("hi","low"),3)))
-minRepdf <- data.frame(Gene_Name=paste("Gene",letters[1:8],sep="_"),minRep)
-
-#kable(minRepdf)
+iris4cor<-iris[,1:4]
+colnames(iris4cor)<-gsub("(.+)(\\.)(\\w{3})(.+)","\\1\\2\\3",colnames(iris4cor))
+head(iris4cor)
 ```
 
+```
+  Sepal.Len Sepal.Wid Petal.Len Petal.Wid
+1       5.1       3.5       1.4       0.2
+2       4.9       3.0       1.4       0.2
+3       4.7       3.2       1.3       0.2
+4       4.6       3.1       1.5       0.2
+5       5.0       3.6       1.4       0.2
+6       5.4       3.9       1.7       0.4
+```
 
-Correlation over a matrix
+Correlation over a matrix (5/8)
 =========================================================
 
+```r
+cor(iris4cor)
+```
 
+```
+           Sepal.Len  Sepal.Wid  Petal.Len  Petal.Wid
+Sepal.Len  1.0000000 -0.1175698  0.8717538  0.8179411
+Sepal.Wid -0.1175698  1.0000000 -0.4284401 -0.3661259
+Petal.Len  0.8717538 -0.4284401  1.0000000  0.9628654
+Petal.Wid  0.8179411 -0.3661259  0.9628654  1.0000000
+```
+
+Correlation (6/8)
+========================================================
+left: 70%
 
 ```r
-cor(minRep)[1:2,2:5]
+cor(iris4cor)
 ```
 
 ```
-            Sample_2.hi Sample_3.hi Sample_4.low Sample_5.low
-Sample_1.hi   0.8602114   0.8332101  -0.07057442   0.06962917
-Sample_2.hi   1.0000000   0.9211826   0.02168039   0.17749482
-```
-
-Visualising correlation
-=========================================================
-
-
-```r
-image(cor(minRep),axes=F)
-axis(1,at=seq(0,1,length.out=6), colnames(minRep))
-axis(2,at=seq(0,1,length.out=6), colnames(minRep))
+           Sepal.Len  Sepal.Wid  Petal.Len  Petal.Wid
+Sepal.Len  1.0000000 -0.1175698  0.8717538  0.8179411
+Sepal.Wid -0.1175698  1.0000000 -0.4284401 -0.3661259
+Petal.Len  0.8717538 -0.4284401  1.0000000  0.9628654
+Petal.Wid  0.8179411 -0.3661259  0.9628654  1.0000000
 ```
 ***
-<img src="Session3_linear_regression-figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="1920px" />
+<img src="Session3_linear_regression-figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="820px" />
 
-Correlation (2/)
+Correlation (7/8)
 ========================================================
 
 ```r
-cor(iris[,1:4])
+pairs(iris4cor)
 ```
 
-```
-             Sepal.Length Sepal.Width Petal.Length Petal.Width
-Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
-Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
-Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
-Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000
-```
-***
-<img src="Session3_linear_regression-figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="820px" />
+![plot of chunk unnamed-chunk-10](Session3_linear_regression-figure/unnamed-chunk-10-1.png)
 
-Correlation (3/)
-========================================================
-
-```r
-pairs(iris[,1:4])
-```
-
-![plot of chunk unnamed-chunk-14](Session3_linear_regression-figure/unnamed-chunk-14-1.png)
-
-Correlation (4/)
+Correlation (8/8)
 ========================================================
 [probably find an example that requires the spearman method]
 
-```r
-cor(iris[,1:4],method="spearman")
-```
-
-```
-             Sepal.Length Sepal.Width Petal.Length Petal.Width
-Sepal.Length    1.0000000  -0.1667777    0.8818981   0.8342888
-Sepal.Width    -0.1667777   1.0000000   -0.3096351  -0.2890317
-Petal.Length    0.8818981  -0.3096351    1.0000000   0.9376668
-Petal.Width     0.8342888  -0.2890317    0.9376668   1.0000000
-```
 
 Regression and linear models (1/)
 =========================================================
@@ -218,7 +198,7 @@ R also provides a comprehensive set of tools for regression analysis including t
 
 To fit a linear regression we use a similar set of arguments as passed to the t-test fuction in the previous slide.
 
-Regression and linear models (/)
+Regression and linear models (2/)
 =========================================================
 Using the Petal.Width from iris data as example
 
@@ -242,7 +222,7 @@ str(iris_versi)
 ```
 
 
-Regression and linear models (/)
+Regression and linear models (3/)
 =========================================================
 Try to use the mean of total Petal.Length first
 
@@ -276,14 +256,14 @@ abline(h=mean(iris_versi$Petal.Length),
        col="forestgreen",lwd=3)
 ```
 
-![plot of chunk unnamed-chunk-18](Session3_linear_regression-figure/unnamed-chunk-18-1.png)
+![plot of chunk unnamed-chunk-14](Session3_linear_regression-figure/unnamed-chunk-14-1.png)
 
 
-Regression and linear models (/)
+Regression and linear models (4/)
 =========================================================
 Try to use the mean of total Petal.Length first
 
-![plot of chunk unnamed-chunk-19](Session3_linear_regression-figure/unnamed-chunk-19-1.png)
+![plot of chunk unnamed-chunk-15](Session3_linear_regression-figure/unnamed-chunk-15-1.png)
 ***
 In this case, the expected values is  $$ mean  = \bar{y} $$
 - residuals (Error)
@@ -294,15 +274,14 @@ $$
   \\ \\
   \end{aligned}
 $$
-- square of the residuals
-- sum of the square of the residuals (SSE)
 
 
-Regression and linear models (/)
+
+Regression and linear models (5/)
 =========================================================
 Zoom in [just see first 4 data points]
 
-![plot of chunk unnamed-chunk-20](Session3_linear_regression-figure/unnamed-chunk-20-1.png)
+![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
 ***
 In this case, the expected values is  $$ mean  = \bar{y} $$
 - residuals (Error)
@@ -331,7 +310,7 @@ Regression and linear models (/)
 =========================================================
 Use the "iris_versi" Petal.Width to predict Petal.Length
 
-![plot of chunk unnamed-chunk-21](Session3_linear_regression-figure/unnamed-chunk-21-1.png)
+![plot of chunk unnamed-chunk-17](Session3_linear_regression-figure/unnamed-chunk-17-1.png)
 ***
 $$
   x = \text{independent or explanatory variable}
@@ -372,8 +351,10 @@ Coefficients:
 ```
 
 
-Regression and linear models (/)
+Interpreting output of lm()
 =========================================================
+As we have seen, printing the model result provides the intercept and slope of line.
+To get some more information on the model we can use the summary() function
 
 ```r
 summary(lmResult)
@@ -400,7 +381,7 @@ Multiple R-squared:  0.6188,	Adjusted R-squared:  0.6109
 F-statistic: 77.93 on 1 and 48 DF,  p-value: 1.272e-11
 ```
 
-Regression and linear models (/)
+Regression and linear models - coefficients (/)
 =========================================================
 
 ```r
@@ -417,37 +398,140 @@ From the $coefficients of object lmResult, we know the equation for the best fit
 
 We can add the line of best fit using **abline()**
 ***
-![plot of chunk unnamed-chunk-25](Session3_linear_regression-figure/unnamed-chunk-25-1.png)
+![plot of chunk unnamed-chunk-21](Session3_linear_regression-figure/unnamed-chunk-21-1.png)
 
-
-Statistics (22/26) - Plotting line of best fit.
+Regression and linear models - residuals
 =========================================================
 
-From the previous slides we now know the formula for the line.
-
-**Y = 7.001 + 1.972*X**
-
-We can add the line of best fit using **abline()**
+The **residuals** are the difference between the predicted and actual values.
+To retrieve the residuals we can access the slot or use the resid() function.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```r
+> summary(resid(lmResult))
+```
 
 ```
-Error in eval(expr, envir, enclos) : object 'lmExample' not found
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-0.8375 -0.1441 -0.0114  0.0000  0.1984  0.6755 
 ```
+
+```r
+> summary(lmResult$residual)
+```
+
+```
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-0.8375 -0.1441 -0.0114  0.0000  0.1984  0.6755 
+```
+Ideally you would want your residuals to be normally distributed around 0.
+
+Regression and linear models - R-squared
+=========================================================
+Left: 70%
+
+```
+
+Call:
+lm(formula = Petal.Length ~ Petal.Width, data = iris_versi)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.8375 -0.1441 -0.0114  0.1984  0.6755 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   1.7813     0.2838   6.276 9.48e-08 ***
+Petal.Width   1.8693     0.2117   8.828 1.27e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2931 on 48 degrees of freedom
+Multiple R-squared:  0.6188,	Adjusted R-squared:  0.6109 
+F-statistic: 77.93 on 1 and 48 DF,  p-value: 1.272e-11
+```
+***
+- The **R-squared** value represents the proportion of variability in the response variable that is explained by the explanatory variable.
+
+- A high **R-squared** here indicates that the line fits closely to the data.
+
+Regression and linear models - F-statistics.
+=========================================================
+Left: 70%
+
+```
+
+Call:
+lm(formula = Petal.Length ~ Petal.Width, data = iris_versi)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.8375 -0.1441 -0.0114  0.1984  0.6755 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   1.7813     0.2838   6.276 9.48e-08 ***
+Petal.Width   1.8693     0.2117   8.828 1.27e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2931 on 48 degrees of freedom
+Multiple R-squared:  0.6188,	Adjusted R-squared:  0.6109 
+F-statistic: 77.93 on 1 and 48 DF,  p-value: 1.272e-11
+```
+***
+The results from linear models also provides a measure of significance for a variable not being relevant.
+
+Statistics (Extra) - A fit line
+=========================================================
+
+![alt text](imgs/fittedline.png)
+
+Statistics (Extra) - Calculating R-squared
+=========================================================
+
+![alt text](imgs/rsquared.png)
+
+Statistics (Extra) - Calculating R-squared
+=========================================================
+
+
+```r
+SSE <- sum(resid(lmResult)^2)
+TSS <- sum((iris_versi$Petal.Length - mean(iris_versi$Petal.Length))^2)
+1- SSE/TSS
+```
+
+```
+[1] 0.6188467
+```
+
+```r
+summary(lmResult)$r.squared
+```
+
+```
+[1] 0.6188467
+```
+
+Statistics (Extra) - Calculating F-stat
+=========================================================
+
+![alt text](imgs/fstatistic.png)
+
+Statistics (Extra) - Calculating F-stat
+=========================================================
+
+
+```r
+> MSE <- mean(lmResult$residuals^2)
+> RSS <- sum((predict(lmResult) - mean(iris_versi$Petal.Length))^2)
+> 
+> summary(lmResult)$fstatistic
+```
+
+```
+   value    numdf    dendf 
+77.93357  1.00000 48.00000 
+```
+
