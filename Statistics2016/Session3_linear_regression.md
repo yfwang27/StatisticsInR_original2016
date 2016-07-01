@@ -240,25 +240,49 @@ Use the "iris_versi" Petal.Width to predict Petal.Length
 
 ![plot of chunk unnamed-chunk-12](Session3_linear_regression-figure/unnamed-chunk-12-1.png)
 ***
-![plot of chunk unnamed-chunk-13](Session3_linear_regression-figure/unnamed-chunk-13-1.png)
+$$
+  x = \text{independent or explanatory variable}
+\\
+  y = \text{dependent variable or }f(x)
+
+$$
+
+**$$f(x)  = b_0 + b_1x$$**
+
+$$\begin{aligned}
+  b_0 = intercept
+  \\
+  b_1 = slope
+\end{aligned}$$
+
+
 
 Regression and linear models (/)
 =========================================================
+The lm() function fits a linear regression to your data and provides useful information on the generated fit.
 
+In the example below we fit a linear model using  lm() on the iris_versi dataset with Petal.Length (Y) as the dependent variable and Petal.Width (X) as the explanatory variable.
 
 ```r
-lm(formula = Petal.Width ~ Petal.Length, data = iris)
+lmResult<-lm(formula = Petal.Length ~ Petal.Width, data = iris_versi)
+lmResult
 ```
 
 ```
 
 Call:
-lm(formula = Petal.Width ~ Petal.Length, data = iris)
+lm(formula = Petal.Length ~ Petal.Width, data = iris_versi)
 
 Coefficients:
- (Intercept)  Petal.Length  
-     -0.3631        0.4158  
+(Intercept)  Petal.Width  
+      1.781        1.869  
 ```
+
+
+Regression and linear models (/)
+=========================================================
+![plot of chunk unnamed-chunk-14](Session3_linear_regression-figure/unnamed-chunk-14-1.png)
+
 
 Regression and linear models
 =========================================================

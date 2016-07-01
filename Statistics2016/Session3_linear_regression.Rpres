@@ -139,7 +139,8 @@ Zoom in [just see first 4 data points]
 
 ```{r,echo=F}
 diff_df<-iris_versi$Petal.Length-mean(iris_versi$Petal.Length)
-plot(iris_versi$Petal.Length[c(1:4)],xlim=c(0,5.5), ylim=c(2,6.5))
+plot(iris_versi$Petal.Length[c(1:4)],xlim=c(0,5.5), ylim=c(2,6.5),
+     ylab="Petal Length of first 4 data points (y)", xlab="x")
 abline(h=mean(iris_versi$Petal.Length),
        col="forestgreen",lwd=3)
 
@@ -180,28 +181,55 @@ Regression and linear models (/)
 Use the "iris_versi" Petal.Width to predict Petal.Length
 
 ```{r,echo=F}
-plot(iris_versi$Petal.Length,ylab="Petal Length of Iris.versicolor")
-abline(h=mean(iris_versi$Petal.Length),
-       col="forestgreen",lwd=3)
-title("Scatter plot of Iris.versicolor Petal.Width")
+plot(iris_versi$Petal.Width,iris_versi$Petal.Length,
+     xlab="Petal Width of Iris.versicolor (x)",
+     ylab="Petal Length of Iris.versicolor (y)")
+abline(lm(iris_versi$Petal.Length~iris_versi$Petal.Width,data=iris_versi),
+       col="blueviolet",lwd=3)
+title("Scatter plot of Iris.versicolor Petal.Width vs Petal.Length")
+
 ```
 ***
+$$
+  x = \text{independent or explanatory variable}
+\\
+  y = \text{dependent variable or }f(x)
+
+$$
+
+**$$f(x)  = b_0 + b_1x$$**
+
+$$\begin{aligned}
+  b_0 = intercept
+  \\
+  b_1 = slope
+\end{aligned}$$
+
+
+
+Regression and linear models (/)
+=========================================================
+The lm() function fits a linear regression to your data and provides useful information on the generated fit.
+
+In the example below we fit a linear model using  lm() on the iris_versi dataset with Petal.Length (Y) as the dependent variable and Petal.Width (X) as the explanatory variable.
+```{r}
+lmResult<-lm(formula = Petal.Length ~ Petal.Width, data = iris_versi)
+lmResult
+```
+
+
+Regression and linear models (/)
+=========================================================
 ```{r,echo=F}
-plot(iris_versi$Petal.Width,iris_versi$Petal.Length,
-     xlab="Petal Width of Iris.versicolor",
-     ylab="Petal Length of Iris.versicolor")
+plot(iris_versi$Petal.Width,iris_versi$Petal.Length,xlim=c(0,1.8),ylim=c(0,5),
+     xlab="Petal Width of Iris.versicolor (x)",
+     ylab="Petal Length of Iris.versicolor (y)")
 abline(lm(iris_versi$Petal.Length~iris_versi$Petal.Width,data=iris_versi),
        col="blueviolet",lwd=3)
 title("Scatter plot of Iris.versicolor Petal.Width vs Petal.Length")
 
 ```
 
-Regression and linear models (/)
-=========================================================
-
-```{r}
-lm(formula = Petal.Width ~ Petal.Length, data = iris)
-```
 
 Regression and linear models
 =========================================================
