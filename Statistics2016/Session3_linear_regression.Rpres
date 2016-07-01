@@ -81,8 +81,12 @@ Regression and linear models (/)
 Using the Petal.Width from iris data as example
 
 We could like to use the current information to predict the width of a petal from Iris.versicolor
+![alt text](imgs/Iris_versicolor.jpg)
+***
 ```{r}
-head(iris)
+iris_versi<-iris[iris$Species=="versicolor",]
+
+str(iris_versi)
 ```
 
 
@@ -90,10 +94,77 @@ Regression and linear models (/)
 =========================================================
 Try to use the mean of total Petal.Length first
 ```{r}
-mean(iris$Petal.Length)
-plot(iris$Petal.Length)
-abline(h=mean(iris$Petal.Length),col="forestgreen",lwd=3)
+head(iris_versi[,c("Petal.Length",
+                   "Species")])
+mean(iris_versi$Petal.Length)
 ```
+***
+```{r}
+plot(iris_versi$Petal.Length)
+abline(h=mean(iris_versi$Petal.Length),
+       col="forestgreen",lwd=3)
+```
+
+
+Regression and linear models (/)
+=========================================================
+Try to use the mean of total Petal.Length first
+
+```{r,echo=F}
+diff_df<-iris_versi$Petal.Length-mean(iris_versi$Petal.Length)
+plot(iris_versi$Petal.Length)
+abline(h=mean(iris_versi$Petal.Length),
+       col="forestgreen",lwd=3)
+
+segments(x0=c(1:nrow(iris_versi)),y0=iris_versi$Petal.Length,
+         x1=c(1:nrow(iris_versi)),y1=mean(iris_versi$Petal.Length),col="pink")
+```
+***
+In this case, the expected values is  $$ mean  = \bar{y} $$
+- residuals (Error)
+$$
+  \begin{aligned}
+
+  Error_i & = y_i - \bar{y}
+  \\ \\
+  \end{aligned}
+$$
+- square of the residuals
+- sum of the square of the residuals (SSE)
+
+
+Regression and linear models (/)
+=========================================================
+Zoom in [just see 3 data points]
+
+```{r,echo=F}
+diff_df<-iris_versi$Petal.Length-mean(iris_versi$Petal.Length)
+plot(iris_versi$Petal.Length[c(2:4)],xlim=c(0.5,4.5), ylim=c(2,6))
+abline(h=mean(iris_versi$Petal.Length),
+       col="forestgreen",lwd=3)
+
+rect(xleft=c(1:3),ybottom=mean(iris_versi$Petal.Length),
+     xright=c(1:3)+abs(diff_df[c(2:4)]),
+     ytop=mean(iris_versi$Petal.Length)+diff_df[c(2:4)],
+     density=30,col = "blue")
+
+segments(x0=c(1:3),y0=iris_versi$Petal.Length[c(2:4)],
+         x1=c(1:3),y1=mean(iris_versi$Petal.Length),col="pink",lwd=3)
+```
+***
+In this case, the expected values is  $$ mean  = \bar{y} $$
+- residuals (Error)
+$$
+  \begin{aligned}
+  \\
+  Error_i & = y_i - \bar{y}
+  \end{aligned}
+$$
+- square of the residuals
+$$
+  Error_i^2
+$$
+- sum of the square of the residuals (SSE)
 
 
 Regression and linear models (/)

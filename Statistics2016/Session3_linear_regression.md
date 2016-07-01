@@ -130,19 +130,22 @@ Regression and linear models (/)
 Using the Petal.Width from iris data as example
 
 We could like to use the current information to predict the width of a petal from Iris.versicolor
+![alt text](imgs/Iris_versicolor.jpg)
+***
 
 ```r
-head(iris)
+iris_versi<-iris[iris$Species=="versicolor",]
+
+str(iris_versi)
 ```
 
 ```
-  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.1         3.5          1.4         0.2  setosa
-2          4.9         3.0          1.4         0.2  setosa
-3          4.7         3.2          1.3         0.2  setosa
-4          4.6         3.1          1.5         0.2  setosa
-5          5.0         3.6          1.4         0.2  setosa
-6          5.4         3.9          1.7         0.4  setosa
+'data.frame':	50 obs. of  5 variables:
+ $ Sepal.Length: num  7 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 ...
+ $ Sepal.Width : num  3.2 3.2 3.1 2.3 2.8 2.8 3.3 2.4 2.9 2.7 ...
+ $ Petal.Length: num  4.7 4.5 4.9 4 4.6 4.5 4.7 3.3 4.6 3.9 ...
+ $ Petal.Width : num  1.4 1.5 1.5 1.3 1.5 1.3 1.6 1 1.3 1.4 ...
+ $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 2 2 2 2 2 2 2 2 2 2 ...
 ```
 
 
@@ -151,19 +154,76 @@ Regression and linear models (/)
 Try to use the mean of total Petal.Length first
 
 ```r
-mean(iris$Petal.Length)
+head(iris_versi[,c("Petal.Length",
+                   "Species")])
 ```
 
 ```
-[1] 3.758
+   Petal.Length    Species
+51          4.7 versicolor
+52          4.5 versicolor
+53          4.9 versicolor
+54          4.0 versicolor
+55          4.6 versicolor
+56          4.5 versicolor
 ```
 
 ```r
-plot(iris$Petal.Length)
-abline(h=mean(iris$Petal.Length),col="forestgreen",lwd=3)
+mean(iris_versi$Petal.Length)
 ```
 
-![plot of chunk unnamed-chunk-8](Session3_linear_regression-figure/unnamed-chunk-8-1.png)
+```
+[1] 4.26
+```
+***
+
+```r
+plot(iris_versi$Petal.Length)
+abline(h=mean(iris_versi$Petal.Length),
+       col="forestgreen",lwd=3)
+```
+
+![plot of chunk unnamed-chunk-9](Session3_linear_regression-figure/unnamed-chunk-9-1.png)
+
+
+Regression and linear models (/)
+=========================================================
+Try to use the mean of total Petal.Length first
+
+![plot of chunk unnamed-chunk-10](Session3_linear_regression-figure/unnamed-chunk-10-1.png)
+***
+In this case, the expected values is  $$ mean  = \bar{y} $$
+- residuals (Error)
+$$
+  \begin{aligned}
+
+  Error_i & = y_i - \bar{y}
+  \\ \\
+  \end{aligned}
+$$
+- square of the residuals
+- sum of the square of the residuals (SSE)
+
+
+Regression and linear models (/)
+=========================================================
+Zoom in [just see 3 data points]
+
+![plot of chunk unnamed-chunk-11](Session3_linear_regression-figure/unnamed-chunk-11-1.png)
+***
+In this case, the expected values is  $$ mean  = \bar{y} $$
+- residuals (Error)
+$$
+  \begin{aligned}
+  \\
+  Error_i & = y_i - \bar{y}
+  \end{aligned}
+$$
+- square of the residuals
+$$
+  Error_i^2
+$$
+- sum of the square of the residuals (SSE)
 
 
 Regression and linear models (/)
@@ -199,7 +259,7 @@ Regression and linear models
 > abline(lmResult,col="red",lty=3,lwd=3)
 ```
 
-![plot of chunk unnamed-chunk-11](Session3_linear_regression-figure/unnamed-chunk-11-1.png)
+![plot of chunk unnamed-chunk-14](Session3_linear_regression-figure/unnamed-chunk-14-1.png)
 
 Statistics (21/26) The lm() function
 =========================================================
@@ -242,7 +302,7 @@ We can add the line of best fit using **abline()**
 > abline(lmResult,col="red",lty=3,lwd=3)
 ```
 
-![plot of chunk unnamed-chunk-13](Session3_linear_regression-figure/unnamed-chunk-13-1.png)
+![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
 
 Statistics (23/26) - Interpreting output of lm()
 =========================================================
@@ -444,4 +504,4 @@ summary(lmResult)$fstatistic
 Slide With Plot
 ========================================================
 
-![plot of chunk unnamed-chunk-21](Session3_linear_regression-figure/unnamed-chunk-21-1.png)
+![plot of chunk unnamed-chunk-24](Session3_linear_regression-figure/unnamed-chunk-24-1.png)
