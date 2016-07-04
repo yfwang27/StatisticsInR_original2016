@@ -94,6 +94,10 @@ probability of success
              0.5189184 
 ```
 
+Hypothesis test in mean
+========================================================
+t-test
+
 t-test example - Load data (1/2)
 ========================================================
 
@@ -136,6 +140,11 @@ PlantGrowth
 29   5.80  trt2
 30   5.26  trt2
 ```
+***
+data visualisation
+
+![plot of chunk unnamed-chunk-4](Session2_hypothesis_testing-figure/unnamed-chunk-4-1.png)
+
 
 t-test example - Load data (2/2)
 ========================================================
@@ -143,21 +152,28 @@ t-test example - Load data (2/2)
 Convert the input data into the proper format
 
 ```r
-install.packages("tidyr")
-```
-
-```
-
-The downloaded binary packages are in
-	/var/folders/n3/j9x1vf1s2wn1ndc5x7tlg4l40000gn/T//Rtmp478F05/downloaded_packages
+#install.packages("tidyr")
+library("tidyr")
 ```
 
 ```r
-library("tidyr")
-PlantGrowth$replicates<-c(rep(c(1:10),3))
-
-PlantGrowth_wide<-spread(PlantGrowth, group, weight)
+PlantGrowthforwide<-PlantGrowth
+PlantGrowthforwide$replicate<-rep(c(1:10),3)
+PlantGrowth_wide<-spread(PlantGrowthforwide, group, weight)
+head(PlantGrowth_wide)
 ```
+
+```
+  replicate ctrl trt1 trt2
+1         1 4.17 4.81 6.31
+2         2 5.58 4.17 5.12
+3         3 5.18 4.41 5.54
+4         4 6.11 3.59 5.50
+5         5 4.50 5.87 5.37
+6         6 4.61 3.83 5.29
+```
+
+
 
 t-test example - Calculating variance
 ========================================================
@@ -381,24 +397,5 @@ For more details on authoring R presentations click the
 - Bullet 2
 - Bullet 3
 
-First Slide
-========================================================
-
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-First Slide
-========================================================
-
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
 
 

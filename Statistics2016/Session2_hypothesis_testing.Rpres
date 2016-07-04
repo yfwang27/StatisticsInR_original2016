@@ -66,7 +66,6 @@ vote.leave=17410742
 vote.remain=16141241
 total.vote=vote.leave+vote.remain
 
-
 ```
 
 Hypothesis test in propotion
@@ -79,6 +78,10 @@ H_a:\text{ Leave vote is no more than 50%}$$
 binom.test(vote.leave, total.vote, p=0.5, alternative = "less")
 ```
 
+Hypothesis test in mean
+========================================================
+t-test
+
 t-test example - Load data (1/2)
 ========================================================
 
@@ -86,19 +89,33 @@ We use "PlantGrowth" as example
 ```{r}
 PlantGrowth
 ```
+***
+data visualisation
+
+```{r,echo=F}
+boxplot(weight~group,data=PlantGrowth,
+        col=(c("gold","darkgreen","blue")),
+        ylab="Weight")
+
+```
+
 
 t-test example - Load data (2/2)
 ========================================================
 
 Convert the input data into the proper format
-```{r}
-install.packages("tidyr")
+```{r, warning=FALSE, eval=T}
+#install.packages("tidyr")
 library("tidyr")
-PlantGrowth$replicates<-c(rep(c(1:10),3))
-
-PlantGrowth_wide<-spread(PlantGrowth, group, weight)
-
 ```
+```{r}
+PlantGrowthforwide<-PlantGrowth
+PlantGrowthforwide$replicate<-rep(c(1:10),3)
+PlantGrowth_wide<-spread(PlantGrowthforwide, group, weight)
+head(PlantGrowth_wide)
+```
+
+
 
 t-test example - Calculating variance
 ========================================================
@@ -207,24 +224,5 @@ For more details on authoring R presentations click the
 - Bullet 2
 - Bullet 3
 
-First Slide
-========================================================
-
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-First Slide
-========================================================
-
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
 
 
