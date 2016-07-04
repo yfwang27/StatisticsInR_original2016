@@ -370,12 +370,48 @@ mean in group ctrl mean in group trt1
 ANOVA
 ========================================================
 
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
+Compute analysis of variance (or deviance) tables for one or more fitted model objects
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+- lm()
+- anova()
+
+
+ANOVA - use the anova() function
+========================================================
+
+```r
+PG.lm<-lm(formula = weight ~ group,
+          data = PlantGrowth)
+PG.lm
+```
+
+```
+
+Call:
+lm(formula = weight ~ group, data = PlantGrowth)
+
+Coefficients:
+(Intercept)    grouptrt1    grouptrt2  
+      5.032       -0.371        0.494  
+```
+***
+
+```r
+PG.anova<-anova(PG.lm)
+PG.anova
+```
+
+```
+Analysis of Variance Table
+
+Response: weight
+          Df  Sum Sq Mean Sq F value  Pr(>F)  
+group      2  3.7663  1.8832  4.8461 0.01591 *
+Residuals 27 10.4921  0.3886                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
 
 Wilcoxon test
 ========================================================

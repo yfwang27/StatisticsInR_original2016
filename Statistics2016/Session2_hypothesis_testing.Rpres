@@ -197,12 +197,25 @@ result_formula
 ANOVA
 ========================================================
 
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
+Compute analysis of variance (or deviance) tables for one or more fitted model objects
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+- lm()
+- anova()
+
+
+ANOVA - use the anova() function
+========================================================
+```{r}
+PG.lm<-lm(formula = weight ~ group,
+          data = PlantGrowth)
+PG.lm
+```
+***
+```{r}
+PG.anova<-anova(PG.lm)
+PG.anova
+```
+
 
 Wilcoxon test
 ========================================================
