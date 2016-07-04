@@ -412,7 +412,7 @@ Data shape - violin plot
 ```
 
 The downloaded binary packages are in
-	/var/folders/n3/j9x1vf1s2wn1ndc5x7tlg4l40000gn/T//Rtmp34MzrG/downloaded_packages
+	/var/folders/n3/j9x1vf1s2wn1ndc5x7tlg4l40000gn/T//Rtmp4d7a18/downloaded_packages
 ```
 ![plot of chunk unnamed-chunk-26](Session1_describe_the_data-figure/unnamed-chunk-26-1.png)
 ***
@@ -527,8 +527,8 @@ rnorm(10,mean=8,sd=3)
 ```
 
 ```
- [1] 9.797488 4.655549 8.889185 8.087282 7.515990 7.053163 6.664486
- [8] 4.270446 6.973191 6.087558
+ [1]  4.075358  3.092251  7.010461 14.518983 11.264890 13.102796  8.451340
+ [8]  9.177035  9.923106  8.223493
 ```
 
 Normal distribution example 1 (2/2)

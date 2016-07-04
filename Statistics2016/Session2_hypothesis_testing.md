@@ -1,4 +1,4 @@
-Session2: Hypothesis Test
+Session2: Hypothesis Testing and ANOVA
 ========================================================
 author: MRC Clinical Sciences Centre (http://mrccsc.github.io/)
 date: 12/July/2016
@@ -9,26 +9,23 @@ font-import: <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel=
 font-family: 'Slabo 27px', serif;
 css:style.css
 
-Hypothesis test
+Hypothesis testing and ANOVA
 ========================================================
 
 - SD (standard deviation) and SE (standard error; standard error of sample mean)
 
-- (CI) Confidence Interval
+- Confidence Interval (CI)
 
-- parametric test:
+- Hypothesis testing
 
-e.g. t-test
+ -- parametric test:e.g. t-test
 
-- non-parametric test:
+ -- non-parametric test: e.g. Wilcoxon test; chi-square test and Fisher's exact test
 
-e.g. Wilcoxon test
+- Analysis of Variance (ANOVA)
 
-- chi-square test; Fisher's exact test
 
-- ANOVA
-
-Test of significance in ratio
+Hypothesis test in propotion
 ========================================================
 
 [example: EU referendum reuslt 2016]
@@ -143,9 +140,6 @@ t-test example - Load data (2/2)
 ========================================================
 
 Convert the input data into the proper format
-
-
-
 
 
 

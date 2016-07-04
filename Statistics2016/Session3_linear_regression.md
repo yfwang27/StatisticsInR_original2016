@@ -115,7 +115,7 @@ cor(x,z)
 ```
 
 ```
-[1] 0.07574555
+[1] 0.004537162
 ```
 ***
 ![plot of chunk unnamed-chunk-5](Session3_linear_regression-figure/unnamed-chunk-5-1.png)
