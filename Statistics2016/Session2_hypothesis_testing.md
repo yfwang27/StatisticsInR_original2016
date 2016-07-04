@@ -25,6 +25,30 @@ Hypothesis testing and ANOVA
 - Analysis of Variance (ANOVA)
 
 
+SD (standard deviation) and SE (standard error)
+========================================================
+- point 1
+- point 2
+
+Confidence Interval (CI)
+========================================================
+- point 1
+- point 2
+
+Statistical tests
+========================================================
+
+On top of descriptive statistics, R has several statistical tests covering a range of problems and data types.
+
+Some common tests include:
+
+- var.test() - Comparing 2 variances (Fisher's F test)
+- t.test() - Comparing 2 sample means with normal errors (Student's t-test)
+- binom.test() - Performs an exact test of a simple null hypothesis about the probability of success in a Bernoulli experiment.
+- wilcox.test() - Comparing 2 means with non-normal errors (Wilcoxon's rank test)
+- fisher.test() - Testing for independence of 2 variables in a contingency table (Fisher's exact test)
+
+
 Hypothesis test in propotion
 ========================================================
 
@@ -69,29 +93,6 @@ sample estimates:
 probability of success 
              0.5189184 
 ```
-
-Statistical tests
-========================================================
-
-On top of descriptive statistics, R has several statistical tests covering a range of problems and data types.
-
-Some common tests include:
-
-- var.test() - Comparing 2 variances (Fisher's F test)
-- t.test() - Comparing 2 sample means with normal errors (Student's t-test)
-- binom.test() - Performs an exact test of a simple null hypothesis about the probability of success in a Bernoulli experiment.
-- wilcox.test() - Comparing 2 means with non-normal errors (Wilcoxon's rank test)
-- fisher.test() - Testing for independence of 2 variables in a contingency table (Fisher's exact test)
-
-Confidence Interval (CI)
-========================================================
-
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
 
 t-test example - Load data (1/2)
 ========================================================
@@ -141,24 +142,263 @@ t-test example - Load data (2/2)
 
 Convert the input data into the proper format
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```r
+install.packages("tidyr")
+```
 
 ```
-Error in library("tidyr") : there is no package called 'tidyr'
+
+The downloaded binary packages are in
+	/var/folders/n3/j9x1vf1s2wn1ndc5x7tlg4l40000gn/T//Rtmp478F05/downloaded_packages
 ```
+
+```r
+library("tidyr")
+PlantGrowth$replicates<-c(rep(c(1:10),3))
+
+PlantGrowth_wide<-spread(PlantGrowth, group, weight)
+```
+
+t-test example - Calculating variance
+========================================================
+
+First we can specify the columns of interest using $ and calculate their variance using var().
+
+```r
+var(PlantGrowth_wide$ctrl)
+```
+
+```
+[1] 0.3399956
+```
+
+```r
+var(PlantGrowth_wide$trt1)
+```
+
+```
+[1] 0.6299211
+```
+
+```r
+var(PlantGrowth_wide$trt2)
+```
+
+```
+[1] 0.1958711
+```
+
+t-test example - Comparing variance
+========================================================
+
+Now we can test for any differences in variances between ctrl and trt1 and ctrl and trt2 with an F-test using the var.test() function.
+
+```r
+var.test(PlantGrowth_wide$ctrl,
+         PlantGrowth_wide$trt1)
+```
+
+```
+
+	F test to compare two variances
+
+data:  PlantGrowth_wide$ctrl and PlantGrowth_wide$trt1
+F = 0.53974, num df = 9, denom df = 9, p-value = 0.3719
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.1340645 2.1730025
+sample estimates:
+ratio of variances 
+         0.5397431 
+```
+***
+
+```r
+var.test(PlantGrowth_wide$ctrl,
+         PlantGrowth_wide$trt2)
+```
+
+```
+
+	F test to compare two variances
+
+data:  PlantGrowth_wide$ctrl and PlantGrowth_wide$trt2
+F = 1.7358, num df = 9, denom df = 9, p-value = 0.4239
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.4311513 6.9883717
+sample estimates:
+ratio of variances 
+          1.735813 
+```
+
+R objects (s3 and s4)
+========================================================
+Left:30% The data type holding the result var.test() is a little more complex than the data types we have looked.
+
+In R, special objects (S3 or S4 objects) can be created which have methods associated to them. The result from var.test is an object of class htest.
+
+Since we have not come across this before, in order to discover its structure we can use the str() function with the object of interest as the argument.
+
+```r
+result <- var.test(PlantGrowth_wide$ctrl, PlantGrowth_wide$trt1)
+str(result)
+```
+
+```
+List of 9
+ $ statistic  : Named num 0.54
+  ..- attr(*, "names")= chr "F"
+ $ parameter  : Named int [1:2] 9 9
+  ..- attr(*, "names")= chr [1:2] "num df" "denom df"
+ $ p.value    : num 0.372
+ $ conf.int   : atomic [1:2] 0.134 2.173
+  ..- attr(*, "conf.level")= num 0.95
+ $ estimate   : Named num 0.54
+  ..- attr(*, "names")= chr "ratio of variances"
+ $ null.value : Named num 1
+  ..- attr(*, "names")= chr "ratio of variances"
+ $ alternative: chr "two.sided"
+ $ method     : chr "F test to compare two variances"
+ $ data.name  : chr "PlantGrowth_wide$ctrl and PlantGrowth_wide$trt1"
+ - attr(*, "class")= chr "htest"
+```
+
+R objects (s3 and s4)
+========================================================
+Now we know the structure and class of the htest object we can access the slots containing information we want just as with a named list.
+
+The p-value
+
+```r
+result$p.value
+```
+
+```
+[1] 0.3718963
+```
+The statistic
+
+```r
+result$statistic
+```
+
+```
+        F 
+0.5397431 
+```
+The data used in function call
+
+```r
+result$data.name
+```
+
+```
+[1] "PlantGrowth_wide$ctrl and PlantGrowth_wide$trt1"
+```
+
+t-test example - Equal Variance
+========================================================
+We have ascertained that ctrl and trt1 have similar variances. We can therefore perform a standard t-test to assess the significance of differences between these groups.
+
+```r
+Result <- t.test(PlantGrowth_wide$ctrl,PlantGrowth_wide$trt1,alternative ="two.sided", var.equal = T)
+Result
+```
+
+```
+
+	Two Sample t-test
+
+data:  PlantGrowth_wide$ctrl and PlantGrowth_wide$trt1
+t = 1.1913, df = 18, p-value = 0.249
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.2833003  1.0253003
+sample estimates:
+mean of x mean of y 
+    5.032     4.661 
+```
+
+t-test example - Unequal Variance
+========================================================
+To compare groups of unequal variance then the var.equal argument may be set to FALSE (which is the default).
+
+note: [see exercise]
+
+T-test example. Specifying a formula
+========================================================
+The same result to that shown could be achieved by specifying a formula for the comparison. Here we wish to compare ctrl versus trt1 so we could simply specify the formula and the data to be used.
+
+```r
+data4formula<-PlantGrowth[PlantGrowth$group!="trt2",]
+result_formula <- t.test(weight~group,data4formula,alternative ="two.sided", var.equal = T)
+result_formula
+```
+
+```
+
+	Two Sample t-test
+
+data:  weight by group
+t = 1.1913, df = 18, p-value = 0.249
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.2833003  1.0253003
+sample estimates:
+mean in group ctrl mean in group trt1 
+             5.032              4.661 
+```
+
+
+ANOVA
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Wilcoxon test
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+First Slide
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+First Slide
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+First Slide
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+
