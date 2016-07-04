@@ -25,10 +25,14 @@ Hypothesis testing and ANOVA
 - Analysis of Variance (ANOVA)
 
 
-SD (standard deviation) and SE (standard error)
+SD (standard deviation) and SE (standard error) (1/)
 ========================================================
-- point 1
-- point 2
+![alt text](imgs/stat_sampling.png)
+
+
+SD (standard deviation) and SE (standard error) (2/)
+========================================================
+
 
 Confidence Interval (CI)
 ========================================================
