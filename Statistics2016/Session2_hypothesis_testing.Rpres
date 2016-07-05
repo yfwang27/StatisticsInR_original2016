@@ -30,27 +30,45 @@ SD and SE (1/)
 ![alt text](imgs/stat_sampling.png)
 
 
-SD and SE - sampling distribution (2/)
+SD and SE - sampling distribution for the mean (2/)
 ========================================================
+If we flip a fair coin 10 times, what is the mean of this experiment?
 ```{r}
-# always do set.seed() before random sampling
+# always do set.seed() before the random sampling
 set.seed(123)
 # number, size and probability
 N=10; n=1; p=0.5
 test1<-rbinom(N,n,p)
-mean(test1)
+showmean<-mean(test1)
+showmean
+```
+***
+If we flip a fair coin 10 times again, what is the mean of this experiment?
+```{r}
 test2<-rbinom(N,n,p)
-mean(test2)
+showmean2<-mean(test2)
+showmean2
+```
 
+
+SD and SE - sampling distribution for the mean (2/)
+========================================================
+```{r}
 set.seed(123)
+mat4plot<-matrix(nrow=10,ncol=2)
 for (i in 1:10){
   showtest<-rbinom(N,1,0.5)
   showdensity<-dbinom(showtest, 10, 0.5, log = FALSE)
   print(showdensity)
   showmean<-mean(showtest)
   print(showmean)
+  mat4plot[i,1]<-showmean
 }
+mat4plot[,2]<-1
+mat4plot<-mat4plot[order(mat4plot[,1]),]
 
+#plot(mat4plot,pch=20,ylim=c(0,100),ylab="count",xlab="mean",xlim = c(0,1))
+hist(mat4plot[,1],xlim=c(0,1),breaks=10)
 
 ```
 
