@@ -37,9 +37,9 @@ If we flip a fair coin 10 times, what is the mean of this experiment?
 ```r
 # always do set.seed() before the random sampling
 set.seed(123)
-# number, size and probability
-N=10; n=1; p=0.5
-test1<-rbinom(N,n,p)
+# observation number, number of trials and probability of success on each trial
+sample.size=10;
+test1<-rbinom(sample.size,1,0.5)
 test1
 ```
 
@@ -59,7 +59,7 @@ showmean
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
 
 ```r
-test2<-rbinom(N,n,p)
+test2<-rbinom(sample.size,1,0.5)
 showmean2<-mean(test2)
 showmean2
 ```
@@ -76,9 +76,9 @@ If we flip a fair coin 10 times, what is the mean of this experiment?
 ```r
 # always do set.seed() before the random sampling
 set.seed(123)
-# number, size and probability
-N=10; n=1; p=0.5
-test1<-rbinom(N,n,p)
+# observation number, number of trials and probability of success on each trial
+sample.size=10;
+test1<-rbinom(sample.size,1,0.5)
 test1
 ```
 
@@ -98,7 +98,7 @@ showmean
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
 
 ```r
-test2<-rbinom(N,n,p)
+test2<-rbinom(sample.size,1,0.5)
 showmean2<-mean(test2)
 showmean2
 ```
@@ -110,31 +110,31 @@ showmean2
 
 SD and SE - sampling distribution for the mean (4/)
 ========================================================
-What will happen if we repeat this experiment 100 times, rather than only 2 times
+What will happen if we repeat this experiment 10 times, rather than only 2 times
 
 ```r
 set.seed(123)
-no.experiment=100
+no.experiment=10
 mat4plot<-matrix(nrow=no.experiment,ncol=2)
 mat4plot[,2]<-1
-N<-10
+sample.size<-10
 for (i in 1:no.experiment){
-  mat4plot[i,1]<-mean(rbinom(N,1,0.5))
+  mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
 }
-hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",main="flip a coin 10 times, and repeat 100 times")
+hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",main="flip a coin 10 times, and it repeat 100 times")
 ```
 
 ![plot of chunk unnamed-chunk-6](Session2_hypothesis_testing-figure/unnamed-chunk-6-1.png)
 
 
-SD and SE - sampling distribution for the mean (5/)
+SD and SE - Central Limited Theory (5/)
 ========================================================
 
 Flip a coin for 10 times, and repeat it for 100 times
 
 ![plot of chunk unnamed-chunk-7](Session2_hypothesis_testing-figure/unnamed-chunk-7-1.png)
 ***
-Flip a coin for 100 times, and repeat it for 100 times
+Flip a coin for 10 times, and repeat it for 1,000 times
 
 ![plot of chunk unnamed-chunk-8](Session2_hypothesis_testing-figure/unnamed-chunk-8-1.png)
 
