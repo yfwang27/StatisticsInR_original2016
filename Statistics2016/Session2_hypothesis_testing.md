@@ -27,11 +27,13 @@ Hypothesis testing and ANOVA
 
 SD and SE (1/)
 ========================================================
+
 ![alt text](imgs/stat_sampling.png)
 
 
 SD and SE - sampling distribution for the mean (2/)
 ========================================================
+
 If we flip a fair coin 10 times, what is the mean of this experiment?
 
 ```r
@@ -56,6 +58,7 @@ showmean
 [1] 0.6
 ```
 ***
+
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
 
 ```r
@@ -71,6 +74,7 @@ showmean2
 
 SD and SE - sampling distribution for the mean (3/)
 ========================================================
+
 If we flip a fair coin 10 times, what is the mean of this experiment?
 
 ```r
@@ -95,6 +99,7 @@ showmean
 [1] 0.6
 ```
 ***
+
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
 
 ```r
@@ -110,6 +115,7 @@ showmean2
 
 SD and SE - sampling distribution for the mean (4/)
 ========================================================
+
 What will happen if we repeat this experiment 10 times, rather than only 2 times
 
 ```r
@@ -134,9 +140,33 @@ Flip a coin for 10 times, and repeat it for 100 times
 
 ![plot of chunk unnamed-chunk-7](Session2_hypothesis_testing-figure/unnamed-chunk-7-1.png)
 ***
+
 Flip a coin for 10 times, and repeat it for 1,000 times
 
 ![plot of chunk unnamed-chunk-8](Session2_hypothesis_testing-figure/unnamed-chunk-8-1.png)
+
+SD and SE - Central Limited Theory (6/)
+========================================================
+
+Flip a coin for 10 times, and repeat it for 1,000 times
+
+![plot of chunk unnamed-chunk-9](Session2_hypothesis_testing-figure/unnamed-chunk-9-1.png)
+***
+
+$$
+ \begin{aligned}
+  \\
+  \text{ mean of the sampling distribution of the mean }
+  \\
+  \mu_{Mean}=\mu
+  \\ \\
+  \text{Variance}
+  \\
+  \sigma_{Mean}^2=\frac{\sigma^2}N
+  \\ \\
+  \end{aligned}
+$$
+
 
 Confidence Interval (CI)
 ========================================================
@@ -254,7 +284,7 @@ PlantGrowth
 ***
 data visualisation
 
-![plot of chunk unnamed-chunk-12](Session2_hypothesis_testing-figure/unnamed-chunk-12-1.png)
+![plot of chunk unnamed-chunk-13](Session2_hypothesis_testing-figure/unnamed-chunk-13-1.png)
 
 
 t-test example - Load data (2/2)
