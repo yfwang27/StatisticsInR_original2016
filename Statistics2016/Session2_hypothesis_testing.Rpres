@@ -25,19 +25,42 @@ Hypothesis testing and ANOVA
 - Analysis of Variance (ANOVA)
 
 
-SD (standard deviation) and SE (standard error) (1/)
+SD and SE (1/)
 ========================================================
 ![alt text](imgs/stat_sampling.png)
 
 
-SD (standard deviation) and SE (standard error) (2/)
+SD and SE - sampling distribution (2/)
 ========================================================
+```{r}
+# always do set.seed() before random sampling
+set.seed(123)
+# number, size and probability
+N=10; n=1; p=0.5
+test1<-rbinom(N,n,p)
+mean(test1)
+test2<-rbinom(N,n,p)
+mean(test2)
 
+set.seed(123)
+for (i in 1:10){
+  showtest<-rbinom(N,1,0.5)
+  showdensity<-dbinom(showtest, 10, 0.5, log = FALSE)
+  print(showdensity)
+  showmean<-mean(showtest)
+  print(showmean)
+}
+
+
+```
 
 Confidence Interval (CI)
 ========================================================
-- point 1
-- point 2
+
+Confidence Interval for propotions
+***
+Confidence Interval for mean
+
 
 Statistical tests
 ========================================================
@@ -53,13 +76,13 @@ Some common tests include:
 - fisher.test() - Testing for independence of 2 variables in a contingency table (Fisher's exact test)
 
 
-Hypothesis test in propotion
+Hypothesis testing for propotions
 ========================================================
 
 [example: EU referendum reuslt 2016]
 
 
-Hypothesis test in propotion
+Hypothesis testing for propotions
 ========================================================
 
 [example: EU referendum reuslt 2016]
@@ -72,7 +95,7 @@ total.vote=vote.leave+vote.remain
 
 ```
 
-Hypothesis test in propotion
+Hypothesis testing for propotions
 ========================================================
 
 $$H_0:\text{ Leave vote is more than 50%}
@@ -82,7 +105,7 @@ H_a:\text{ Leave vote is no more than 50%}$$
 binom.test(vote.leave, total.vote, p=0.5, alternative = "less")
 ```
 
-Hypothesis test in mean
+Hypothesis testing for mean
 ========================================================
 t-test
 
