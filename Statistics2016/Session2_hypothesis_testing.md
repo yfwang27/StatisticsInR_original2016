@@ -121,19 +121,20 @@ What will happen if we repeat this experiment 10 times, rather than only 2 times
 ```r
 set.seed(123)
 no.experiment=10
-mat4plot<-matrix(nrow=no.experiment,ncol=2)
-mat4plot[,2]<-1
+mat4plot<-matrix(nrow=no.experiment,ncol=2);mat4plot[,2]<-1;
 sample.size<-10
 for (i in 1:no.experiment){
   mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
 }
-hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",main="flip a coin 10 times, and repeat it 10 times")
+hist(mat4plot[,1],xlim=c(0,1),breaks=100,
+     xlab="mean",ylab="observed frequency",
+     main="flip a coin 10 times, and repeat it 10 times")
 ```
 
 ![plot of chunk unnamed-chunk-6](Session2_hypothesis_testing-figure/unnamed-chunk-6-1.png)
 
 
-SD and SE - Central Limited Theory (5/)
+SD and SE - Central limit theorem (5/)
 ========================================================
 
 Flip a coin for 10 times, and repeat it for 100 times
@@ -145,25 +146,27 @@ Flip a coin for 10 times, and repeat it for 1,000 times
 
 ![plot of chunk unnamed-chunk-8](Session2_hypothesis_testing-figure/unnamed-chunk-8-1.png)
 
-SD and SE - Central Limited Theory (6/)
+SD and SE - Central limit theorem (6/)
 ========================================================
 
 Flip a coin for 10 times, and repeat it for 1,000 times
 
 ![plot of chunk unnamed-chunk-9](Session2_hypothesis_testing-figure/unnamed-chunk-9-1.png)
 ***
+$$\text{the sample mean }\bar{X}\text{ follows an approximate normal distribution}
+  \\
+  \bar{X}\sim N\left(\mu,\dfrac{\sigma^2}{n}\right)$$
+
 mean of the sampling distribution of the mean
 
-  $$\mu_{Mean}=\mu$$
+  $$E(\bar{X})=\mu_{\bar{X}}=\mu$$
 
 variance of the sampling distribution of the mean
 
 $$
-  \sigma_{Mean}^2=\frac{\sigma^2}N
-  \\
-  SE^2=\frac{SD^2}N
+  Var(\bar{X})=\sigma_{\bar{X}}^2=\frac{\sigma^2}n \text{or }SE^2=\frac{SD^2}n
   \\ \\
-  SE=\frac{SD}{\sqrt N}
+  SE=\frac{SD}{\sqrt n}
   \\
 $$
 
@@ -171,18 +174,22 @@ $$
 
 
 
-SD and SE - Central Limited Theory (6/)
+SD and SE - Central limit theorem (7/)
 ========================================================
 
 Flip a coin for 10 times, and repeat it for 1,000 times
 
 ![plot of chunk unnamed-chunk-10](Session2_hypothesis_testing-figure/unnamed-chunk-10-1.png)
 
+$$SE=\frac{SD}{\sqrt 10}$$
+
 ***
 
 Flip a coin for 100 times and repeat it for 1000 times
 
 ![plot of chunk unnamed-chunk-11](Session2_hypothesis_testing-figure/unnamed-chunk-11-1.png)
+
+$$SE=\frac{SD}{\sqrt 100}$$
 
 
 Confidence Interval (CI)
