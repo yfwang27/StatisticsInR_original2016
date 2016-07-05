@@ -96,7 +96,7 @@ sample.size<-10
 for (i in 1:no.experiment){
   mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
 }
-hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",main="flip a coin 10 times, and it repeat 100 times")
+hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",main="flip a coin 10 times, and repeat it 10 times")
 
 ```
 
@@ -115,7 +115,7 @@ sample.size<-10
 for (i in 1:no.experiment){
   mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
 }
-hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",main="flip a coin 10 times, and it repeat 100 times")
+hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",main="flip a coin 10 times, and repeat it 100 times")
 
 ```
 ***
