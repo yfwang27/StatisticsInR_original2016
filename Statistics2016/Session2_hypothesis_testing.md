@@ -152,20 +152,37 @@ Flip a coin for 10 times, and repeat it for 1,000 times
 
 ![plot of chunk unnamed-chunk-9](Session2_hypothesis_testing-figure/unnamed-chunk-9-1.png)
 ***
+mean of the sampling distribution of the mean
+
+  $$\mu_{Mean}=\mu$$
+
+variance of the sampling distribution of the mean
 
 $$
- \begin{aligned}
-  \\
-  \text{ mean of the sampling distribution of the mean }
-  \\
-  \mu_{Mean}=\mu
-  \\ \\
-  \text{Variance}
-  \\
   \sigma_{Mean}^2=\frac{\sigma^2}N
+  \\
+  SE^2=\frac{SD^2}N
   \\ \\
-  \end{aligned}
+  SE=\frac{SD}{\sqrt N}
+  \\
 $$
+
+***What will happen if we flip a coin for 100 times and repeat it for 1000 times?***
+
+
+
+SD and SE - Central Limited Theory (6/)
+========================================================
+
+Flip a coin for 10 times, and repeat it for 1,000 times
+
+![plot of chunk unnamed-chunk-10](Session2_hypothesis_testing-figure/unnamed-chunk-10-1.png)
+
+***
+
+Flip a coin for 100 times and repeat it for 1000 times
+
+![plot of chunk unnamed-chunk-11](Session2_hypothesis_testing-figure/unnamed-chunk-11-1.png)
 
 
 Confidence Interval (CI)
@@ -284,7 +301,7 @@ PlantGrowth
 ***
 data visualisation
 
-![plot of chunk unnamed-chunk-13](Session2_hypothesis_testing-figure/unnamed-chunk-13-1.png)
+![plot of chunk unnamed-chunk-15](Session2_hypothesis_testing-figure/unnamed-chunk-15-1.png)
 
 
 t-test example - Load data (2/2)
