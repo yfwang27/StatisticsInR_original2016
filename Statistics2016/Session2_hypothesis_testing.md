@@ -40,6 +40,14 @@ set.seed(123)
 # number, size and probability
 N=10; n=1; p=0.5
 test1<-rbinom(N,n,p)
+test1
+```
+
+```
+ [1] 0 1 0 1 1 0 1 1 1 0
+```
+
+```r
 showmean<-mean(test1)
 showmean
 ```
@@ -48,7 +56,7 @@ showmean
 [1] 0.6
 ```
 ***
-If we flip a fair coin 10 times again, what is the mean of this experiment?
+If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
 
 ```r
 test2<-rbinom(N,n,p)
@@ -61,64 +69,74 @@ showmean2
 ```
 
 
-SD and SE - sampling distribution for the mean (2/)
+SD and SE - sampling distribution for the mean (3/)
 ========================================================
+If we flip a fair coin 10 times, what is the mean of this experiment?
+
+```r
+# always do set.seed() before the random sampling
+set.seed(123)
+# number, size and probability
+N=10; n=1; p=0.5
+test1<-rbinom(N,n,p)
+test1
+```
+
+```
+ [1] 0 1 0 1 1 0 1 1 1 0
+```
+
+```r
+showmean<-mean(test1)
+showmean
+```
+
+```
+[1] 0.6
+```
+***
+If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
+
+```r
+test2<-rbinom(N,n,p)
+showmean2<-mean(test2)
+showmean2
+```
+
+```
+[1] 0.5
+```
+![plot of chunk unnamed-chunk-5](Session2_hypothesis_testing-figure/unnamed-chunk-5-1.png)
+
+SD and SE - sampling distribution for the mean (4/)
+========================================================
+What will happen if we repeat this experiment 100 times, rather than only 2 times
 
 ```r
 set.seed(123)
-mat4plot<-matrix(nrow=10,ncol=2)
-for (i in 1:10){
-  showtest<-rbinom(N,1,0.5)
-  showdensity<-dbinom(showtest, 10, 0.5, log = FALSE)
-  print(showdensity)
-  showmean<-mean(showtest)
-  print(showmean)
-  mat4plot[i,1]<-showmean
-}
-```
-
-```
- [1] 0.0009765625 0.0097656250 0.0009765625 0.0097656250 0.0097656250
- [6] 0.0009765625 0.0097656250 0.0097656250 0.0097656250 0.0009765625
-[1] 0.6
- [1] 0.0097656250 0.0009765625 0.0097656250 0.0097656250 0.0009765625
- [6] 0.0097656250 0.0009765625 0.0009765625 0.0009765625 0.0097656250
-[1] 0.5
- [1] 0.0097656250 0.0097656250 0.0097656250 0.0097656250 0.0097656250
- [6] 0.0097656250 0.0097656250 0.0097656250 0.0009765625 0.0009765625
-[1] 0.8
- [1] 0.0097656250 0.0097656250 0.0097656250 0.0097656250 0.0009765625
- [6] 0.0009765625 0.0097656250 0.0009765625 0.0009765625 0.0009765625
-[1] 0.5
- [1] 0.0009765625 0.0009765625 0.0009765625 0.0009765625 0.0009765625
- [6] 0.0009765625 0.0009765625 0.0009765625 0.0009765625 0.0097656250
-[1] 0.1
- [1] 0.0009765625 0.0009765625 0.0097656250 0.0009765625 0.0097656250
- [6] 0.0009765625 0.0009765625 0.0097656250 0.0097656250 0.0009765625
-[1] 0.4
- [1] 0.0097656250 0.0009765625 0.0009765625 0.0009765625 0.0097656250
- [6] 0.0009765625 0.0097656250 0.0097656250 0.0097656250 0.0009765625
-[1] 0.5
- [1] 0.0097656250 0.0097656250 0.0097656250 0.0009765625 0.0009765625
- [6] 0.0009765625 0.0009765625 0.0097656250 0.0009765625 0.0009765625
-[1] 0.4
- [1] 0.0009765625 0.0097656250 0.0009765625 0.0097656250 0.0009765625
- [6] 0.0009765625 0.0097656250 0.0097656250 0.0097656250 0.0009765625
-[1] 0.5
- [1] 0.0009765625 0.0097656250 0.0009765625 0.0097656250 0.0009765625
- [6] 0.0009765625 0.0097656250 0.0009765625 0.0009765625 0.0097656250
-[1] 0.4
-```
-
-```r
+no.experiment=100
+mat4plot<-matrix(nrow=no.experiment,ncol=2)
 mat4plot[,2]<-1
-mat4plot<-mat4plot[order(mat4plot[,1]),]
-
-#plot(mat4plot,pch=20,ylim=c(0,100),ylab="count",xlab="mean",xlim = c(0,1))
-hist(mat4plot[,1],xlim=c(0,1),breaks=10)
+N<-10
+for (i in 1:no.experiment){
+  mat4plot[i,1]<-mean(rbinom(N,1,0.5))
+}
+hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",main="flip a coin 10 times, and repeat 100 times")
 ```
 
-![plot of chunk unnamed-chunk-3](Session2_hypothesis_testing-figure/unnamed-chunk-3-1.png)
+![plot of chunk unnamed-chunk-6](Session2_hypothesis_testing-figure/unnamed-chunk-6-1.png)
+
+
+SD and SE - sampling distribution for the mean (5/)
+========================================================
+
+Flip a coin for 10 times, and repeat it for 100 times
+
+![plot of chunk unnamed-chunk-7](Session2_hypothesis_testing-figure/unnamed-chunk-7-1.png)
+***
+Flip a coin for 100 times, and repeat it for 100 times
+
+![plot of chunk unnamed-chunk-8](Session2_hypothesis_testing-figure/unnamed-chunk-8-1.png)
 
 Confidence Interval (CI)
 ========================================================
@@ -236,7 +254,7 @@ PlantGrowth
 ***
 data visualisation
 
-![plot of chunk unnamed-chunk-7](Session2_hypothesis_testing-figure/unnamed-chunk-7-1.png)
+![plot of chunk unnamed-chunk-12](Session2_hypothesis_testing-figure/unnamed-chunk-12-1.png)
 
 
 t-test example - Load data (2/2)
