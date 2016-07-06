@@ -18,10 +18,15 @@ Outline
 
 Dataset - use the "iris" data (1/3)
 ========================================================
-We have used the "iris" data for the [Intermediate R course]. We are going to work on this data again for this session.
+We have used the "iris" data for the [Intermediate R course]. We are going to work with this dataset again for this session.
 
 Dataset - use the "iris" data (2/3)
 ========================================================
+
+
+```r
+data(iris)
+```
 Some basic checks
 
 ```r
@@ -65,9 +70,15 @@ Dataset - use the "iris" data (3/3)
 [*intermediate R; add a link to the intermediate R]
 
 ```r
-# library("dplyr")
+#install.packages("dplyr")
+library("dplyr")
+```
+
+
+```r
 # tbl_df()
 ```
+
 Correlation (1/8)
 =========================================================
 
@@ -115,10 +126,10 @@ cor(x,z)
 ```
 
 ```
-[1] 0.004537162
+[1] 0.02992602
 ```
 ***
-![plot of chunk unnamed-chunk-5](Session3_linear_regression-figure/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-7](Session3_linear_regression-figure/unnamed-chunk-7-1.png)
 
 
 Correlation over a matrix (4/8)
@@ -156,53 +167,37 @@ Sepal.Wid -0.1175698  1.0000000 -0.4284401 -0.3661259
 Petal.Len  0.8717538 -0.4284401  1.0000000  0.9628654
 Petal.Wid  0.8179411 -0.3661259  0.9628654  1.0000000
 ```
+<img src="Session3_linear_regression-figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="820px" />
+
 
 Correlation (6/8)
-========================================================
-left: 70%
-
-```r
-cor(iris4cor)
-```
-
-```
-           Sepal.Len  Sepal.Wid  Petal.Len  Petal.Wid
-Sepal.Len  1.0000000 -0.1175698  0.8717538  0.8179411
-Sepal.Wid -0.1175698  1.0000000 -0.4284401 -0.3661259
-Petal.Len  0.8717538 -0.4284401  1.0000000  0.9628654
-Petal.Wid  0.8179411 -0.3661259  0.9628654  1.0000000
-```
-***
-<img src="Session3_linear_regression-figure/unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="820px" />
-
-Correlation (7/8)
 ========================================================
 
 ```r
 pairs(iris4cor)
 ```
 
-![plot of chunk unnamed-chunk-10](Session3_linear_regression-figure/unnamed-chunk-10-1.png)
+![plot of chunk unnamed-chunk-11](Session3_linear_regression-figure/unnamed-chunk-11-1.png)
 
-Correlation (8/8)
+Correlation (7/8)
 ========================================================
-[probably find an example that requires the spearman method]
+[find an example that requires the spearman method]
 
 
 Regression and linear models (1/)
 =========================================================
 
-We have seen how we can find the correlation between two sets of variables using cor() function.
+We have seen how we can find the correlation between two sets of variables using **cor()** function.
 
-R also provides a comprehensive set of tools for regression analysis including the well used linear modeling function lm()
+R also provides a comprehensive set of tools for regression analysis including the well used linear modeling function **lm()**
 
 To fit a linear regression we use a similar set of arguments as passed to the t-test fuction in the previous slide.
 
 Regression and linear models (2/)
 =========================================================
-Using the Petal.Width from iris data as example
+Using the Petal.Length from iris data as example
 
-We could like to use the current information to predict the width of a petal from Iris.versicolor
+We could like to use the current information to predict the length of a petal from Iris.versicolor
 ![alt text](imgs/Iris_versicolor.jpg)
 ***
 
@@ -227,8 +222,7 @@ Regression and linear models (3/)
 Try to use the mean of total Petal.Length first
 
 ```r
-head(iris_versi[,c("Petal.Length",
-                   "Species")])
+head(iris_versi[,c("Petal.Length","Species")])
 ```
 
 ```
@@ -256,21 +250,24 @@ abline(h=mean(iris_versi$Petal.Length),
        col="forestgreen",lwd=3)
 ```
 
-![plot of chunk unnamed-chunk-14](Session3_linear_regression-figure/unnamed-chunk-14-1.png)
+![plot of chunk unnamed-chunk-15](Session3_linear_regression-figure/unnamed-chunk-15-1.png)
 
 
 Regression and linear models (4/)
 =========================================================
 Try to use the mean of total Petal.Length first
 
-![plot of chunk unnamed-chunk-15](Session3_linear_regression-figure/unnamed-chunk-15-1.png)
+![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
 ***
-In this case, the expected values is  $$ mean  = \bar{y} $$
+
+$$\text{In this case, the expected values is mean } = \overline y $$
+
 - residuals (Error)
+
 $$
   \begin{aligned}
 
-  Error_i & = y_i - \bar{y}
+  Error_i & = y_i - \overline y
   \\ \\
   \end{aligned}
 $$
@@ -281,36 +278,41 @@ Regression and linear models (5/)
 =========================================================
 Zoom in [just see first 4 data points]
 
-![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
+![plot of chunk unnamed-chunk-17](Session3_linear_regression-figure/unnamed-chunk-17-1.png)
 ***
-In this case, the expected values is  $$ mean  = \bar{y} $$
+
+$$\text{In this case, the expected values is mean } = \overline y $$
+
 - residuals (Error)
+
 $$
   \begin{aligned}
   \\
-  Error_i & = y_i - \bar{y}
+  Error_i & = y_i - \overline y
   \end{aligned}
 $$
 - square of the residuals
+
 $$
   \begin{aligned}
-  Error_i^2  = (y_i - \bar{y})^2
+  Error_i^2  = (y_i - \overline y)^2
   \end{aligned}
 $$
+
 - sum of the square of the residuals (SSE)
+
 $$
   \begin{aligned}
-
-  SSE  = \sum_{i=1}^{n}(y_i-\bar{y})^2
+  SSE  = \sum_{i=1}^{n}(y_i-\overline y)^2
   \end{aligned}
 $$
 
 
-Regression and linear models (/)
+Regression and linear models (6/)
 =========================================================
-Use the "iris_versi" Petal.Width to predict Petal.Length
+Use the "iris_versi" *Petal.Width* to predict *Petal.Length*
 
-![plot of chunk unnamed-chunk-17](Session3_linear_regression-figure/unnamed-chunk-17-1.png)
+![plot of chunk unnamed-chunk-18](Session3_linear_regression-figure/unnamed-chunk-18-1.png)
 ***
 $$
   x = \text{independent or explanatory variable}
@@ -321,15 +323,12 @@ $$
 
 **$$f(x)  = b_0 + b_1x$$**
 
-$$\begin{aligned}
-  b_0 = intercept
-  \\
-  b_1 = slope
-\end{aligned}$$
+$$b_0\text{(intercept): the value of f(x) when x =0}$$
+
+$$b_1\text{(slope): the amount of f(x) will change when x changes 1 unit}$$
 
 
-
-Regression and linear models (/)
+Regression and linear models (7/)
 =========================================================
 The lm() function fits a linear regression to your data and provides useful information on the generated fit.
 
@@ -351,7 +350,7 @@ Coefficients:
 ```
 
 
-Interpreting output of lm()
+Interpreting output of lm(8/)
 =========================================================
 As we have seen, printing the model result provides the intercept and slope of line.
 To get some more information on the model we can use the summary() function
@@ -381,7 +380,7 @@ Multiple R-squared:  0.6188,	Adjusted R-squared:  0.6109
 F-statistic: 77.93 on 1 and 48 DF,  p-value: 1.272e-11
 ```
 
-Regression and linear models - coefficients (/)
+Regression and linear models - coefficients (9/)
 =========================================================
 
 ```r
@@ -394,13 +393,20 @@ lmResult$coefficients
 ```
 From the $coefficients of object lmResult, we know the equation for the best fit is
 
-**Y = 1.781275 + 1.869325 *X**
+**$$Y = 1.781275 + 1.869325 *X$$**
+
+**$$f(x)  = b_0 + b_1x$$**
 
 We can add the line of best fit using **abline()**
-***
-![plot of chunk unnamed-chunk-21](Session3_linear_regression-figure/unnamed-chunk-21-1.png)
 
-Regression and linear models - residuals
+$$b_0\text{: the value of f(x) when x =0}$$
+
+$$b_1\text{: the amount of f(x) will change when x changes 1 unit}$$
+
+***
+![plot of chunk unnamed-chunk-22](Session3_linear_regression-figure/unnamed-chunk-22-1.png)
+
+Regression and linear models - residuals (10/)
 =========================================================
 
 The **residuals** are the difference between the predicted and actual values.

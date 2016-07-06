@@ -1,4 +1,4 @@
-Session1: Describe the Data
+Session1: Data summary
 ========================================================
 author: MRC Clinical Sciences Centre (http://mrccsc.github.io/)
 date: 12/July/2016
@@ -170,7 +170,7 @@ plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)")
 
 Spread of data - work with plots (3/6)
 ========================================================
-min(), max(), median(), range() and quantile() functions
+**min()**, **max()**, **median()**, **range()** and **quantile()** functions
 ```{r}
 min.life.exp<-min(Life_exp$life.expectancy)
 max.life.exp<-max(Life_exp$life.expectancy)
@@ -238,7 +238,7 @@ Spread of data - Variance and Standard deviation
 
 $$
   \begin{aligned}
-  \bar{x} & = \frac{{\displaystyle\sum_{i=1}^n}x_i}n \\
+  \overline x & = \frac{{\displaystyle\sum_{i=1}^n}x_i}n \\
   \\ \\
   Variance & =\frac{{\displaystyle\sum_{i=1}^n}(\left|x_i-\overline x\right|)^2}{n-1} \\
   \\ \\
@@ -292,9 +292,7 @@ par(mfrow=c(1,1))
 Data shape - violin plot
 ========================================================
 
-```{r,echo=F}
-install.packages("vioplot")
-```
+
 ```{r,echo=F}
 par(mfrow=c(2,1))
   hist(Life_exp$life.expectancy,breaks=10,freq = F,xlim=range(Life_exp$life.expectancy))
@@ -304,11 +302,15 @@ par(mfrow=c(2,1))
 par(mfrow=c(1,1))
 ```
 ***
-```{r}
-library("vioplot")
-boxplot(Life_exp$life.expectancy,ylab="Life expectancy (Years)",horizontal=T, ylim=range(Life_exp$life.expectancy))
 
-vioplot(Life_exp$life.expectancy,ylim=range(Life_exp$life.expectancy),horizontal = T)
+```{r, warning=FALSE, eval=T}
+#install.packages("vioplot")
+library("vioplot")
+```
+```{r}
+vioplot(Life_exp$life.expectancy,
+        ylim=range(Life_exp$life.expectancy),
+        horizontal = T)
 
 ```
 

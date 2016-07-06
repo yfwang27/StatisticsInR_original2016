@@ -1,4 +1,4 @@
-Session1: Describe the Data
+Session1: Data summary
 ========================================================
 author: MRC Clinical Sciences Centre (http://mrccsc.github.io/)
 date: 12/July/2016
@@ -230,7 +230,7 @@ plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)")
 
 Spread of data - work with plots (3/6)
 ========================================================
-min(), max(), median(), range() and quantile() functions
+**min()**, **max()**, **median()**, **range()** and **quantile()** functions
 
 ```r
 min.life.exp<-min(Life_exp$life.expectancy)
@@ -339,7 +339,7 @@ Spread of data - Variance and Standard deviation
 
 $$
   \begin{aligned}
-  \bar{x} & = \frac{{\displaystyle\sum_{i=1}^n}x_i}n \\
+  \overline x & = \frac{{\displaystyle\sum_{i=1}^n}x_i}n \\
   \\ \\
   Variance & =\frac{{\displaystyle\sum_{i=1}^n}(\left|x_i-\overline x\right|)^2}{n-1} \\
   \\ \\
@@ -409,26 +409,22 @@ Data shape - violin plot
 ========================================================
 
 
-```
-
-The downloaded binary packages are in
-	/var/folders/j5/98tmhch92zv0xfnrb65cqj0c0000gp/T//RtmpCmJoHD/downloaded_packages
-```
-![plot of chunk unnamed-chunk-26](Session1_describe_the_data-figure/unnamed-chunk-26-1.png)
+![plot of chunk unnamed-chunk-25](Session1_describe_the_data-figure/unnamed-chunk-25-1.png)
 ***
 
+
 ```r
+#install.packages("vioplot")
 library("vioplot")
-boxplot(Life_exp$life.expectancy,ylab="Life expectancy (Years)",horizontal=T, ylim=range(Life_exp$life.expectancy))
+```
+
+```r
+vioplot(Life_exp$life.expectancy,
+        ylim=range(Life_exp$life.expectancy),
+        horizontal = T)
 ```
 
 ![plot of chunk unnamed-chunk-27](Session1_describe_the_data-figure/unnamed-chunk-27-1.png)
-
-```r
-vioplot(Life_exp$life.expectancy,ylim=range(Life_exp$life.expectancy),horizontal = T)
-```
-
-![plot of chunk unnamed-chunk-27](Session1_describe_the_data-figure/unnamed-chunk-27-2.png)
 
 
 Data shape - histogram
@@ -527,8 +523,8 @@ rnorm(10,mean=8,sd=3)
 ```
 
 ```
- [1]  8.819359 10.328423  9.649495 11.666026 12.780973 10.536738  5.682149
- [8]  7.511676  1.156298  7.078410
+ [1] 12.560887 10.865237 10.018183  7.925390  4.939866 10.549148  8.771325
+ [8]  9.913189 11.184843  8.943356
 ```
 
 Normal distribution example 1 (2/2)
