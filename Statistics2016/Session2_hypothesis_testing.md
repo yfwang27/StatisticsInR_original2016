@@ -121,7 +121,7 @@ What will happen if we repeat this experiment 10 times, rather than only 2 times
 ```r
 set.seed(123)
 no.experiment=10
-mat4plot<-matrix(nrow=no.experiment,ncol=2);mat4plot[,2]<-1;
+mat4plot<-matrix(nrow=no.experiment,ncol=1);
 no.observation<-10
 for (i in 1:no.experiment){
   mat4plot[i,1]<-mean(rbinom(no.observation,1,0.5))
@@ -153,18 +153,18 @@ Flip a coin for 10 times, and repeat it for 1,000 times
 
 ![plot of chunk unnamed-chunk-9](Session2_hypothesis_testing-figure/unnamed-chunk-9-1.png)
 ***
-$$\text{the sample mean }\bar{X}\text{ follows an approximate normal distribution}
+$$\text{the sample mean }\overline X\text{ follows an approximate normal distribution}
   \\
-  \bar{X}\approx Normal\left(\mu,\dfrac{\sigma^2}{n}\right)$$
+  \overline X\approx Normal\left(\mu,\dfrac{\sigma^2}{n}\right)$$
 
 mean of the sampling distribution of the mean
 
-  $$E(\bar{X})=\mu_{\bar{X}}=\mu$$
+  $$E(\overline X)=\mu_{\overline X}=\mu$$
 
 variance of the sampling distribution of the mean
 
 $$
-  Var(\bar{X})=\sigma_{\bar{X}}^2=\frac{\sigma^2}n \text{or }SE^2=\frac{SD^2}n
+  Var(\overline X)=\sigma_{\overline X}^2=\frac{\sigma^2}n \text{or }SE^2=\frac{SD^2}n
   \\ \\
   SE=\frac{SD}{\sqrt n}
   \\
@@ -197,7 +197,7 @@ $$
 
 
 
-Confidence Interval for proportions
+Confidence Interval for proportions (1/)
 ========================================================
 
 - $$
@@ -251,12 +251,12 @@ $$
 
 
 
-Confidence Interval for means
+Confidence Interval for means (2/)
 ========================================================
 
 - $$
 \begin{aligned}
-  \text{distribution of }\bar{X}:
+  \text{distribution of }\overline X:
 \end{aligned}
 $$
 
@@ -264,13 +264,13 @@ $$
 
 $$
   \begin{aligned}
-  E(\bar{X}) = \mu = \text{true mean}.
+  E(\overline X) = \mu = \text{true mean}.
   \\
-  Var(\bar{X})=\frac{\sigma^2}n.
+  Var(\overline X)=\frac{\sigma^2}n.
   \\
   \text{C.L.T.: approximately: }
   \\
-  \bar{X}\approx Normal\left(\mu,\;\frac{\sigma^2}n\right).
+  \overline X\approx Normal\left(\mu,\;\frac{\sigma^2}n\right).
 \end{aligned}
 $$
 
@@ -278,7 +278,7 @@ $$
 
 - $$
 \begin{aligned}
-  \frac{\bar{X}-\mu}{\sqrt{\displaystyle\frac{\sigma^2}n}}\approx Normal\left(0,\;1\right).
+  \frac{\overline X-\mu}{\sqrt{\displaystyle\frac{\sigma^2}n}}\approx Normal\left(0,\;1\right).
 \end{aligned}
 $$
 
@@ -286,21 +286,44 @@ $$
 
 $$
 \begin{aligned}
-  P(\left|\frac{\widehat p-p}{\sqrt{\displaystyle\frac{p(1-p)}n}}\right|>1.96)\approx5\%.
+  P(\left|\frac{ \overline X-\mu}{\sqrt{\frac{\sigma^2}n}}\right|\leq1.96)\approx95\%.
   \\
-  P(\left|\frac{\widehat p-p}{\sqrt{\displaystyle\frac{p(1-p)}n}}\right|\leq1.96)\approx95\%.
-  \\
-  P(p-1.96\sqrt{\frac{p(1-p)}n}\leq\widehat p\leq p+1.96\sqrt{\frac{p(1-p)}n})\approx95\%.
+
+  P\left(\overline X-1.96\sqrt{\frac{\sigma^2}n},\;\overline X+1.96\sqrt{\frac{\sigma^2}n}\right)\approx95\%.
 \end{aligned}
 $$
 
-- 95% confidence interval for p
+- $$\text{95% confidence interval for }\overline X$$
 
 $$
 \begin{aligned}
-  \left[\hat p-1.96\sqrt{\frac{p(1-p)}n},\;\hat p+1.96\sqrt{\frac{p(1-p)}n}\right].
+  \left[\overline X-1.96\sqrt{\frac{\sigma^2}n},\;\overline X+1.96\sqrt{\frac{\sigma^2}n}\right].
 \end{aligned}
 $$
+
+- $$\sigma^2\text{ is unknown}$$
+
+*Known*
+
+$$E(S^2)=\sigma^2$$
+
+- $$\text{substitue }\sigma^2=S^2$$
+
+
+
+Confidence Interval for means (3/)
+========================================================
+
+after substitution, rather than having
+
+$$ \frac{\overline X-\mu}{\sqrt{\displaystyle\frac{S^2}n}}\approx Normal\left(0,\;1\right).$$
+
+we have
+
+$$ \frac{\overline X-\mu}{\sqrt{\displaystyle\frac{S^2}n}}\approx t_{n-1}.$$
+
+$$t_{n-1}:\text{t distribution with n-1 degrees of freedom}.$$
+
 
 
 Confidence Interval (CI)
@@ -310,7 +333,7 @@ Confidence Interval for proportions
 
 $$
 \begin{aligned}
-  100(1-\alpha)\%\text{ CI for p: }
+  100(1-\alpha)\%\text{ CI for }\hat{p}:
   \\\\
   \hat{p}\pm z_\frac\alpha2\sqrt{\frac{p(1-p)}n}.
 \end{aligned}
@@ -322,7 +345,9 @@ Confidence Interval for means
 
 $$
 \begin{aligned}
-
+  100(1-\alpha)\%\text{ CI for }\overline X:
+  \\\\
+  \overline X\pm t_\frac\alpha2\frac S{\sqrt n}.
 \end{aligned}
 $$
 
@@ -351,7 +376,7 @@ Hypothesis testing for propotions
 
 [example: EU referendum reuslt 2016]
 [data/EU-referendum-result-data.csv]
-Is the leave vote more than the 50%?
+Is the leaving vote more than the 50%?
 
 ```r
 vote.leave=17410742
@@ -359,12 +384,107 @@ vote.remain=16141241
 total.vote=vote.leave+vote.remain
 ```
 
+CI for the leaving vote
+========================================================
+Left: 40%
+
+Calculate the 95% CI
+
+
+```r
+alpha.vote=0.05;
+
+phat.vote<-vote.leave/total.vote;
+
+z.vote<-qnorm(alpha.vote/2,
+              mean=0,sd=1,
+              lower.tail = F)
+
+ME.vote<-z.vote*sqrt(phat.vote*(1-phat.vote)/total.vote)
+
+CI.vote<-phat.vote + c(-ME.vote, ME.vote)
+CI.vote
+```
+
+```
+[1] 0.5187494 0.5190875
+```
+***
+
+Use the *binom.confint()* from **binom** package
+
+
+```r
+#install.packages("binom")
+library("binom")
+```
+
+
+```r
+binom.confint(vote.leave, total.vote, conf.level = 0.95, methods = "asymptotic")
+```
+
+```
+      method        x        n      mean     lower     upper
+1 asymptotic 17410742 33551983 0.5189184 0.5187494 0.5190875
+```
+
 Hypothesis testing for propotions
 ========================================================
 
-$$H_0:\text{ Leave vote is more than 50%}
+$$H_0:\text{ Leave vote is equal 50%}
 \\
-H_a:\text{ Leave vote is no more than 50%}$$
+H_a:\text{ Leave vote is not equal to 50%}$$
+
+```r
+binom.test(vote.leave, total.vote, p=0.5, alternative = "two.sided")
+```
+
+```
+
+	Exact binomial test
+
+data:  vote.leave and total.vote
+number of successes = 17411000, number of trials = 33552000,
+p-value < 2.2e-16
+alternative hypothesis: true probability of success is not equal to 0.5
+95 percent confidence interval:
+ 0.5187493 0.5190875
+sample estimates:
+probability of success 
+             0.5189184 
+```
+***
+
+$$H_0:\text{ Leave vote is equal 50%}
+\\
+H_a:\text{ Leave vote is not equal to 50%}$$
+
+```r
+prop.test(vote.leave, total.vote, p=0.5, alternative = "two.sided")
+```
+
+```
+
+	1-sample proportions test with continuity correction
+
+data:  vote.leave out of total.vote, null probability 0.5
+X-squared = 48034, df = 1, p-value < 2.2e-16
+alternative hypothesis: true p is not equal to 0.5
+95 percent confidence interval:
+ 0.5187493 0.5190875
+sample estimates:
+        p 
+0.5189184 
+```
+
+
+Hypothesis testing for propotions
+========================================================
+
+$$H_0:\text{ Leaving vote is >= 50%}
+\\
+H_a:\text{ Leaving vote is < 50%}$$
 
 ```r
 binom.test(vote.leave, total.vote, p=0.5, alternative = "less")
@@ -384,6 +504,8 @@ sample estimates:
 probability of success 
              0.5189184 
 ```
+
+
 
 Hypothesis testing for mean
 ========================================================
@@ -435,7 +557,7 @@ PlantGrowth
 ***
 data visualisation
 
-![plot of chunk unnamed-chunk-15](Session2_hypothesis_testing-figure/unnamed-chunk-15-1.png)
+![plot of chunk unnamed-chunk-20](Session2_hypothesis_testing-figure/unnamed-chunk-20-1.png)
 
 
 t-test example - Load data (2/2)
