@@ -426,7 +426,6 @@ vioplot(Life_exp$life.expectancy,
 
 ![plot of chunk unnamed-chunk-27](Session1_describe_the_data-figure/unnamed-chunk-27-1.png)
 
-
 Data shape - histogram
 ========================================================
 
@@ -492,15 +491,6 @@ For more details on authoring R presentations click the
 - Bullet 2
 - Bullet 3
 
-Poisson distribution
-========================================================
-
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
 
 Normal distribution
 ========================================================
@@ -523,8 +513,8 @@ rnorm(10,mean=8,sd=3)
 ```
 
 ```
- [1] 12.560887 10.865237 10.018183  7.925390  4.939866 10.549148  8.771325
- [8]  9.913189 11.184843  8.943356
+ [1]  1.757759 11.002107  9.587035  8.061594  6.562935  9.752966  5.612643
+ [8] 11.671348 10.707884 10.432739
 ```
 
 Normal distribution example 1 (2/2)
@@ -563,13 +553,6 @@ qnorm(0.5,mean=8,sd=3)
 ```
 [1] 8
 ```
-
-
-
-
-Slide With Code
-========================================================
-
 
 
 

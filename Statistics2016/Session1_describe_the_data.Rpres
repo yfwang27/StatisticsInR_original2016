@@ -314,7 +314,6 @@ vioplot(Life_exp$life.expectancy,
 
 ```
 
-
 Data shape - histogram
 ========================================================
 
@@ -373,15 +372,6 @@ For more details on authoring R presentations click the
 - Bullet 2
 - Bullet 3
 
-Poisson distribution
-========================================================
-
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
 
 Normal distribution
 ========================================================
@@ -424,14 +414,5 @@ The value for which i have a 50 percent being greater than given a normal distri
 qnorm(0.5,mean=8,sd=3)
 ```
 
-
-
-
-Slide With Code
-========================================================
-
-```{r}
-
-```
 
 
