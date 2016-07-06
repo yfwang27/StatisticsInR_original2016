@@ -146,7 +146,7 @@ Flip a coin for 10 times, and repeat it for 1,000 times
 
 ![plot of chunk unnamed-chunk-8](Session2_hypothesis_testing-figure/unnamed-chunk-8-1.png)
 
-SD and SE - Central limit theorem (6/)
+SD and SE - Central limit theorem (C.L.T.) (6/)
 ========================================================
 
 Flip a coin for 10 times, and repeat it for 1,000 times
@@ -155,7 +155,7 @@ Flip a coin for 10 times, and repeat it for 1,000 times
 ***
 $$\text{the sample mean }\bar{X}\text{ follows an approximate normal distribution}
   \\
-  \bar{X}\sim N\left(\mu,\dfrac{\sigma^2}{n}\right)$$
+  \bar{X}\approx Normal\left(\mu,\dfrac{\sigma^2}{n}\right)$$
 
 mean of the sampling distribution of the mean
 
@@ -174,14 +174,16 @@ $$
 
 
 
-SD and SE - Central limit theorem (7/)
+SD and SE - Central limit theorem (C.L.T.) (7/)
 ========================================================
 
 Flip a coin for 10 times, and repeat it for 1,000 times
 
 ![plot of chunk unnamed-chunk-10](Session2_hypothesis_testing-figure/unnamed-chunk-10-1.png)
 
-$$SE=\frac{SD}{\sqrt 10}$$
+$$
+  SE=\frac{SD}{\sqrt{10}}
+$$
 
 ***
 
@@ -189,16 +191,91 @@ Flip a coin for 100 times and repeat it for 1000 times
 
 ![plot of chunk unnamed-chunk-11](Session2_hypothesis_testing-figure/unnamed-chunk-11-1.png)
 
-$$SE=\frac{SD}{\sqrt 100}$$
+$$
+  SE=\frac{SD}{\sqrt{100}}
+$$
+
+
+
+Confidence Interval for proportions
+========================================================
+
+- $$
+\begin{aligned}
+  \text{distribution of }\hat{p}:
+\end{aligned}
+$$
+
+*Known*
+
+$$
+  \begin{aligned}
+  E(\hat{p}) = p.
+  \\
+  Var(\hat{p})=\frac{p(1-p)}n.
+  \\
+
+  \text{C.L.T.: approximately: }
+  \\
+  \hat{p}\approx Normal\left(p,\;\frac{p(1-p)}n\right).
+\end{aligned}
+$$
+
+*So*
+
+- $$
+\begin{aligned}
+  \frac{ \hat{p}-p}{\sqrt{\displaystyle\frac{p(1-p)}n}}\approx Normal\left(0,\;1\right).
+\end{aligned}
+$$
+
+***
+
+$$
+\begin{aligned}
+  P(\left|\frac{\widehat p-p}{\sqrt{\displaystyle\frac{p(1-p)}n}}\right|>1.96)\approx5\%.
+  \\
+  P(\left|\frac{\widehat p-p}{\sqrt{\displaystyle\frac{p(1-p)}n}}\right|\leq1.96)\approx95\%.
+  \\
+  P(p-1.96\sqrt{\frac{p(1-p)}n}\leq\widehat p\leq p+1.96\sqrt{\frac{p(1-p)}n})\approx95\%.
+\end{aligned}
+$$
+
+- 95% confidence interval for p
+
+$$
+\begin{aligned}
+  \left[\hat p-1.96\sqrt{\frac{p(1-p)}n},\;\hat p+1.96\sqrt{\frac{p(1-p)}n}\right].
+\end{aligned}
+$$
+
+
+Confidence Interval for means
+========================================================
 
 
 Confidence Interval (CI)
 ========================================================
 
-Confidence Interval for propotions
-***
-Confidence Interval for mean
+Confidence Interval for proportions
 
+$$
+\begin{aligned}
+  100(1-\alpha)\%\text{ CI for p: }
+  \\\\
+  \hat{p}\pm z_\frac\alpha2\sqrt{\frac{p(1-p)}n}.
+\end{aligned}
+$$
+
+***
+
+Confidence Interval for means
+
+$$
+\begin{aligned}
+
+\end{aligned}
+$$
 
 Statistical tests
 ========================================================
