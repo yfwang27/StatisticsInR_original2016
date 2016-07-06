@@ -206,7 +206,7 @@ $$
 
 ***
 
-Flip a coin for 100 times and repeat it for 1000 times
+Flip a coin for 100 times and repeat it for 1,000 times
 
 ```{r,echo=F}
 set.seed(123)
@@ -227,7 +227,7 @@ $$
 
 
 
-Confidence Interval for proportions (1/)
+Confidence Interval for proportions (1/4)
 ========================================================
 
 - $$
@@ -271,7 +271,7 @@ $$
 \end{aligned}
 $$
 
-- 95% confidence interval for p
+- $$\text{95% confidence interval for }\hat{p}$$
 
 $$
 \begin{aligned}
@@ -279,9 +279,14 @@ $$
 \end{aligned}
 $$
 
+- $$\text{p is unknown}$$
+
+***$$\text{substitute }p=\hat{p}$$***
+
+***$$\text{or substitute }p=1/2$$***
 
 
-Confidence Interval for means (2/)
+Confidence Interval for means (2/4)
 ========================================================
 
 - $$
@@ -337,11 +342,11 @@ $$
 
 $$E(S^2)=\sigma^2$$
 
-- $$\text{substitue }\sigma^2=S^2$$
+***$$\text{substitue }\sigma^2=S^2$$***
 
 
 
-Confidence Interval for means (3/)
+Confidence Interval for means (3/4)
 ========================================================
 
 after substitution, rather than having
@@ -356,7 +361,7 @@ $$t_{n-1}:\text{t distribution with n-1 degrees of freedom}.$$
 
 
 
-Confidence Interval (CI)
+Confidence Interval (CI) (4/4)
 ========================================================
 
 Confidence Interval for proportions
@@ -387,18 +392,11 @@ Statistical tests
 On top of descriptive statistics, R has several statistical tests covering a range of problems and data types.
 
 Some common tests include:
-
+- binom.test() - Performs an exact test of a simple null hypothesis about the probability of success in a Bernoulli experiment.
 - var.test() - Comparing 2 variances (Fisher's F test)
 - t.test() - Comparing 2 sample means with normal errors (Student's t-test)
-- binom.test() - Performs an exact test of a simple null hypothesis about the probability of success in a Bernoulli experiment.
 - wilcox.test() - Comparing 2 means with non-normal errors (Wilcoxon's rank test)
 - fisher.test() - Testing for independence of 2 variables in a contingency table (Fisher's exact test)
-
-
-Hypothesis testing for propotions
-========================================================
-
-[example: EU referendum reuslt 2016]
 
 
 Hypothesis testing for propotions
@@ -409,14 +407,16 @@ Hypothesis testing for propotions
 Is the leaving vote more than the 50%?
 ```{r}
 vote.leave=17410742
+
 vote.remain=16141241
+
 total.vote=vote.leave+vote.remain
 
+total.vote
 ```
 
 CI for the leaving vote
 ========================================================
-Left: 40%
 
 Calculate the 95% CI
 
@@ -432,6 +432,7 @@ z.vote<-qnorm(alpha.vote/2,
 ME.vote<-z.vote*sqrt(phat.vote*(1-phat.vote)/total.vote)
 
 CI.vote<-phat.vote + c(-ME.vote, ME.vote)
+
 CI.vote
 ```
 ***
@@ -450,24 +451,13 @@ binom.confint(vote.leave, total.vote, conf.level = 0.95, methods = "asymptotic")
 Hypothesis testing for propotions
 ========================================================
 
-$$H_0:\text{ Leave vote is equal 50%}
+$$H_0:\text{ Leaving vote is equal 50%}
 \\
-H_a:\text{ Leave vote is not equal to 50%}$$
+H_a:\text{ Leaving vote is not equal to 50%}$$
 ```{r}
 binom.test(vote.leave, total.vote, p=0.5, alternative = "two.sided")
 ```
 ***
-
-$$H_0:\text{ Leave vote is equal 50%}
-\\
-H_a:\text{ Leave vote is not equal to 50%}$$
-```{r}
-prop.test(vote.leave, total.vote, p=0.5, alternative = "two.sided")
-```
-
-
-Hypothesis testing for propotions
-========================================================
 
 $$H_0:\text{ Leaving vote is >= 50%}
 \\
@@ -476,13 +466,7 @@ H_a:\text{ Leaving vote is < 50%}$$
 binom.test(vote.leave, total.vote, p=0.5, alternative = "less")
 ```
 
-
-
-Hypothesis testing for mean
-========================================================
-t-test
-
-t-test example - Load data (1/2)
+Hypothesis testing for mean - Load data (1/)
 ========================================================
 
 We use "PlantGrowth" as example
@@ -501,7 +485,7 @@ boxplot(weight~group,data=PlantGrowth,
 ```
 
 
-t-test example - Load data (2/2)
+Hypothesis testing for mean - Load data (2/)
 ========================================================
 
 Convert the input data into the proper format
@@ -518,7 +502,7 @@ head(PlantGrowth_wide)
 
 
 
-t-test example - Calculating variance
+T-test example - Calculating variance (3/)
 ========================================================
 
 First we can specify the columns of interest using $ and calculate their variance using var().
@@ -528,7 +512,7 @@ var(PlantGrowth_wide$trt1)
 var(PlantGrowth_wide$trt2)
 ```
 
-t-test example - Comparing variance
+T-test example - Comparing variance (4/)
 ========================================================
 
 Now we can test for any differences in variances between ctrl and trt1 and ctrl and trt2 with an F-test using the var.test() function.
@@ -542,7 +526,7 @@ var.test(PlantGrowth_wide$ctrl,
          PlantGrowth_wide$trt2)
 ```
 
-R objects (s3 and s4)
+R objects (s3 and s4) (5/)
 ========================================================
 Left:30% The data type holding the result var.test() is a little more complex than the data types we have looked.
 
@@ -554,7 +538,7 @@ result <- var.test(PlantGrowth_wide$ctrl, PlantGrowth_wide$trt1)
 str(result)
 ```
 
-R objects (s3 and s4)
+R objects (s3 and s4) (6/)
 ========================================================
 Now we know the structure and class of the htest object we can access the slots containing information we want just as with a named list.
 
@@ -571,7 +555,7 @@ The data used in function call
 result$data.name
 ```
 
-t-test example - Equal Variance
+T-test example - Equal Variance (7/)
 ========================================================
 We have ascertained that ctrl and trt1 have similar variances. We can therefore perform a standard t-test to assess the significance of differences between these groups.
 ```{r}
@@ -579,13 +563,13 @@ Result <- t.test(PlantGrowth_wide$ctrl,PlantGrowth_wide$trt1,alternative ="two.s
 Result
 ```
 
-t-test example - Unequal Variance
+T-test example - Unequal Variance (8/)
 ========================================================
 To compare groups of unequal variance then the var.equal argument may be set to FALSE (which is the default).
 
 note: [see exercise]
 
-T-test example. Specifying a formula
+T-test example - Specifying a formula (9/)
 ========================================================
 The same result to that shown could be achieved by specifying a formula for the comparison. Here we wish to compare ctrl versus trt1 so we could simply specify the formula and the data to be used.
 ```{r}
@@ -595,7 +579,7 @@ result_formula
 ```
 
 
-ANOVA
+ANOVA (1/)
 ========================================================
 
 Compute analysis of variance (or deviance) tables for one or more fitted model objects
@@ -604,7 +588,7 @@ Compute analysis of variance (or deviance) tables for one or more fitted model o
 - anova()
 
 
-ANOVA - use the anova() function
+ANOVA - use the anova() function (2/)
 ========================================================
 ```{r}
 PG.lm<-lm(formula = weight ~ group,
