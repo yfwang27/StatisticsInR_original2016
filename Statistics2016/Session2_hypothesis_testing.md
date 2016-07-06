@@ -250,8 +250,57 @@ $$
 $$
 
 
+
 Confidence Interval for means
 ========================================================
+
+- $$
+\begin{aligned}
+  \text{distribution of }\bar{X}:
+\end{aligned}
+$$
+
+*Known*
+
+$$
+  \begin{aligned}
+  E(\bar{X}) = \mu = \text{true mean}.
+  \\
+  Var(\bar{X})=\frac{\sigma^2}n.
+  \\
+  \text{C.L.T.: approximately: }
+  \\
+  \bar{X}\approx Normal\left(\mu,\;\frac{\sigma^2}n\right).
+\end{aligned}
+$$
+
+*So*
+
+- $$
+\begin{aligned}
+  \frac{\bar{X}-\mu}{\sqrt{\displaystyle\frac{\sigma^2}n}}\approx Normal\left(0,\;1\right).
+\end{aligned}
+$$
+
+***
+
+$$
+\begin{aligned}
+  P(\left|\frac{\widehat p-p}{\sqrt{\displaystyle\frac{p(1-p)}n}}\right|>1.96)\approx5\%.
+  \\
+  P(\left|\frac{\widehat p-p}{\sqrt{\displaystyle\frac{p(1-p)}n}}\right|\leq1.96)\approx95\%.
+  \\
+  P(p-1.96\sqrt{\frac{p(1-p)}n}\leq\widehat p\leq p+1.96\sqrt{\frac{p(1-p)}n})\approx95\%.
+\end{aligned}
+$$
+
+- 95% confidence interval for p
+
+$$
+\begin{aligned}
+  \left[\hat p-1.96\sqrt{\frac{p(1-p)}n},\;\hat p+1.96\sqrt{\frac{p(1-p)}n}\right].
+\end{aligned}
+$$
 
 
 Confidence Interval (CI)
