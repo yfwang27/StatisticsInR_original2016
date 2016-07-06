@@ -25,13 +25,13 @@ Hypothesis testing and ANOVA
 - Analysis of Variance (ANOVA)
 
 
-SD and SE (1/)
+SD and SE (1/7)
 ========================================================
 
 ![alt text](imgs/stat_sampling.png)
 
 
-SD and SE - sampling distribution for the mean (2/)
+SD and SE - sampling distribution for the mean (2/7)
 ========================================================
 
 If we flip a fair coin 10 times, what is the mean of this experiment?
@@ -72,7 +72,7 @@ showmean2
 ```
 
 
-SD and SE - sampling distribution for the mean (3/)
+SD and SE - sampling distribution for the mean (3/7)
 ========================================================
 
 If we flip a fair coin 10 times, what is the mean of this experiment?
@@ -113,10 +113,10 @@ showmean2
 ```
 ![plot of chunk unnamed-chunk-5](Session2_hypothesis_testing-figure/unnamed-chunk-5-1.png)
 
-SD and SE - sampling distribution for the mean (4/)
+SD and SE - sampling distribution for the mean (4/7)
 ========================================================
 
-What will happen if we repeat this experiment 10 times, rather than only 2 times
+What will happen if we repeat this experiment for 10 times, rather than only 2 times
 
 ```r
 set.seed(123)
@@ -128,13 +128,13 @@ for (i in 1:no.experiment){
 }
 hist(mat4plot[,1],xlim=c(0,1),breaks=100,
      xlab="mean",ylab="observed frequency",
-     main="flip a coin 10 times, and repeat it 10 times")
+     main="flip a coin 10 times, and repeat it for 10 times")
 ```
 
 ![plot of chunk unnamed-chunk-6](Session2_hypothesis_testing-figure/unnamed-chunk-6-1.png)
 
 
-SD and SE - Central limit theorem (5/)
+SD and SE - Central limit theorem (5/7)
 ========================================================
 
 Flip a coin for 10 times, and repeat it for 100 times
@@ -146,7 +146,7 @@ Flip a coin for 10 times, and repeat it for 1,000 times
 
 ![plot of chunk unnamed-chunk-8](Session2_hypothesis_testing-figure/unnamed-chunk-8-1.png)
 
-SD and SE - Central limit theorem (C.L.T.) (6/)
+SD and SE - Central limit theorem (C.L.T.) (6/7)
 ========================================================
 
 Flip a coin for 10 times, and repeat it for 1,000 times
@@ -174,7 +174,7 @@ $$
 
 
 
-SD and SE - Central limit theorem (C.L.T.) (7/)
+SD and SE - Central limit theorem (C.L.T.) (7/7)
 ========================================================
 
 Flip a coin for 10 times, and repeat it for 1,000 times
