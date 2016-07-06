@@ -40,8 +40,8 @@ If we flip a fair coin 10 times, what is the mean of this experiment?
 # always do set.seed() before the random sampling
 set.seed(123)
 # observation number, number of trials and probability of success on each trial
-sample.size=10;
-test1<-rbinom(sample.size,1,0.5)
+no.observation=10;
+test1<-rbinom(no.observation,1,0.5)
 test1
 ```
 
@@ -62,7 +62,7 @@ showmean
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
 
 ```r
-test2<-rbinom(sample.size,1,0.5)
+test2<-rbinom(no.observation,1,0.5)
 showmean2<-mean(test2)
 showmean2
 ```
@@ -81,8 +81,8 @@ If we flip a fair coin 10 times, what is the mean of this experiment?
 # always do set.seed() before the random sampling
 set.seed(123)
 # observation number, number of trials and probability of success on each trial
-sample.size=10;
-test1<-rbinom(sample.size,1,0.5)
+no.observation=10;
+test1<-rbinom(no.observation,1,0.5)
 test1
 ```
 
@@ -103,7 +103,7 @@ showmean
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
 
 ```r
-test2<-rbinom(sample.size,1,0.5)
+test2<-rbinom(no.observation,1,0.5)
 showmean2<-mean(test2)
 showmean2
 ```
@@ -122,9 +122,9 @@ What will happen if we repeat this experiment 10 times, rather than only 2 times
 set.seed(123)
 no.experiment=10
 mat4plot<-matrix(nrow=no.experiment,ncol=2);mat4plot[,2]<-1;
-sample.size<-10
+no.observation<-10
 for (i in 1:no.experiment){
-  mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
+  mat4plot[i,1]<-mean(rbinom(no.observation,1,0.5))
 }
 hist(mat4plot[,1],xlim=c(0,1),breaks=100,
      xlab="mean",ylab="observed frequency",
@@ -269,6 +269,7 @@ t-test example - Load data (1/2)
 We use "PlantGrowth" as example
 
 ```r
+data("PlantGrowth")
 PlantGrowth
 ```
 
@@ -316,31 +317,287 @@ t-test example - Load data (2/2)
 
 Convert the input data into the proper format
 
+```r
+#install.packages("tidyr")
+library("tidyr")
+```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```r
+PlantGrowthforwide<-PlantGrowth
+PlantGrowthforwide$replicate<-rep(c(1:10),3)
+PlantGrowth_wide<-spread(PlantGrowthforwide, group, weight)
+head(PlantGrowth_wide)
+```
 
 ```
-Error in library("tidyr") : there is no package called 'tidyr'
+  replicate ctrl trt1 trt2
+1         1 4.17 4.81 6.31
+2         2 5.58 4.17 5.12
+3         3 5.18 4.41 5.54
+4         4 6.11 3.59 5.50
+5         5 4.50 5.87 5.37
+6         6 4.61 3.83 5.29
 ```
+
+
+
+t-test example - Calculating variance
+========================================================
+
+First we can specify the columns of interest using $ and calculate their variance using var().
+
+```r
+var(PlantGrowth_wide$ctrl)
+```
+
+```
+[1] 0.3399956
+```
+
+```r
+var(PlantGrowth_wide$trt1)
+```
+
+```
+[1] 0.6299211
+```
+
+```r
+var(PlantGrowth_wide$trt2)
+```
+
+```
+[1] 0.1958711
+```
+
+t-test example - Comparing variance
+========================================================
+
+Now we can test for any differences in variances between ctrl and trt1 and ctrl and trt2 with an F-test using the var.test() function.
+
+```r
+var.test(PlantGrowth_wide$ctrl,
+         PlantGrowth_wide$trt1)
+```
+
+```
+
+	F test to compare two variances
+
+data:  PlantGrowth_wide$ctrl and PlantGrowth_wide$trt1
+F = 0.53974, num df = 9, denom df = 9, p-value = 0.3719
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.1340645 2.1730025
+sample estimates:
+ratio of variances 
+         0.5397431 
+```
+***
+
+```r
+var.test(PlantGrowth_wide$ctrl,
+         PlantGrowth_wide$trt2)
+```
+
+```
+
+	F test to compare two variances
+
+data:  PlantGrowth_wide$ctrl and PlantGrowth_wide$trt2
+F = 1.7358, num df = 9, denom df = 9, p-value = 0.4239
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.4311513 6.9883717
+sample estimates:
+ratio of variances 
+          1.735813 
+```
+
+R objects (s3 and s4)
+========================================================
+Left:30% The data type holding the result var.test() is a little more complex than the data types we have looked.
+
+In R, special objects (S3 or S4 objects) can be created which have methods associated to them. The result from var.test is an object of class htest.
+
+Since we have not come across this before, in order to discover its structure we can use the str() function with the object of interest as the argument.
+
+```r
+result <- var.test(PlantGrowth_wide$ctrl, PlantGrowth_wide$trt1)
+str(result)
+```
+
+```
+List of 9
+ $ statistic  : Named num 0.54
+  ..- attr(*, "names")= chr "F"
+ $ parameter  : Named int [1:2] 9 9
+  ..- attr(*, "names")= chr [1:2] "num df" "denom df"
+ $ p.value    : num 0.372
+ $ conf.int   : atomic [1:2] 0.134 2.173
+  ..- attr(*, "conf.level")= num 0.95
+ $ estimate   : Named num 0.54
+  ..- attr(*, "names")= chr "ratio of variances"
+ $ null.value : Named num 1
+  ..- attr(*, "names")= chr "ratio of variances"
+ $ alternative: chr "two.sided"
+ $ method     : chr "F test to compare two variances"
+ $ data.name  : chr "PlantGrowth_wide$ctrl and PlantGrowth_wide$trt1"
+ - attr(*, "class")= chr "htest"
+```
+
+R objects (s3 and s4)
+========================================================
+Now we know the structure and class of the htest object we can access the slots containing information we want just as with a named list.
+
+The p-value
+
+```r
+result$p.value
+```
+
+```
+[1] 0.3718963
+```
+The statistic
+
+```r
+result$statistic
+```
+
+```
+        F 
+0.5397431 
+```
+The data used in function call
+
+```r
+result$data.name
+```
+
+```
+[1] "PlantGrowth_wide$ctrl and PlantGrowth_wide$trt1"
+```
+
+t-test example - Equal Variance
+========================================================
+We have ascertained that ctrl and trt1 have similar variances. We can therefore perform a standard t-test to assess the significance of differences between these groups.
+
+```r
+Result <- t.test(PlantGrowth_wide$ctrl,PlantGrowth_wide$trt1,alternative ="two.sided", var.equal = T)
+Result
+```
+
+```
+
+	Two Sample t-test
+
+data:  PlantGrowth_wide$ctrl and PlantGrowth_wide$trt1
+t = 1.1913, df = 18, p-value = 0.249
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.2833003  1.0253003
+sample estimates:
+mean of x mean of y 
+    5.032     4.661 
+```
+
+t-test example - Unequal Variance
+========================================================
+To compare groups of unequal variance then the var.equal argument may be set to FALSE (which is the default).
+
+note: [see exercise]
+
+T-test example. Specifying a formula
+========================================================
+The same result to that shown could be achieved by specifying a formula for the comparison. Here we wish to compare ctrl versus trt1 so we could simply specify the formula and the data to be used.
+
+```r
+data4formula<-PlantGrowth[PlantGrowth$group!="trt2",]
+result_formula <- t.test(weight~group,data4formula,alternative ="two.sided", var.equal = T)
+result_formula
+```
+
+```
+
+	Two Sample t-test
+
+data:  weight by group
+t = 1.1913, df = 18, p-value = 0.249
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.2833003  1.0253003
+sample estimates:
+mean in group ctrl mean in group trt1 
+             5.032              4.661 
+```
+
+
+ANOVA
+========================================================
+
+Compute analysis of variance (or deviance) tables for one or more fitted model objects
+
+- lm()
+- anova()
+
+
+ANOVA - use the anova() function
+========================================================
+
+```r
+PG.lm<-lm(formula = weight ~ group,
+          data = PlantGrowth)
+PG.lm
+```
+
+```
+
+Call:
+lm(formula = weight ~ group, data = PlantGrowth)
+
+Coefficients:
+(Intercept)    grouptrt1    grouptrt2  
+      5.032       -0.371        0.494  
+```
+***
+
+```r
+PG.anova<-anova(PG.lm)
+PG.anova
+```
+
+```
+Analysis of Variance Table
+
+Response: weight
+          Df  Sum Sq Mean Sq F value  Pr(>F)  
+group      2  3.7663  1.8832  4.8461 0.01591 *
+Residuals 27 10.4921  0.3886                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+Wilcoxon test
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+First Slide
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+
+

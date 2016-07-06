@@ -39,8 +39,8 @@ If we flip a fair coin 10 times, what is the mean of this experiment?
 # always do set.seed() before the random sampling
 set.seed(123)
 # observation number, number of trials and probability of success on each trial
-sample.size=10;
-test1<-rbinom(sample.size,1,0.5)
+no.observation=10;
+test1<-rbinom(no.observation,1,0.5)
 test1
 showmean<-mean(test1)
 showmean
@@ -49,7 +49,7 @@ showmean
 
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
 ```{r}
-test2<-rbinom(sample.size,1,0.5)
+test2<-rbinom(no.observation,1,0.5)
 showmean2<-mean(test2)
 showmean2
 ```
@@ -63,8 +63,8 @@ If we flip a fair coin 10 times, what is the mean of this experiment?
 # always do set.seed() before the random sampling
 set.seed(123)
 # observation number, number of trials and probability of success on each trial
-sample.size=10;
-test1<-rbinom(sample.size,1,0.5)
+no.observation=10;
+test1<-rbinom(no.observation,1,0.5)
 test1
 showmean<-mean(test1)
 showmean
@@ -73,7 +73,7 @@ showmean
 
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
 ```{r}
-test2<-rbinom(sample.size,1,0.5)
+test2<-rbinom(no.observation,1,0.5)
 showmean2<-mean(test2)
 showmean2
 ```
@@ -83,7 +83,7 @@ no.experiment=2
 mat4plot<-matrix(nrow=no.experiment,ncol=2)
 mat4plot[,2]<-1
 for (i in 1:no.experiment){
-  mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
+  mat4plot[i,1]<-mean(rbinom(no.observation,1,0.5))
 }
 hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",ylab="observed frequency",
      main="flip a coin 10 times, and repeat it 2 times")
@@ -98,9 +98,9 @@ What will happen if we repeat this experiment 10 times, rather than only 2 times
 set.seed(123)
 no.experiment=10
 mat4plot<-matrix(nrow=no.experiment,ncol=2);mat4plot[,2]<-1;
-sample.size<-10
+no.observation<-10
 for (i in 1:no.experiment){
-  mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
+  mat4plot[i,1]<-mean(rbinom(no.observation,1,0.5))
 }
 hist(mat4plot[,1],xlim=c(0,1),breaks=100,
      xlab="mean",ylab="observed frequency",
@@ -119,9 +119,9 @@ set.seed(123)
 no.experiment=100
 mat4plot<-matrix(nrow=no.experiment,ncol=2)
 mat4plot[,2]<-1
-sample.size<-10
+no.observation<-10
 for (i in 1:no.experiment){
-  mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
+  mat4plot[i,1]<-mean(rbinom(no.observation,1,0.5))
 }
 hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",ylab="observed frequency",
      main="flip a coin 10 times, and repeat it 100 times")
@@ -136,9 +136,9 @@ set.seed(123)
 no.experiment=1000
 mat4plot<-matrix(nrow=no.experiment,ncol=2)
 mat4plot[,2]<-1
-sample.size<-10
+no.observation<-10
 for (i in 1:no.experiment){
-  mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
+  mat4plot[i,1]<-mean(rbinom(no.observation,1,0.5))
 }
 hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",
      ylab="observed frequency",main="flip a coin 10 times, and repeat it 1,000 times")
@@ -155,9 +155,9 @@ set.seed(123)
 no.experiment=1000
 mat4plot<-matrix(nrow=no.experiment,ncol=2)
 mat4plot[,2]<-1
-sample.size<-10
+no.observation<-10
 for (i in 1:no.experiment){
-  mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
+  mat4plot[i,1]<-mean(rbinom(no.observation,1,0.5))
 }
 hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",ylab="observed frequency",
      main="flip a coin 10 times, and repeat it 1,000 times",freq = F)
@@ -195,9 +195,9 @@ set.seed(123)
 no.experiment=1000
 mat4plot<-matrix(nrow=no.experiment,ncol=2)
 mat4plot[,2]<-1
-sample.size<-10
+no.observation<-10
 for (i in 1:no.experiment){
-  mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
+  mat4plot[i,1]<-mean(rbinom(no.observation,1,0.5))
 }
 hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",ylab="observed frequency",
      main="flip a coin 10 times, and repeat it 1,000 times")
@@ -215,9 +215,9 @@ set.seed(123)
 no.experiment=1000
 mat4plot<-matrix(nrow=no.experiment,ncol=2)
 mat4plot[,2]<-1
-sample.size<-100
+no.observation<-100
 for (i in 1:no.experiment){
-  mat4plot[i,1]<-mean(rbinom(sample.size,1,0.5))
+  mat4plot[i,1]<-mean(rbinom(no.observation,1,0.5))
 }
 hist(mat4plot[,1],xlim=c(0,1),breaks=100,xlab="mean",ylab="observed frequency",
      main="flip a coin 100 times, and repeat it 1,000 times")
@@ -287,6 +287,7 @@ t-test example - Load data (1/2)
 
 We use "PlantGrowth" as example
 ```{r}
+data("PlantGrowth")
 PlantGrowth
 ```
 ***
