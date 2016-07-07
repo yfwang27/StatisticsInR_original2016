@@ -337,6 +337,13 @@ Time for an exercise!
 
 Exercise on this part can be found [here]
 
+purpose of this exercise:
+
+1. recap some basic R functions, i.e. read.table(), subsetting, dim(), nrow()
+
+2. get familiar with some basic stat functions that mentioned in the course
+
+
 Answers to exercise.
 ========================================================
 
@@ -411,7 +418,7 @@ $$X \sim Normal(\mu,\sigma^2)$$
 ```{r,echo=F}
 x <- seq(-4, 4, length=100)
 hx <- dnorm(x)
-plot(x, hx, type="l", lty=2, lwd=2, cor="blue4",
+plot(x, hx, type="l", lty=2, lwd=2, col="blue4",
      xlab="x value",ylab="Density", main="pdf (probability density function) of normal distribution",xaxt='n')
 axis(side=1, at=c(-4,-2,0,2,4),
      labels=c(expression(paste(-2,sigma)),expression(-sigma),expression(mu),
@@ -427,7 +434,7 @@ $$X \sim Normal(\mu,\sigma^2)$$
 ```{r,echo=F}
 x <- seq(-4, 4, length=100)
 hx <- dnorm(x)
-plot(x, hx, type="l", lty=2, lwd=2, cor="blue4",
+plot(x, hx, type="l", lty=2, lwd=2, col="blue4",
      xlab="x value",ylab="Density", main="Normal distribution",xaxt='n')
 axis(side=1, at=c(-4,-2,0,2,4),
      labels=c(expression(paste(-2,sigma)),expression(-sigma),expression(mu),
@@ -448,7 +455,7 @@ $$
 ```{r,echo=F}
 x <- seq(-4, 4, length=200)
 hx <- dnorm(x)
-plot(x, hx, type="l", lty=2, lwd=2, cor="blue4",
+plot(x, hx, type="l", lty=2, lwd=2, col="blue4",
      xlab="z score",ylab="Density", main="standardised Normal distribution",xaxt='n')
 axis(side=1, at=c(-4,-2,0,2,4),
      labels=c(-2,-1,0,1,2))
@@ -473,7 +480,7 @@ data4plot<-rnorm(10,mean=8,sd=3)
 data4plot_h<-dnorm(data4plot,mean=8,sd=3)
 x <- seq(0,16,by=.1)
 hx <- dnorm(x,mean=8,sd=3)
-plot(x, hx, type="l", lty=2, lwd=2, cor="blue4",
+plot(x, hx, type="l", lty=2, lwd=2, col="blue4",
      xlab="x value",ylab="Density", main="Normal distribution",xaxt="n")
 points(x=data4plot,y=data4plot_h,col="red",pch=16,cex=1.6)
 axis(side=1, at=c(2,5,8,11,14),labels=c(2,5,8,11,14))
@@ -496,7 +503,7 @@ data4plot<-rnorm(10,mean=8,sd=3)
 maxdensity<-dnorm(8,mean=8,sd=3)
 x <- seq(0,16,by=.1)
 hx <- dnorm(x,mean=8,sd=3)
-plot(x, hx, type="l", lty=2, lwd=2, cor="blue4",ylim=c(0,maxdensity),
+plot(x, hx, type="l", lty=2, lwd=2, col="blue4",ylim=c(0,maxdensity),
      xlab="x value",ylab="Density", main="Normal distribution",xaxt="n")
 axis(side=1, at=c(2,5,8,11,14),labels=c(2,5,8,11,14))
 abline(h=maxdensity,v=8,col="pink",lwd=3,lty=2)
@@ -519,7 +526,7 @@ curve(dnorm(x,8,3),xlim=c(0,16),main='Normal distribution',
       col="blue4",xaxt="n",type="l", lty=2, lwd=2)
  cord.x <- c(0,seq(0,8,0.01),8)
  cord.y <- c(0,dnorm(seq(0,8,0.01),mean=8,sd=3),0)
-polygon(cord.x,cord.y,col='skyblue')
+polygon(cord.x,cord.y,col='salmon')
 axis(side=1, at=c(2,5,8,11,14),labels=c(2,5,8,11,14))
 
 ```
@@ -538,11 +545,7 @@ Time for an exercise!
 
 Exercise on distribution can be found [here]
 
-purpose of this exercise:
 
-1. recap some basic R functions, i.e. read.table(), subsetting, dim(), nrow()
-
-2. get familiar with some basic stat functions that mentioned in the course
 
 
 Answers to exercise.
