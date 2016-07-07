@@ -126,7 +126,7 @@ cor(x,z)
 ```
 
 ```
-[1] 0.02992602
+[1] -0.1334344
 ```
 ***
 ![plot of chunk unnamed-chunk-7](Session3_linear_regression-figure/unnamed-chunk-7-1.png)
@@ -137,8 +137,14 @@ Correlation over a matrix (4/8)
 left: 70%
 Often we wish to apply correlation analysis to all columns or rows in a matrix in a pair-wise manner. To do this in R, we can simply pass the **cor()** function a single argument of the numeric matrix of interest. The **cor()** function will then perform all pair-wise correlations between columns.
 
+- subset data.frame
+
 ```r
 iris4cor<-iris[,1:4]
+```
+- change colnames
+
+```r
 colnames(iris4cor)<-gsub("(.+)(\\.)(\\w{3})(.+)","\\1\\2\\3",colnames(iris4cor))
 head(iris4cor)
 ```
@@ -167,7 +173,7 @@ Sepal.Wid -0.1175698  1.0000000 -0.4284401 -0.3661259
 Petal.Len  0.8717538 -0.4284401  1.0000000  0.9628654
 Petal.Wid  0.8179411 -0.3661259  0.9628654  1.0000000
 ```
-<img src="Session3_linear_regression-figure/unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="820px" />
+<img src="Session3_linear_regression-figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="820px" />
 
 
 Correlation (6/8)
@@ -177,14 +183,14 @@ Correlation (6/8)
 pairs(iris4cor)
 ```
 
-![plot of chunk unnamed-chunk-11](Session3_linear_regression-figure/unnamed-chunk-11-1.png)
+![plot of chunk unnamed-chunk-12](Session3_linear_regression-figure/unnamed-chunk-12-1.png)
 
 Correlation (7/8)
 ========================================================
 [find an example that requires the spearman method]
 
 
-Regression and linear models (1/)
+Regression and linear models (1/12)
 =========================================================
 
 We have seen how we can find the correlation between two sets of variables using **cor()** function.
@@ -193,50 +199,59 @@ R also provides a comprehensive set of tools for regression analysis including t
 
 To fit a linear regression we use a similar set of arguments as passed to the t-test fuction in the previous slide.
 
-Regression and linear models (2/)
+Regression and linear models (2/12)
 =========================================================
-Using the Petal.Length from iris data as example
+Use the *Petal.Width* to predict the *Petal.Length* from the iris data as example
 
-We could like to use the current information to predict the length of a petal from Iris.versicolor
+We will focus on *Iris.versicolor* as example
 ![alt text](imgs/Iris_versicolor.jpg)
 ***
+- subset data *iris*
 
 ```r
-iris_versi<-iris[iris$Species=="versicolor",]
+iris_versi<-
+  iris[iris$Species=="versicolor", c("Petal.Length","Petal.Width")]
 
-str(iris_versi)
+dim(iris_versi)
 ```
 
 ```
-'data.frame':	50 obs. of  5 variables:
- $ Sepal.Length: num  7 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 ...
- $ Sepal.Width : num  3.2 3.2 3.1 2.3 2.8 2.8 3.3 2.4 2.9 2.7 ...
- $ Petal.Length: num  4.7 4.5 4.9 4 4.6 4.5 4.7 3.3 4.6 3.9 ...
- $ Petal.Width : num  1.4 1.5 1.5 1.3 1.5 1.3 1.6 1 1.3 1.4 ...
- $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 2 2 2 2 2 2 2 2 2 2 ...
+[1] 50  2
+```
+
+```r
+head(iris_versi)
+```
+
+```
+   Petal.Length Petal.Width
+51          4.7         1.4
+52          4.5         1.5
+53          4.9         1.5
+54          4.0         1.3
+55          4.6         1.5
+56          4.5         1.3
 ```
 
 
-Regression and linear models (3/)
+Regression and linear models (3/12)
 =========================================================
-Try to use the mean of total Petal.Length first
+
+If we only know the Petal.Length, and would like to use this information to predict the Petal.Length
+
 
 ```r
-head(iris_versi[,c("Petal.Length","Species")])
+head(iris_versi[,"Petal.Length"])
 ```
 
 ```
-   Petal.Length    Species
-51          4.7 versicolor
-52          4.5 versicolor
-53          4.9 versicolor
-54          4.0 versicolor
-55          4.6 versicolor
-56          4.5 versicolor
+[1] 4.7 4.5 4.9 4.0 4.6 4.5
 ```
 
 ```r
-mean(iris_versi$Petal.Length)
+PetalLen.mean<-mean(iris_versi$Petal.Length)
+
+PetalLen.mean
 ```
 
 ```
@@ -245,22 +260,23 @@ mean(iris_versi$Petal.Length)
 ***
 
 ```r
-plot(iris_versi$Petal.Length, ylab="Petal Length of Iris.versicolor")
-abline(h=mean(iris_versi$Petal.Length),
-       col="forestgreen",lwd=3)
+plot(iris_versi$Petal.Length,
+     ylab="Petal Length of Iris.versicolor")
+abline(h=PetalLen.mean, col="forestgreen",lwd=3)
 ```
 
-![plot of chunk unnamed-chunk-15](Session3_linear_regression-figure/unnamed-chunk-15-1.png)
-
-
-Regression and linear models (4/)
-=========================================================
-Try to use the mean of total Petal.Length first
-
 ![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
+
+
+Regression and linear models (4/12)
+=========================================================
+
+If we only know the Petal.Length, and would like to use this information to predict the Petal.Length
+
+![plot of chunk unnamed-chunk-17](Session3_linear_regression-figure/unnamed-chunk-17-1.png)
 ***
 
-$$\text{In this case, the expected values is mean } = \overline y $$
+$$\text{In this case, the expected value is mean } = \overline y $$
 
 - residuals (Error)
 
@@ -272,13 +288,12 @@ $$
   \end{aligned}
 $$
 
-
-
-Regression and linear models (5/)
+Regression and linear models (5/12)
 =========================================================
+
 Zoom in [just see first 4 data points]
 
-![plot of chunk unnamed-chunk-17](Session3_linear_regression-figure/unnamed-chunk-17-1.png)
+![plot of chunk unnamed-chunk-18](Session3_linear_regression-figure/unnamed-chunk-18-1.png)
 ***
 
 $$\text{In this case, the expected values is mean } = \overline y $$
@@ -307,12 +322,14 @@ $$
   \end{aligned}
 $$
 
-
-Regression and linear models (6/)
+Regression and linear models (6/12)
 =========================================================
-Use the "iris_versi" *Petal.Width* to predict *Petal.Length*
 
-![plot of chunk unnamed-chunk-18](Session3_linear_regression-figure/unnamed-chunk-18-1.png)
+Now we use the "iris_versi" *Petal.Width* to predict *Petal.Length*
+
+We can plot *Petal.Width* as X and *Petal.Length* as Y
+
+![plot of chunk unnamed-chunk-19](Session3_linear_regression-figure/unnamed-chunk-19-1.png)
 ***
 $$
   x = \text{independent or explanatory variable}
@@ -328,11 +345,11 @@ $$b_0\text{(intercept): the value of f(x) when x =0}$$
 $$b_1\text{(slope): the amount of f(x) will change when x changes 1 unit}$$
 
 
-Regression and linear models (7/)
+Regression and linear models (7/12)
 =========================================================
-The lm() function fits a linear regression to your data and provides useful information on the generated fit.
+The *lm()* function fits a linear regression to your data and provides useful information on the generated fit.
 
-In the example below we fit a linear model using  lm() on the iris_versi dataset with Petal.Length (Y) as the dependent variable and Petal.Width (X) as the explanatory variable.
+In the example below we fit a linear model using  *lm()* on the iris_versi dataset with Petal.Length (Y) as the dependent variable and Petal.Width (X) as the explanatory variable.
 
 ```r
 lmResult<-lm(formula = Petal.Length ~ Petal.Width, data = iris_versi)
@@ -349,11 +366,11 @@ Coefficients:
       1.781        1.869  
 ```
 
-
-Interpreting output of lm(8/)
+Interpreting output of lm() (8/12)
 =========================================================
+
 As we have seen, printing the model result provides the intercept and slope of line.
-To get some more information on the model we can use the summary() function
+To get some more information on the model we can use the *summary()* function
 
 ```r
 summary(lmResult)
@@ -380,7 +397,7 @@ Multiple R-squared:  0.6188,	Adjusted R-squared:  0.6109
 F-statistic: 77.93 on 1 and 48 DF,  p-value: 1.272e-11
 ```
 
-Regression and linear models - coefficients (9/)
+Regression and linear models - coefficients (9/12)
 =========================================================
 
 ```r
@@ -404,13 +421,13 @@ $$b_0\text{: the value of f(x) when x =0}$$
 $$b_1\text{: the amount of f(x) will change when x changes 1 unit}$$
 
 ***
-![plot of chunk unnamed-chunk-22](Session3_linear_regression-figure/unnamed-chunk-22-1.png)
+![plot of chunk unnamed-chunk-23](Session3_linear_regression-figure/unnamed-chunk-23-1.png)
 
-Regression and linear models - residuals (10/)
+Regression and linear models - residuals (10/12)
 =========================================================
 
 The **residuals** are the difference between the predicted and actual values.
-To retrieve the residuals we can access the slot or use the resid() function.
+To retrieve the residuals we can access the slot or use the *resid()* function.
 
 
 ```r
@@ -432,7 +449,40 @@ To retrieve the residuals we can access the slot or use the resid() function.
 ```
 Ideally you would want your residuals to be normally distributed around 0.
 
-Regression and linear models - R-squared
+
+Regression and linear models - residuals (11/12)
+=========================================================
+
+
+```r
+> IrisLm.res<-lmResult$residual
+> head(IrisLm.res)
+```
+
+```
+        51         52         53         54         55         56 
+ 0.3016700 -0.0852625  0.3147375 -0.2113976  0.0147375  0.2886024 
+```
+
+```r
+> sum(IrisLm.res)
+```
+
+```
+[1] 3.469447e-16
+```
+$$
+\sum_{i=1}^nError=\sum_{i=1}^ny_i-\overline{y} \equiv 0
+$$
+
+***
+
+Plot the residuals against the independent variable (X)
+![plot of chunk unnamed-chunk-26](Session3_linear_regression-figure/unnamed-chunk-26-1.png)
+
+
+
+Regression and linear models - R-squared (12/12)
 =========================================================
 Left: 70%
 
@@ -500,6 +550,8 @@ Statistics (Extra) - Calculating R-squared
 
 Statistics (Extra) - Calculating R-squared
 =========================================================
+
+The fraction of variability in the independent variable (Y; or the *Petal.Length* in this example) that can be explained by the explanatory variable (X; or the *Petal.Width* in this example).
 
 
 ```r

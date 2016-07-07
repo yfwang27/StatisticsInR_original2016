@@ -93,8 +93,13 @@ Correlation over a matrix (4/8)
 =========================================================
 left: 70%
 Often we wish to apply correlation analysis to all columns or rows in a matrix in a pair-wise manner. To do this in R, we can simply pass the **cor()** function a single argument of the numeric matrix of interest. The **cor()** function will then perform all pair-wise correlations between columns.
+
+- subset data.frame
 ```{r}
 iris4cor<-iris[,1:4]
+```
+- change colnames
+```{r}
 colnames(iris4cor)<-gsub("(.+)(\\.)(\\w{3})(.+)","\\1\\2\\3",colnames(iris4cor))
 head(iris4cor)
 
@@ -126,7 +131,7 @@ Correlation (7/8)
 
 ```
 
-Regression and linear models (1/)
+Regression and linear models (1/12)
 =========================================================
 
 We have seen how we can find the correlation between two sets of variables using **cor()** function.
@@ -135,51 +140,57 @@ R also provides a comprehensive set of tools for regression analysis including t
 
 To fit a linear regression we use a similar set of arguments as passed to the t-test fuction in the previous slide.
 
-Regression and linear models (2/)
+Regression and linear models (2/12)
 =========================================================
-Using the Petal.Length from iris data as example
+Use the *Petal.Width* to predict the *Petal.Length* from the iris data as example
 
-We could like to use the current information to predict the length of a petal from Iris.versicolor
+We will focus on *Iris.versicolor* as example
 ![alt text](imgs/Iris_versicolor.jpg)
 ***
+- subset data *iris*
 ```{r}
-iris_versi<-iris[iris$Species=="versicolor",]
+iris_versi<-
+  iris[iris$Species=="versicolor", c("Petal.Length","Petal.Width")]
 
-str(iris_versi)
+dim(iris_versi)
+head(iris_versi)
 ```
 
 
-Regression and linear models (3/)
+Regression and linear models (3/12)
 =========================================================
-Try to use the mean of total Petal.Length first
+
+If we only know the Petal.Length, and would like to use this information to predict the Petal.Length
+
 ```{r}
-head(iris_versi[,c("Petal.Length","Species")])
-mean(iris_versi$Petal.Length)
+head(iris_versi[,"Petal.Length"])
+PetalLen.mean<-mean(iris_versi$Petal.Length)
+
+PetalLen.mean
 ```
 ***
 ```{r}
-plot(iris_versi$Petal.Length, ylab="Petal Length of Iris.versicolor")
-abline(h=mean(iris_versi$Petal.Length),
-       col="forestgreen",lwd=3)
+plot(iris_versi$Petal.Length,
+     ylab="Petal Length of Iris.versicolor")
+abline(h=PetalLen.mean, col="forestgreen",lwd=3)
 ```
 
 
-Regression and linear models (4/)
+Regression and linear models (4/12)
 =========================================================
-Try to use the mean of total Petal.Length first
+
+If we only know the Petal.Length, and would like to use this information to predict the Petal.Length
 
 ```{r,echo=F}
-
-plot(iris_versi$Petal.Length,ylab="Petal Length of Iris.versicolor")
-abline(h=mean(iris_versi$Petal.Length),
-       col="forestgreen",lwd=3)
-
+plot(iris_versi$Petal.Length,
+     ylab="Petal Length of Iris.versicolor")
+abline(h=PetalLen.mean,col="forestgreen",lwd=3)
 segments(x0=c(1:nrow(iris_versi)),y0=iris_versi$Petal.Length,
-         x1=c(1:nrow(iris_versi)),y1=mean(iris_versi$Petal.Length),col="pink")
+         x1=c(1:nrow(iris_versi)),y1=mean(iris_versi$Petal.Length),col="brown")
 ```
 ***
 
-$$\text{In this case, the expected values is mean } = \overline y $$
+$$\text{In this case, the expected value is mean } = \overline y $$
 
 - residuals (Error)
 
@@ -191,14 +202,13 @@ $$
   \end{aligned}
 $$
 
-
-
-Regression and linear models (5/)
+Regression and linear models (5/12)
 =========================================================
+
 Zoom in [just see first 4 data points]
 
 ```{r,echo=F}
-diff_df<-iris_versi$Petal.Length-mean(iris_versi$Petal.Length)
+diff_df<-iris_versi$Petal.Length-PetalLen.mean
 plot(iris_versi$Petal.Length[c(1:4)],xlim=c(0,5.5), ylim=c(2,6.5),
      ylab="Petal Length of first 4 data points (y)", xlab="x")
 abline(h=mean(iris_versi$Petal.Length),
@@ -210,7 +220,7 @@ rect(xleft=c(1:4),ybottom=mean(iris_versi$Petal.Length),
      density=30,col = "blue")
 
 segments(x0=c(1:4),y0=iris_versi$Petal.Length[c(1:4)],
-         x1=c(1:4),y1=mean(iris_versi$Petal.Length),col="pink",lwd=3)
+         x1=c(1:4),y1=mean(iris_versi$Petal.Length),col="brown",lwd=3)
 ```
 ***
 
@@ -240,10 +250,12 @@ $$
   \end{aligned}
 $$
 
-
-Regression and linear models (6/)
+Regression and linear models (6/12)
 =========================================================
-Use the "iris_versi" *Petal.Width* to predict *Petal.Length*
+
+Now we use the "iris_versi" *Petal.Width* to predict *Petal.Length*
+
+We can plot *Petal.Width* as X and *Petal.Length* as Y
 
 ```{r,echo=F}
 plot(iris_versi$Petal.Width,iris_versi$Petal.Length,
@@ -269,26 +281,26 @@ $$b_0\text{(intercept): the value of f(x) when x =0}$$
 $$b_1\text{(slope): the amount of f(x) will change when x changes 1 unit}$$
 
 
-Regression and linear models (7/)
+Regression and linear models (7/12)
 =========================================================
-The lm() function fits a linear regression to your data and provides useful information on the generated fit.
+The *lm()* function fits a linear regression to your data and provides useful information on the generated fit.
 
-In the example below we fit a linear model using  lm() on the iris_versi dataset with Petal.Length (Y) as the dependent variable and Petal.Width (X) as the explanatory variable.
+In the example below we fit a linear model using  *lm()* on the iris_versi dataset with Petal.Length (Y) as the dependent variable and Petal.Width (X) as the explanatory variable.
 ```{r}
 lmResult<-lm(formula = Petal.Length ~ Petal.Width, data = iris_versi)
 lmResult
 ```
 
-
-Interpreting output of lm(8/)
+Interpreting output of lm() (8/12)
 =========================================================
+
 As we have seen, printing the model result provides the intercept and slope of line.
-To get some more information on the model we can use the summary() function
+To get some more information on the model we can use the *summary()* function
 ```{r}
 summary(lmResult)
 ```
 
-Regression and linear models - coefficients (9/)
+Regression and linear models - coefficients (9/12)
 =========================================================
 ```{r}
 lmResult$coefficients
@@ -317,11 +329,11 @@ points(x=0,y=1.781275,pch=23,cor="pink")
 title("Scatter plot of Iris.versicolor Petal.Width vs Petal.Length")
 ```
 
-Regression and linear models - residuals (10/)
+Regression and linear models - residuals (10/12)
 =========================================================
 
 The **residuals** are the difference between the predicted and actual values.
-To retrieve the residuals we can access the slot or use the resid() function.
+To retrieve the residuals we can access the slot or use the *resid()* function.
 
 ```{r,prompt=T,echo=T}
 summary(resid(lmResult))
@@ -329,7 +341,32 @@ summary(lmResult$residual)
 ```
 Ideally you would want your residuals to be normally distributed around 0.
 
-Regression and linear models - R-squared
+
+Regression and linear models - residuals (11/12)
+=========================================================
+
+```{r,prompt=T,echo=T}
+IrisLm.res<-lmResult$residual
+head(IrisLm.res)
+
+sum(IrisLm.res)
+```
+$$
+\sum_{i=1}^nError=\sum_{i=1}^ny_i-\overline{y} \equiv 0
+$$
+
+***
+
+Plot the residuals against the independent variable (X)
+```{r,echo=F}
+plot(iris_versi$Petal.Width,IrisLm.res,
+     ylab="residuals",xlab="Petal Width of Iris.versicolor (x)")
+abline(h=0,col="red")
+```
+
+
+
+Regression and linear models - R-squared (12/12)
 =========================================================
 Left: 70%
 ```{r,prompt=T,echo=F}
@@ -361,6 +398,8 @@ Statistics (Extra) - Calculating R-squared
 
 Statistics (Extra) - Calculating R-squared
 =========================================================
+
+The fraction of variability in the independent variable (Y; or the *Petal.Length* in this example) that can be explained by the explanatory variable (X; or the *Petal.Width* in this example).
 
 ```{r,prompt=F}
 SSE <- sum(resid(lmResult)^2)
