@@ -96,22 +96,22 @@ Data Source: Office for National Statistics
 Load data
 
 ```r
-Life_exp<-read.csv("data/Life_expectancy_at_birth.csv",header=T)
+> Life_exp<-read.csv("data/Life_expectancy_at_birth.csv",header=T)
 ```
 
 Recap some basic R functions (1/6)
 ========================================================
-- str(), head(), dim(), colnames() and summary() functions
+- **str()**, **head()**, **dim()**, **colnames()** and **summary()** functions
 - more details please see "Reproducible R course" [# hyperlink to the course]
 
 
 Recap some basic R functions (2/6)
 ========================================================
 
-head(): See the first 6 lines of an R object
+**head()**: See the first 6 lines of an R object
 
 ```r
-head(Life_exp)
+> head(Life_exp)
 ```
 
 ```
@@ -127,10 +127,10 @@ head(Life_exp)
 Recap some basic R functions (3/6)
 ========================================================
 
-str(): Compactly display the internal structure of an R object
+**str()**: Compactly display the internal structure of an R object
 
 ```r
-str(Life_exp)
+> str(Life_exp)
 ```
 
 ```
@@ -146,7 +146,7 @@ Recap some basic R functions (4/6)
 see the how many rows and columns in "Life_exp"
 
 ```r
-dim(Life_exp)
+> dim(Life_exp)
 ```
 
 ```
@@ -156,7 +156,7 @@ dim(Life_exp)
 see column names of "Life_exp"
 
 ```r
-colnames(Life_exp)
+> colnames(Life_exp)
 ```
 
 ```
@@ -168,7 +168,7 @@ Recap some basic R functions (5/6)
 
 
 ```r
-summary(Life_exp)
+> summary(Life_exp)
 ```
 
 ```
@@ -185,7 +185,7 @@ summary(Life_exp)
 Recap some basic R functions (6/6)
 ========================================================
 
-ftable(): Create ‘flat’ contingency tables
+**ftable()**: Create ‘flat’ contingency tables
 
 ```r
 ftable(Life_exp[,c("area","gender")])
@@ -209,10 +209,12 @@ Data shape - use "Life_exp$life.expectancy"
 
 Data shape - work with plots (1/6)
 ========================================================
-Scatter plot
+
+Scatter plot: plot the life.expectancy against index
+
 
 ```r
-plot(Life_exp$life.expectancy,ylab="Life expectancy (Years)")
+> plot(Life_exp$life.expectancy,ylab="Life expectancy (Years)")
 ```
 
 ![plot of chunk unnamed-chunk-9](Session1_describe_the_data-figure/unnamed-chunk-9-1.png)
@@ -221,26 +223,23 @@ Spread of data - work with plots (2/6)
 ========================================================
 sort the data from min to max
 
-```r
-plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)")
-```
-
 ![plot of chunk unnamed-chunk-10](Session1_describe_the_data-figure/unnamed-chunk-10-1.png)
+***
 
+start to see something here...
+
+![plot of chunk unnamed-chunk-11](Session1_describe_the_data-figure/unnamed-chunk-11-1.png)
 
 Spread of data - work with plots (3/6)
 ========================================================
 **min()**, **max()**, **median()**, **range()** and **quantile()** functions
 
 ```r
-min.life.exp<-min(Life_exp$life.expectancy)
-max.life.exp<-max(Life_exp$life.expectancy)
-median.life.exp<-median(Life_exp$life.expectancy)
-mean.life.exp<-mean(Life_exp$life.expectancy)
-```
-
-```r
-c(min.life.exp, max.life.exp, median.life.exp, mean.life.exp)
+> min.life.exp<-min(Life_exp$life.expectancy)
+> max.life.exp<-max(Life_exp$life.expectancy)
+> median.life.exp<-median(Life_exp$life.expectancy)
+> mean.life.exp<-mean(Life_exp$life.expectancy)
+> c(min.life.exp, max.life.exp, median.life.exp, mean.life.exp)
 ```
 
 ```
@@ -248,7 +247,7 @@ c(min.life.exp, max.life.exp, median.life.exp, mean.life.exp)
 ```
 
 ```r
-range(Life_exp$life.expectancy)
+> range(Life_exp$life.expectancy)
 ```
 
 ```
@@ -256,7 +255,7 @@ range(Life_exp$life.expectancy)
 ```
 
 ```r
-quantile(Life_exp$life.expectancy)
+> quantile(Life_exp$life.expectancy)
 ```
 
 ```
@@ -264,16 +263,17 @@ quantile(Life_exp$life.expectancy)
 71.470 75.085 78.005 79.910 83.010 
 ```
 
-
 Spread of data - work with plots (4/6)
 ========================================================
+Left: 40%
+
 Boxplot
 
-![plot of chunk unnamed-chunk-14](Session1_describe_the_data-figure/unnamed-chunk-14-1.png)
+![plot of chunk unnamed-chunk-13](Session1_describe_the_data-figure/unnamed-chunk-13-1.png)
 ***
 
 ```r
-c(min.life.exp, max.life.exp)
+> c(min.life.exp, max.life.exp)
 ```
 
 ```
@@ -281,7 +281,7 @@ c(min.life.exp, max.life.exp)
 ```
 
 ```r
-c(median.life.exp, mean.life.exp)
+> c(median.life.exp, mean.life.exp)
 ```
 
 ```
@@ -289,7 +289,7 @@ c(median.life.exp, mean.life.exp)
 ```
 
 ```r
-quantile(Life_exp$life.expectancy)[c(2,4)]
+> quantile(Life_exp$life.expectancy)[c(2,4)]
 ```
 
 ```
@@ -301,33 +301,33 @@ quantile(Life_exp$life.expectancy)[c(2,4)]
 Spread of data - work with plots (5/6)
 ========================================================
 
-![plot of chunk unnamed-chunk-16](Session1_describe_the_data-figure/unnamed-chunk-16-1.png)
+![plot of chunk unnamed-chunk-15](Session1_describe_the_data-figure/unnamed-chunk-15-1.png)
 
 Spread of data -  work with plots (6/6)
 ========================================================
-summary()
+**summary()**
 
 ```r
-summary(Life_exp$life.expectancy)
+> summary(Life_exp$life.expectancy)
 ```
 
 ```
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   71.47   75.09   78.00   77.63   79.91   83.01 
 ```
-range(): show the minimum and maximum
+**range()**: show the minimum and maximum
 
 ```r
-range(Life_exp$life.expectancy)
+> range(Life_exp$life.expectancy)
 ```
 
 ```
 [1] 71.47 83.01
 ```
-IQR(): show the interquartile range, i.e. 3rd quartile-1st quartile
+**IQR()**: show the interquartile range, i.e. 3rd quartile - 1st quartile
 
 ```r
-IQR(Life_exp$life.expectancy)
+> IQR(Life_exp$life.expectancy)
 ```
 
 ```
@@ -349,9 +349,9 @@ $$
 $$
 
 ```r
-var.life.exp<-sum((Life_exp$life.expectancy-mean.life.exp)^2)/(nrow(Life_exp)-1)
-sd.life.exp<-sqrt(var.life.exp)
-c(var.life.exp, sd.life.exp)
+> var.life.exp<-sum((Life_exp$life.expectancy-mean.life.exp)^2)/(nrow(Life_exp)-1)
+> sd.life.exp<-sqrt(var.life.exp)
+> c(var.life.exp, sd.life.exp)
 ```
 
 ```
@@ -362,7 +362,7 @@ Spread of data - var() and sd() function
 ========================================================
 
 ```r
-var(Life_exp$life.expectancy)
+> var(Life_exp$life.expectancy)
 ```
 
 ```
@@ -370,7 +370,7 @@ var(Life_exp$life.expectancy)
 ```
 
 ```r
-sd(Life_exp$life.expectancy)
+> sd(Life_exp$life.expectancy)
 ```
 
 ```
@@ -383,7 +383,18 @@ Data shape - histogram
 
 
 ```r
-hist(Life_exp$life.expectancy,breaks=10)
+> hist(Life_exp$life.expectancy,breaks=10)
+```
+
+![plot of chunk unnamed-chunk-21](Session1_describe_the_data-figure/unnamed-chunk-21-1.png)
+
+Data shape - histogram
+========================================================
+
+
+```r
+> hist(Life_exp$life.expectancy,breaks=10,freq = F)
+> lines(density(Life_exp$life.expectancy),col="red")
 ```
 
 ![plot of chunk unnamed-chunk-22](Session1_describe_the_data-figure/unnamed-chunk-22-1.png)
@@ -391,25 +402,14 @@ hist(Life_exp$life.expectancy,breaks=10)
 Data shape - histogram
 ========================================================
 
-
-```r
-hist(Life_exp$life.expectancy,breaks=10,freq = F)
-lines(density(Life_exp$life.expectancy),col="red")
-```
-
 ![plot of chunk unnamed-chunk-23](Session1_describe_the_data-figure/unnamed-chunk-23-1.png)
-
-Data shape - histogram
-========================================================
-
-![plot of chunk unnamed-chunk-24](Session1_describe_the_data-figure/unnamed-chunk-24-1.png)
 
 
 Data shape - violin plot
 ========================================================
+Left: 40%
 
-
-![plot of chunk unnamed-chunk-25](Session1_describe_the_data-figure/unnamed-chunk-25-1.png)
+![plot of chunk unnamed-chunk-24](Session1_describe_the_data-figure/unnamed-chunk-24-1.png)
 ***
 
 
@@ -419,30 +419,13 @@ library("vioplot")
 ```
 
 ```r
-vioplot(Life_exp$life.expectancy,
-        ylim=range(Life_exp$life.expectancy),
-        horizontal = T)
+> vioplot(Life_exp$life.expectancy,
++         ylim=range(Life_exp$life.expectancy),
++         horizontal = T)
 ```
 
-![plot of chunk unnamed-chunk-27](Session1_describe_the_data-figure/unnamed-chunk-27-1.png)
+![plot of chunk unnamed-chunk-26](Session1_describe_the_data-figure/unnamed-chunk-26-1.png)
 
-Data shape - histogram
-========================================================
-
-
-```r
-Eng.life.exp<-Life_exp[Life_exp$area=="England",]
-boxplot(life.expectancy~area,data=Life_exp,las=2, cex.axis=0.6)
-```
-
-![plot of chunk unnamed-chunk-28](Session1_describe_the_data-figure/unnamed-chunk-28-1.png)
-
-```r
-boxplot(life.expectancy~gender*area,data=Life_exp,col=(c("gold","darkgreen")),
-        las=2, cex.axis=0.6)
-```
-
-![plot of chunk unnamed-chunk-28](Session1_describe_the_data-figure/unnamed-chunk-28-2.png)
 Time for an exercise!
 ========================================================
 
@@ -513,8 +496,8 @@ rnorm(10,mean=8,sd=3)
 ```
 
 ```
- [1]  1.757759 11.002107  9.587035  8.061594  6.562935  9.752966  5.612643
- [8] 11.671348 10.707884 10.432739
+ [1] 12.223993 12.486807  4.319434  6.949653 12.584465 10.243158 12.748394
+ [8]  6.436038  7.954729  9.458806
 ```
 
 Normal distribution example 1 (2/2)

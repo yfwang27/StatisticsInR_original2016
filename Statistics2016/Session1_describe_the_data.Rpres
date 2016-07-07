@@ -93,55 +93,55 @@ Life expectancies at Birth for the UK and Constituent Countries 1991-93 to 2010-
 Data Source: Office for National Statistics
 
 Load data
-```{r}
+```{r,prompt=T}
 Life_exp<-read.csv("data/Life_expectancy_at_birth.csv",header=T)
 ```
 
 Recap some basic R functions (1/6)
 ========================================================
-- str(), head(), dim(), colnames() and summary() functions
+- **str()**, **head()**, **dim()**, **colnames()** and **summary()** functions
 - more details please see "Reproducible R course" [# hyperlink to the course]
 
 
 Recap some basic R functions (2/6)
 ========================================================
 
-head(): See the first 6 lines of an R object
-```{r}
+**head()**: See the first 6 lines of an R object
+```{r,prompt=T}
 head(Life_exp)
 ```
 
 Recap some basic R functions (3/6)
 ========================================================
 
-str(): Compactly display the internal structure of an R object
-```{r}
+**str()**: Compactly display the internal structure of an R object
+```{r,prompt=T}
 str(Life_exp)
 ```
 
 Recap some basic R functions (4/6)
 ========================================================
 see the how many rows and columns in "Life_exp"
-```{r}
+```{r,prompt=T}
 dim(Life_exp)
 ```
 
 see column names of "Life_exp"
-```{r}
+```{r,prompt=T}
 colnames(Life_exp)
 ```
 
 Recap some basic R functions (5/6)
 ========================================================
 
-```{r}
+```{r,prompt=T}
 summary(Life_exp)
 ```
 
 Recap some basic R functions (6/6)
 ========================================================
 
-ftable(): Create ‘flat’ contingency tables
+**ftable()**: Create ‘flat’ contingency tables
 ```{r}
 ftable(Life_exp[,c("area","gender")])
 ```
@@ -155,39 +155,51 @@ Data shape - use "Life_exp$life.expectancy"
 
 Data shape - work with plots (1/6)
 ========================================================
-Scatter plot
-```{r}
+
+Scatter plot: plot the life.expectancy against index
+
+```{r,prompt=T}
 plot(Life_exp$life.expectancy,ylab="Life expectancy (Years)")
 ```
 
 Spread of data - work with plots (2/6)
 ========================================================
 sort the data from min to max
-```{r}
+
+```{r,prompt=T,echo=F}
 plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)")
 ```
+***
 
+start to see something here...
+
+```{r,echo=F}
+plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)")
+  points(x=c(1,median(1:nrow(Life_exp)),nrow(Life_exp)),
+         y=c(min(Life_exp$life.expectancy),
+             median(Life_exp$life.expectancy),max(Life_exp$life.expectancy)),
+         col="red",pch=16,cex=1.6)
+  abline(h=quantile(Life_exp$life.expectancy)[c(2,4)],
+         v=quantile(c(1:nrow(Life_exp)))[c(2,4)],col="pink")
+```
 
 Spread of data - work with plots (3/6)
 ========================================================
 **min()**, **max()**, **median()**, **range()** and **quantile()** functions
-```{r}
+```{r,prompt=T}
 min.life.exp<-min(Life_exp$life.expectancy)
 max.life.exp<-max(Life_exp$life.expectancy)
 median.life.exp<-median(Life_exp$life.expectancy)
 mean.life.exp<-mean(Life_exp$life.expectancy)
-```
-```{r}
 c(min.life.exp, max.life.exp, median.life.exp, mean.life.exp)
-```
-```{r}
 range(Life_exp$life.expectancy)
 quantile(Life_exp$life.expectancy)
 ```
 
-
 Spread of data - work with plots (4/6)
 ========================================================
+Left: 40%
+
 Boxplot
 
 ```{r, echo=FALSE}
@@ -195,7 +207,7 @@ boxplot(Life_exp$life.expectancy,ylab="Life expectancy (Years)")
 abline(h=mean(Life_exp$life.expectancy),col="forestgreen",lwd=3)
 ```
 ***
-```{r}
+```{r,prompt=T}
 c(min.life.exp, max.life.exp)
 c(median.life.exp, mean.life.exp)
 quantile(Life_exp$life.expectancy)[c(2,4)]
@@ -220,16 +232,16 @@ par(mfrow=c(1,1))
 
 Spread of data -  work with plots (6/6)
 ========================================================
-summary()
-```{r}
+**summary()**
+```{r,prompt=T}
 summary(Life_exp$life.expectancy)
 ```
-range(): show the minimum and maximum
-```{r}
+**range()**: show the minimum and maximum
+```{r,prompt=T}
 range(Life_exp$life.expectancy)
 ```
-IQR(): show the interquartile range, i.e. 3rd quartile-1st quartile
-```{r}
+**IQR()**: show the interquartile range, i.e. 3rd quartile - 1st quartile
+```{r,prompt=T}
 IQR(Life_exp$life.expectancy)
 ```
 
@@ -246,7 +258,7 @@ $$
   \\ \\
   \end{aligned}
 $$
-```{r}
+```{r,prompt=T}
 var.life.exp<-sum((Life_exp$life.expectancy-mean.life.exp)^2)/(nrow(Life_exp)-1)
 sd.life.exp<-sqrt(var.life.exp)
 c(var.life.exp, sd.life.exp)
@@ -254,7 +266,7 @@ c(var.life.exp, sd.life.exp)
 
 Spread of data - var() and sd() function
 ========================================================
-```{r}
+```{r,prompt=T}
 var(Life_exp$life.expectancy)
 sd(Life_exp$life.expectancy)
 ```
@@ -263,14 +275,14 @@ sd(Life_exp$life.expectancy)
 Data shape - histogram
 ========================================================
 
-```{r}
+```{r,prompt=T}
 hist(Life_exp$life.expectancy,breaks=10)
 ```
 
 Data shape - histogram
 ========================================================
 
-```{r}
+```{r,prompt=T}
 hist(Life_exp$life.expectancy,breaks=10,freq = F)
 lines(density(Life_exp$life.expectancy),col="red")
 
@@ -291,7 +303,7 @@ par(mfrow=c(1,1))
 
 Data shape - violin plot
 ========================================================
-
+Left: 40%
 
 ```{r,echo=F}
 par(mfrow=c(2,1))
@@ -307,23 +319,12 @@ par(mfrow=c(1,1))
 #install.packages("vioplot")
 library("vioplot")
 ```
-```{r}
+```{r,prompt=T}
 vioplot(Life_exp$life.expectancy,
         ylim=range(Life_exp$life.expectancy),
         horizontal = T)
-
 ```
 
-Data shape - histogram
-========================================================
-
-```{r}
-Eng.life.exp<-Life_exp[Life_exp$area=="England",]
-boxplot(life.expectancy~area,data=Life_exp,las=2, cex.axis=0.6)
-boxplot(life.expectancy~gender*area,data=Life_exp,col=(c("gold","darkgreen")),
-        las=2, cex.axis=0.6)
-
-```
 Time for an exercise!
 ========================================================
 
