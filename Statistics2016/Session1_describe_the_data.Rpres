@@ -345,13 +345,13 @@ Answers can be found here  [here]
 R code for solutions can be found here  [here]
 
 
-Distributions (1/)
+Distributions (1/6)
 ========================================================
 - Binomial distribution
 - Normal distribution
 
 
-Distributions (2/)
+Distributions (2/6)
 ========================================================
 R comes with functions for extracting information from most common distibutions types. An example of standard R functions for dealing with distibution can be seen here using the normal distributions.
 
@@ -360,7 +360,7 @@ R comes with functions for extracting information from most common distibutions 
 - dnorm - distribution density, aka p.d.f. (probability density function)
 - rnorm - random number from normal distribution
 
-Distributions
+Distributions (3/6)
 ========================================================
 Similar functions are available for other distibution types including:
 
@@ -370,7 +370,7 @@ Similar functions are available for other distibution types including:
 - phyper (hypergeometric)
 
 
-Binomial distribution
+Binomial distribution (4/6)
 ========================================================
 
 $$X \sim Binom(n,p)$$
@@ -403,7 +403,7 @@ plot(x, hx, type="l", lty=2, lwd=2, col="brown4",
 ```
 
 
-Normal distribution
+Normal distribution (5/6)
 ========================================================
 
 $$X \sim Normal(\mu,\sigma^2)$$
@@ -419,7 +419,7 @@ axis(side=1, at=c(-4,-2,0,2,4),
 
 ```
 
-Standard Normal distribution
+Standard Normal distribution (6/6)
 ========================================================
 
 $$X \sim Normal(\mu,\sigma^2)$$

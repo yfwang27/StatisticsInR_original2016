@@ -440,13 +440,13 @@ Answers can be found here  [here]
 R code for solutions can be found here  [here]
 
 
-Distributions (1/)
+Distributions (1/6)
 ========================================================
 - Binomial distribution
 - Normal distribution
 
 
-Distributions (2/)
+Distributions (2/6)
 ========================================================
 R comes with functions for extracting information from most common distibutions types. An example of standard R functions for dealing with distibution can be seen here using the normal distributions.
 
@@ -455,7 +455,7 @@ R comes with functions for extracting information from most common distibutions 
 - dnorm - distribution density, aka p.d.f. (probability density function)
 - rnorm - random number from normal distribution
 
-Distributions
+Distributions (3/6)
 ========================================================
 Similar functions are available for other distibution types including:
 
@@ -465,7 +465,7 @@ Similar functions are available for other distibution types including:
 - phyper (hypergeometric)
 
 
-Binomial distribution
+Binomial distribution (4/6)
 ========================================================
 
 $$X \sim Binom(n,p)$$
@@ -492,14 +492,14 @@ $$X \sim B(100,0.2)$$
 ![plot of chunk unnamed-chunk-27](Session1_describe_the_data-figure/unnamed-chunk-27-1.png)
 
 
-Normal distribution
+Normal distribution (5/6)
 ========================================================
 
 $$X \sim Normal(\mu,\sigma^2)$$
 
 ![plot of chunk unnamed-chunk-28](Session1_describe_the_data-figure/unnamed-chunk-28-1.png)
 
-Standard Normal distribution
+Standard Normal distribution (6/6)
 ========================================================
 
 $$X \sim Normal(\mu,\sigma^2)$$
