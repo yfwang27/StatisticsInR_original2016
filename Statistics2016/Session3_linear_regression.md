@@ -126,7 +126,7 @@ Correlation between vectors (3/8)
 ```
 
 ```
-[1] -0.1326525
+[1] -0.1274763
 ```
 ***
 ![plot of chunk unnamed-chunk-7](Session3_linear_regression-figure/unnamed-chunk-7-1.png)
