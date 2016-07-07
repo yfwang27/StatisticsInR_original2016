@@ -430,7 +430,7 @@ library("vioplot")
 Time for an exercise!
 ========================================================
 
-Exercise on vectors can be found [here]
+Exercise on this part can be found [here]
 
 Answers to exercise.
 ========================================================
@@ -588,6 +588,12 @@ Time for an exercise!
 ========================================================
 
 Exercise on distribution can be found [here]
+
+purpose of this exercise:
+
+1. recap some basic R functions, i.e. read.table(), subsetting, dim(), nrow()
+
+2. get familiar with some basic stat functions that mentioned in the course
 
 
 Answers to exercise.
