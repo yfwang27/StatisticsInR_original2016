@@ -450,9 +450,9 @@ Distributions (2/)
 ========================================================
 R comes with functions for extracting information from most common distibutions types. An example of standard R functions for dealing with distibution can be seen here using the normal distributions.
 
-- pnorm - cumulative distribution for x
+- pnorm - cumulative distribution for x, aka c.d.f. (cumulative distribution function)
 - qnorm - inverse of pnorm (from probability gives x)
-- dnorm - distribution density
+- dnorm - distribution density, aka p.d.f. (probability density function)
 - rnorm - random number from normal distribution
 
 Distributions
@@ -468,29 +468,43 @@ Similar functions are available for other distibution types including:
 Binomial distribution
 ========================================================
 
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
+$$X \sim Binom(n,p)$$
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+$$
+n=\text{number of experiment}
+\\
+p=\text{probability of success}
+$$
+
+$$
+E(X)=np
+\\
+Var(X)=\frac{p(1-p)}n
+\\
+$$
+
+For example:
+
+$$X \sim B(100,0.2)$$
+
+***
+
+![plot of chunk unnamed-chunk-27](Session1_describe_the_data-figure/unnamed-chunk-27-1.png)
 
 
 Normal distribution
 ========================================================
 
-pdf (probability density function), cdf (cumulative distribution function)
-
 $$X \sim Normal(\mu,\sigma^2)$$
 
-![plot of chunk unnamed-chunk-27](Session1_describe_the_data-figure/unnamed-chunk-27-1.png)
+![plot of chunk unnamed-chunk-28](Session1_describe_the_data-figure/unnamed-chunk-28-1.png)
 
 Standard Normal distribution
 ========================================================
 
 $$X \sim Normal(\mu,\sigma^2)$$
 
-![plot of chunk unnamed-chunk-28](Session1_describe_the_data-figure/unnamed-chunk-28-1.png)
+![plot of chunk unnamed-chunk-29](Session1_describe_the_data-figure/unnamed-chunk-29-1.png)
 ***
 
 Z-score transformation
@@ -502,25 +516,30 @@ Z=\frac{X-\mu}\sigma
 Z \sim Normal(0,1)
 $$
 
-![plot of chunk unnamed-chunk-29](Session1_describe_the_data-figure/unnamed-chunk-29-1.png)
+![plot of chunk unnamed-chunk-30](Session1_describe_the_data-figure/unnamed-chunk-30-1.png)
 
-Normal distribution example 1 (1/2)
+Normal distribution example (1/)
 ========================================================
-We can use rnorm to generate random values following a normal distribution.
 
-Here we produce 10 normally distributed numeric values with mean 8 and standard deviation of 3
+We can use **rnorm()** function to generate random values following a normal distribution. Here we produce 10 normally distributed numeric values with mean 8 and standard deviation of 3
 
 
 ```r
+set.seed(2)
 rnorm(10,mean=8,sd=3)
 ```
 
 ```
- [1]  6.356325  4.317434  8.074359  6.510037  7.014558  2.713577  6.496521
- [8] 10.028114 11.249106  9.001558
+ [1]  5.309256  8.554548 12.763536  4.608873  7.759245  8.397261 10.123864
+ [8]  7.280906 13.953422  7.583639
 ```
 
-Normal distribution example 1 (2/2)
+If you want to regenerate the exact random numbers, use the **set.seed()** function before generating any random numbers.
+
+![plot of chunk unnamed-chunk-32](Session1_describe_the_data-figure/unnamed-chunk-32-1.png)
+
+
+Normal distribution example (2/)
 ========================================================
 We can also use these functions to interrogate values assuming a normal distribution for the data.
 
@@ -535,7 +554,8 @@ dnorm(8,mean=8,sd=3)
 [1] 0.1329808
 ```
 
-Normal distribution example 2
+![plot of chunk unnamed-chunk-34](Session1_describe_the_data-figure/unnamed-chunk-34-1.png)
+Normal distribution example (3/)
 ========================================================
 The probablity of a value being less than 8 for a distribution of mean 8 and standard deviation 3.
 
