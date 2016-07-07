@@ -23,28 +23,28 @@ We have used the "iris" data for the [Intermediate R course]. We are going to wo
 Dataset - use the "iris" data (2/3)
 ========================================================
 
-```{r}
+```{r,prompt=T}
 data(iris)
 ```
 Some basic checks
-```{r}
+```{r,prompt=T}
 class(iris)
 str(iris)
 ```
 ***
-```{r}
+```{r,prompt=T}
 head(iris)
 ```
 
 Dataset - use the "iris" data (3/3)
 ========================================================
 [*intermediate R; add a link to the intermediate R]
-```{r, warning=FALSE, eval=T}
+```{r, warning=FALSE, eval=T,prompt=T}
 #install.packages("dplyr")
 library("dplyr")
 ```
 
-```{r}
+```{r,prompt=T}
 # tbl_df()
 ```
 
@@ -55,7 +55,7 @@ A common task in statistical analysis is to investigate the relationship between
 
 This can be done by identifying the correlation between numeric vectors using the **cor()** function in R.
 
-In this example we use cor() to identify the Pearson correlation between two variables.  The **method** argument may be set to make use of different correlation methods.
+In this example we use **cor()** to identify the Pearson correlation between two variables.  The **method** argument may be set to make use of different correlation methods.
 
 - Perfectly posively correlated vectors will return 1
 - Perfectly negatively correlated vectors will return -1
@@ -70,7 +70,7 @@ Correlation (2/8)
 Correlation between vectors (3/8)
 =========================================================
 
-```{r}
+```{r,prompt=T}
 x <- rnorm(100,10,2)
 z <- rnorm(100,10,2)
 y <- x
@@ -79,7 +79,7 @@ cor(x,-y)
 cor(x,z)
 ```
 ***
-```{r,echo=F}
+```{r,echo=F,prompt=T}
 par(mfrow=c(3,1))
 plot(x,y) #
 plot(x,-y)
@@ -95,11 +95,11 @@ left: 70%
 Often we wish to apply correlation analysis to all columns or rows in a matrix in a pair-wise manner. To do this in R, we can simply pass the **cor()** function a single argument of the numeric matrix of interest. The **cor()** function will then perform all pair-wise correlations between columns.
 
 - subset data.frame
-```{r}
+```{r,prompt=T}
 iris4cor<-iris[,1:4]
 ```
 - change colnames
-```{r}
+```{r,prompt=T}
 colnames(iris4cor)<-gsub("(.+)(\\.)(\\w{3})(.+)","\\1\\2\\3",colnames(iris4cor))
 head(iris4cor)
 
@@ -107,7 +107,7 @@ head(iris4cor)
 
 Correlation over a matrix (5/8)
 =========================================================
-```{r}
+```{r,prompt=T}
 cor(iris4cor)
 ```
 ```{r,eval=T,echo=F,fig.width=4,fig.height=4,dpi=300,out.width="820px",height="820px"}
@@ -120,14 +120,14 @@ mtext(colnames(iris4cor),side=1,at=seq(0,1,length.out=4),las=2,cex=0.8)
 
 Correlation (6/8)
 ========================================================
-```{r}
+```{r,prompt=T}
 pairs(iris4cor)
 ```
 
 Correlation (7/8)
 ========================================================
 [find an example that requires the spearman method]
-```{r}
+```{r,prompt=T}
 
 ```
 
@@ -148,10 +148,8 @@ We will focus on *Iris.versicolor* as example
 ![alt text](imgs/Iris_versicolor.jpg)
 ***
 - subset data *iris*
-```{r}
-iris_versi<-
-  iris[iris$Species=="versicolor", c("Petal.Length","Petal.Width")]
-
+```{r,prompt=T}
+iris_versi<-iris[iris$Species=="versicolor", c("Petal.Length","Petal.Width")]
 dim(iris_versi)
 head(iris_versi)
 ```
@@ -162,16 +160,14 @@ Regression and linear models (3/12)
 
 If we only know the Petal.Length, and would like to use this information to predict the Petal.Length
 
-```{r}
+```{r,prompt=T}
 head(iris_versi[,"Petal.Length"])
 PetalLen.mean<-mean(iris_versi$Petal.Length)
-
 PetalLen.mean
 ```
 ***
-```{r}
-plot(iris_versi$Petal.Length,
-     ylab="Petal Length of Iris.versicolor")
+```{r,prompt=T}
+plot(iris_versi$Petal.Length,ylab="Petal Length of Iris.versicolor")
 abline(h=PetalLen.mean, col="forestgreen",lwd=3)
 ```
 
@@ -179,7 +175,7 @@ abline(h=PetalLen.mean, col="forestgreen",lwd=3)
 Regression and linear models (4/12)
 =========================================================
 
-If we only know the Petal.Length, and would like to use this information to predict the Petal.Length
+If we only know the *Petal.Length*, and would like to use this information to predict the *Petal.Length*
 
 ```{r,echo=F}
 plot(iris_versi$Petal.Length,
@@ -283,10 +279,10 @@ $$b_1\text{(slope): the amount of f(x) will change when x changes 1 unit}$$
 
 Regression and linear models (7/12)
 =========================================================
-The *lm()* function fits a linear regression to your data and provides useful information on the generated fit.
+The **lm()** function fits a linear regression to your data and provides useful information on the generated fit.
 
-In the example below we fit a linear model using  *lm()* on the iris_versi dataset with Petal.Length (Y) as the dependent variable and Petal.Width (X) as the explanatory variable.
-```{r}
+In the example below we fit a linear model using  **lm()** on the *iris_versi* dataset with *Petal.Length* (Y) as the dependent variable and *Petal.Width* (X) as the explanatory variable.
+```{r,prompt=T}
 lmResult<-lm(formula = Petal.Length ~ Petal.Width, data = iris_versi)
 lmResult
 ```
@@ -295,14 +291,14 @@ Interpreting output of lm() (8/12)
 =========================================================
 
 As we have seen, printing the model result provides the intercept and slope of line.
-To get some more information on the model we can use the *summary()* function
-```{r}
+To get some more information on the model we can use the **summary()** function
+```{r,prompt=T}
 summary(lmResult)
 ```
 
 Regression and linear models - coefficients (9/12)
 =========================================================
-```{r}
+```{r,prompt=T}
 lmResult$coefficients
 ```
 From the $coefficients of object lmResult, we know the equation for the best fit is
@@ -333,7 +329,7 @@ Regression and linear models - residuals (10/12)
 =========================================================
 
 The **residuals** are the difference between the predicted and actual values.
-To retrieve the residuals we can access the slot or use the *resid()* function.
+To retrieve the residuals we can access the slot or use the **resid()** function.
 
 ```{r,prompt=T,echo=T}
 summary(resid(lmResult))
@@ -358,13 +354,12 @@ $$
 ***
 
 Plot the residuals against the independent variable (X)
+
 ```{r,echo=F}
 plot(iris_versi$Petal.Width,IrisLm.res,
      ylab="residuals",xlab="Petal Width of Iris.versicolor (x)")
-abline(h=0,col="red")
+abline(h=0,col="blueviolet",lwd=3, lty=3)
 ```
-
-
 
 Regression and linear models - R-squared (12/12)
 =========================================================
@@ -401,7 +396,7 @@ Statistics (Extra) - Calculating R-squared
 
 The fraction of variability in the independent variable (Y; or the *Petal.Length* in this example) that can be explained by the explanatory variable (X; or the *Petal.Width* in this example).
 
-```{r,prompt=F}
+```{r,prompt=T}
 SSE <- sum(resid(lmResult)^2)
 TSS <- sum((iris_versi$Petal.Length - mean(iris_versi$Petal.Length))^2)
 1- SSE/TSS

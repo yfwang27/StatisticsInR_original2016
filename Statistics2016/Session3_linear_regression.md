@@ -25,12 +25,12 @@ Dataset - use the "iris" data (2/3)
 
 
 ```r
-data(iris)
+> data(iris)
 ```
 Some basic checks
 
 ```r
-class(iris)
+> class(iris)
 ```
 
 ```
@@ -38,7 +38,7 @@ class(iris)
 ```
 
 ```r
-str(iris)
+> str(iris)
 ```
 
 ```
@@ -52,7 +52,7 @@ str(iris)
 ***
 
 ```r
-head(iris)
+> head(iris)
 ```
 
 ```
@@ -70,13 +70,13 @@ Dataset - use the "iris" data (3/3)
 [*intermediate R; add a link to the intermediate R]
 
 ```r
-#install.packages("dplyr")
-library("dplyr")
+> #install.packages("dplyr")
+> library("dplyr")
 ```
 
 
 ```r
-# tbl_df()
+> # tbl_df()
 ```
 
 Correlation (1/8)
@@ -86,7 +86,7 @@ A common task in statistical analysis is to investigate the relationship between
 
 This can be done by identifying the correlation between numeric vectors using the **cor()** function in R.
 
-In this example we use cor() to identify the Pearson correlation between two variables.  The **method** argument may be set to make use of different correlation methods.
+In this example we use **cor()** to identify the Pearson correlation between two variables.  The **method** argument may be set to make use of different correlation methods.
 
 - Perfectly posively correlated vectors will return 1
 - Perfectly negatively correlated vectors will return -1
@@ -103,10 +103,10 @@ Correlation between vectors (3/8)
 
 
 ```r
-x <- rnorm(100,10,2)
-z <- rnorm(100,10,2)
-y <- x
-cor(x,y) #
+> x <- rnorm(100,10,2)
+> z <- rnorm(100,10,2)
+> y <- x
+> cor(x,y) #
 ```
 
 ```
@@ -114,7 +114,7 @@ cor(x,y) #
 ```
 
 ```r
-cor(x,-y)
+> cor(x,-y)
 ```
 
 ```
@@ -122,11 +122,11 @@ cor(x,-y)
 ```
 
 ```r
-cor(x,z)
+> cor(x,z)
 ```
 
 ```
-[1] -0.1334344
+[1] -0.1326525
 ```
 ***
 ![plot of chunk unnamed-chunk-7](Session3_linear_regression-figure/unnamed-chunk-7-1.png)
@@ -140,13 +140,13 @@ Often we wish to apply correlation analysis to all columns or rows in a matrix i
 - subset data.frame
 
 ```r
-iris4cor<-iris[,1:4]
+> iris4cor<-iris[,1:4]
 ```
 - change colnames
 
 ```r
-colnames(iris4cor)<-gsub("(.+)(\\.)(\\w{3})(.+)","\\1\\2\\3",colnames(iris4cor))
-head(iris4cor)
+> colnames(iris4cor)<-gsub("(.+)(\\.)(\\w{3})(.+)","\\1\\2\\3",colnames(iris4cor))
+> head(iris4cor)
 ```
 
 ```
@@ -163,7 +163,7 @@ Correlation over a matrix (5/8)
 =========================================================
 
 ```r
-cor(iris4cor)
+> cor(iris4cor)
 ```
 
 ```
@@ -180,7 +180,7 @@ Correlation (6/8)
 ========================================================
 
 ```r
-pairs(iris4cor)
+> pairs(iris4cor)
 ```
 
 ![plot of chunk unnamed-chunk-12](Session3_linear_regression-figure/unnamed-chunk-12-1.png)
@@ -209,10 +209,8 @@ We will focus on *Iris.versicolor* as example
 - subset data *iris*
 
 ```r
-iris_versi<-
-  iris[iris$Species=="versicolor", c("Petal.Length","Petal.Width")]
-
-dim(iris_versi)
+> iris_versi<-iris[iris$Species=="versicolor", c("Petal.Length","Petal.Width")]
+> dim(iris_versi)
 ```
 
 ```
@@ -220,7 +218,7 @@ dim(iris_versi)
 ```
 
 ```r
-head(iris_versi)
+> head(iris_versi)
 ```
 
 ```
@@ -241,7 +239,7 @@ If we only know the Petal.Length, and would like to use this information to pred
 
 
 ```r
-head(iris_versi[,"Petal.Length"])
+> head(iris_versi[,"Petal.Length"])
 ```
 
 ```
@@ -249,9 +247,8 @@ head(iris_versi[,"Petal.Length"])
 ```
 
 ```r
-PetalLen.mean<-mean(iris_versi$Petal.Length)
-
-PetalLen.mean
+> PetalLen.mean<-mean(iris_versi$Petal.Length)
+> PetalLen.mean
 ```
 
 ```
@@ -260,9 +257,8 @@ PetalLen.mean
 ***
 
 ```r
-plot(iris_versi$Petal.Length,
-     ylab="Petal Length of Iris.versicolor")
-abline(h=PetalLen.mean, col="forestgreen",lwd=3)
+> plot(iris_versi$Petal.Length,ylab="Petal Length of Iris.versicolor")
+> abline(h=PetalLen.mean, col="forestgreen",lwd=3)
 ```
 
 ![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
@@ -271,7 +267,7 @@ abline(h=PetalLen.mean, col="forestgreen",lwd=3)
 Regression and linear models (4/12)
 =========================================================
 
-If we only know the Petal.Length, and would like to use this information to predict the Petal.Length
+If we only know the *Petal.Length*, and would like to use this information to predict the *Petal.Length*
 
 ![plot of chunk unnamed-chunk-17](Session3_linear_regression-figure/unnamed-chunk-17-1.png)
 ***
@@ -347,13 +343,13 @@ $$b_1\text{(slope): the amount of f(x) will change when x changes 1 unit}$$
 
 Regression and linear models (7/12)
 =========================================================
-The *lm()* function fits a linear regression to your data and provides useful information on the generated fit.
+The **lm()** function fits a linear regression to your data and provides useful information on the generated fit.
 
-In the example below we fit a linear model using  *lm()* on the iris_versi dataset with Petal.Length (Y) as the dependent variable and Petal.Width (X) as the explanatory variable.
+In the example below we fit a linear model using  **lm()** on the *iris_versi* dataset with *Petal.Length* (Y) as the dependent variable and *Petal.Width* (X) as the explanatory variable.
 
 ```r
-lmResult<-lm(formula = Petal.Length ~ Petal.Width, data = iris_versi)
-lmResult
+> lmResult<-lm(formula = Petal.Length ~ Petal.Width, data = iris_versi)
+> lmResult
 ```
 
 ```
@@ -370,10 +366,10 @@ Interpreting output of lm() (8/12)
 =========================================================
 
 As we have seen, printing the model result provides the intercept and slope of line.
-To get some more information on the model we can use the *summary()* function
+To get some more information on the model we can use the **summary()** function
 
 ```r
-summary(lmResult)
+> summary(lmResult)
 ```
 
 ```
@@ -401,7 +397,7 @@ Regression and linear models - coefficients (9/12)
 =========================================================
 
 ```r
-lmResult$coefficients
+> lmResult$coefficients
 ```
 
 ```
@@ -427,7 +423,7 @@ Regression and linear models - residuals (10/12)
 =========================================================
 
 The **residuals** are the difference between the predicted and actual values.
-To retrieve the residuals we can access the slot or use the *resid()* function.
+To retrieve the residuals we can access the slot or use the **resid()** function.
 
 
 ```r
@@ -478,9 +474,8 @@ $$
 ***
 
 Plot the residuals against the independent variable (X)
+
 ![plot of chunk unnamed-chunk-26](Session3_linear_regression-figure/unnamed-chunk-26-1.png)
-
-
 
 Regression and linear models - R-squared (12/12)
 =========================================================
@@ -555,9 +550,9 @@ The fraction of variability in the independent variable (Y; or the *Petal.Length
 
 
 ```r
-SSE <- sum(resid(lmResult)^2)
-TSS <- sum((iris_versi$Petal.Length - mean(iris_versi$Petal.Length))^2)
-1- SSE/TSS
+> SSE <- sum(resid(lmResult)^2)
+> TSS <- sum((iris_versi$Petal.Length - mean(iris_versi$Petal.Length))^2)
+> 1- SSE/TSS
 ```
 
 ```
@@ -565,7 +560,7 @@ TSS <- sum((iris_versi$Petal.Length - mean(iris_versi$Petal.Length))^2)
 ```
 
 ```r
-summary(lmResult)$r.squared
+> summary(lmResult)$r.squared
 ```
 
 ```
