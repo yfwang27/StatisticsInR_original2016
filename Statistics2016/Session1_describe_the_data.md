@@ -200,14 +200,14 @@ Scotland              20    20
 Wales                 20    20
 ```
 
-Data shape - use "Life_exp$life.expectancy"
+Spread of data - use "Life_exp$life.expectancy" (1/9)
 ========================================================
 
 - working with plots
 - more details please see "Reproducible R"
 
 
-Data shape - work with plots (1/6)
+Spread of data - work with plots (2/9)
 ========================================================
 
 Scatter plot: plot the life.expectancy against index
@@ -219,7 +219,7 @@ Scatter plot: plot the life.expectancy against index
 
 ![plot of chunk unnamed-chunk-9](Session1_describe_the_data-figure/unnamed-chunk-9-1.png)
 
-Spread of data - work with plots (2/6)
+Spread of data - work with plots (3/9)
 ========================================================
 sort the data from min to max
 
@@ -230,8 +230,9 @@ start to see something here...
 
 ![plot of chunk unnamed-chunk-11](Session1_describe_the_data-figure/unnamed-chunk-11-1.png)
 
-Spread of data - work with plots (3/6)
+Spread of data - work with plots (4/9)
 ========================================================
+
 **min()**, **max()**, **median()**, **range()** and **quantile()** functions
 
 ```r
@@ -263,7 +264,7 @@ Spread of data - work with plots (3/6)
 71.470 75.085 78.005 79.910 83.010 
 ```
 
-Spread of data - work with plots (4/6)
+Spread of data - work with plots (5/9)
 ========================================================
 Left: 40%
 
@@ -298,12 +299,12 @@ Boxplot
 ```
 
 
-Spread of data - work with plots (5/6)
+Spread of data - work with plots (6/9)
 ========================================================
 
 ![plot of chunk unnamed-chunk-15](Session1_describe_the_data-figure/unnamed-chunk-15-1.png)
 
-Spread of data -  work with plots (6/6)
+Spread of data -  work with plots (7/9)
 ========================================================
 **summary()**
 
@@ -334,16 +335,16 @@ Spread of data -  work with plots (6/6)
 [1] 4.825
 ```
 
-Spread of data - Variance and Standard deviation
+Spread of data - Variance and Standard deviation (8/9)
 ========================================================
 
 $$
   \begin{aligned}
-  \overline x & = \frac{{\displaystyle\sum_{i=1}^n}x_i}n \\
+  \overline x  = \frac{{\displaystyle\sum_{i=1}^n}x_i}n \\
   \\ \\
-  Variance & =\frac{{\displaystyle\sum_{i=1}^n}(\left|x_i-\overline x\right|)^2}{n-1} \\
+  \text{Variance} = \sigma^2 = \frac{{\displaystyle\sum_{i=1}^n}(\left|x_i-\overline x\right|)^2}{n-1} \\
   \\ \\
-  Stan dard\;deviation & =\sqrt{Variance} \\
+  \text{Standard deviation} = \sigma =\sqrt{\text{Variance}} \\
   \\ \\
   \end{aligned}
 $$
@@ -358,7 +359,7 @@ $$
 [1] 8.653772 2.941729
 ```
 
-Spread of data - var() and sd() function
+Spread of data - var() and sd() function (9/9)
 ========================================================
 
 ```r
@@ -378,7 +379,7 @@ Spread of data - var() and sd() function
 ```
 
 
-Data shape - histogram
+Data shape - histogram (1/4)
 ========================================================
 
 
@@ -388,7 +389,7 @@ Data shape - histogram
 
 ![plot of chunk unnamed-chunk-21](Session1_describe_the_data-figure/unnamed-chunk-21-1.png)
 
-Data shape - histogram
+Data shape - histogram (2/4)
 ========================================================
 
 
@@ -399,13 +400,13 @@ Data shape - histogram
 
 ![plot of chunk unnamed-chunk-22](Session1_describe_the_data-figure/unnamed-chunk-22-1.png)
 
-Data shape - histogram
+Data shape - histogram (3/4)
 ========================================================
 
 ![plot of chunk unnamed-chunk-23](Session1_describe_the_data-figure/unnamed-chunk-23-1.png)
 
 
-Data shape - violin plot
+Data shape - violin plot (4/4)
 ========================================================
 Left: 40%
 
@@ -439,13 +440,13 @@ Answers can be found here  [here]
 R code for solutions can be found here  [here]
 
 
-Distributions
+Distributions (1/)
 ========================================================
 - Binomial distribution
 - Normal distribution
 
 
-Distributions
+Distributions (2/)
 ========================================================
 R comes with functions for extracting information from most common distibutions types. An example of standard R functions for dealing with distibution can be seen here using the normal distributions.
 
@@ -459,9 +460,9 @@ Distributions
 Similar functions are available for other distibution types including:
 
 - pbinom (binomial)
+- pt (T distribution)
 - pnbinom (negative binomial),
 - phyper (hypergeometric)
-- pt (T distribution)
 
 
 Binomial distribution
@@ -480,9 +481,28 @@ Normal distribution
 
 pdf (probability density function), cdf (cumulative distribution function)
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+$$X \sim Normal(\mu,\sigma^2)$$
+
+![plot of chunk unnamed-chunk-27](Session1_describe_the_data-figure/unnamed-chunk-27-1.png)
+
+Standard Normal distribution
+========================================================
+
+$$X \sim Normal(\mu,\sigma^2)$$
+
+![plot of chunk unnamed-chunk-28](Session1_describe_the_data-figure/unnamed-chunk-28-1.png)
+***
+
+Z-score transformation
+
+$$
+Z=\frac{X-\mu}\sigma
+\\
+\\
+Z \sim Normal(0,1)
+$$
+
+![plot of chunk unnamed-chunk-29](Session1_describe_the_data-figure/unnamed-chunk-29-1.png)
 
 Normal distribution example 1 (1/2)
 ========================================================
@@ -496,8 +516,8 @@ rnorm(10,mean=8,sd=3)
 ```
 
 ```
- [1] 12.223993 12.486807  4.319434  6.949653 12.584465 10.243158 12.748394
- [8]  6.436038  7.954729  9.458806
+ [1]  6.356325  4.317434  8.074359  6.510037  7.014558  2.713577  6.496521
+ [8] 10.028114 11.249106  9.001558
 ```
 
 Normal distribution example 1 (2/2)

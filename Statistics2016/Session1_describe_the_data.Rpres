@@ -146,14 +146,14 @@ Recap some basic R functions (6/6)
 ftable(Life_exp[,c("area","gender")])
 ```
 
-Data shape - use "Life_exp$life.expectancy"
+Spread of data - use "Life_exp$life.expectancy" (1/9)
 ========================================================
 
 - working with plots
 - more details please see "Reproducible R"
 
 
-Data shape - work with plots (1/6)
+Spread of data - work with plots (2/9)
 ========================================================
 
 Scatter plot: plot the life.expectancy against index
@@ -162,7 +162,7 @@ Scatter plot: plot the life.expectancy against index
 plot(Life_exp$life.expectancy,ylab="Life expectancy (Years)")
 ```
 
-Spread of data - work with plots (2/6)
+Spread of data - work with plots (3/9)
 ========================================================
 sort the data from min to max
 
@@ -174,17 +174,22 @@ plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)")
 start to see something here...
 
 ```{r,echo=F}
-plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)")
+quan_1<-quantile(c(1:nrow(Life_exp)))[2]
+quan_3<-quantile(c(1:nrow(Life_exp)))[4]
+plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)",xaxt="n")
+  axis(side=1, at=c(0,quan_1,median(1:nrow(Life_exp)),quan_3,nrow(Life_exp)),
+     labels=c("min","1stquantile","median","3rdquantile","max"))
   points(x=c(1,median(1:nrow(Life_exp)),nrow(Life_exp)),
          y=c(min(Life_exp$life.expectancy),
              median(Life_exp$life.expectancy),max(Life_exp$life.expectancy)),
          col="red",pch=16,cex=1.6)
   abline(h=quantile(Life_exp$life.expectancy)[c(2,4)],
-         v=quantile(c(1:nrow(Life_exp)))[c(2,4)],col="pink")
+         v=quantile(c(1:nrow(Life_exp)))[c(2,4)],col="pink",lwd=3,lty=2)
 ```
 
-Spread of data - work with plots (3/6)
+Spread of data - work with plots (4/9)
 ========================================================
+
 **min()**, **max()**, **median()**, **range()** and **quantile()** functions
 ```{r,prompt=T}
 min.life.exp<-min(Life_exp$life.expectancy)
@@ -196,7 +201,7 @@ range(Life_exp$life.expectancy)
 quantile(Life_exp$life.expectancy)
 ```
 
-Spread of data - work with plots (4/6)
+Spread of data - work with plots (5/9)
 ========================================================
 Left: 40%
 
@@ -214,23 +219,25 @@ quantile(Life_exp$life.expectancy)[c(2,4)]
 ```
 
 
-Spread of data - work with plots (5/6)
+Spread of data - work with plots (6/9)
 ========================================================
 
 ```{r, echo=FALSE}
 par(mfrow=c(1,2))
   boxplot(Life_exp$life.expectancy,ylab="Life expectancy (Years)")
-  plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)")
+  plot(sort(Life_exp$life.expectancy),ylab="Life expectancy (Years)",xaxt="n")
+  axis(side=1, at=c(0,quan_1,median(1:nrow(Life_exp)),quan_3,nrow(Life_exp)),
+     labels=c("min","1stquantile","median","3rdquantile","max"))
   points(x=c(1,median(1:nrow(Life_exp)),nrow(Life_exp)),
          y=c(min(Life_exp$life.expectancy),
              median(Life_exp$life.expectancy),max(Life_exp$life.expectancy)),
          col="red",pch=16,cex=1.6)
   abline(h=quantile(Life_exp$life.expectancy)[c(2,4)],
-         v=quantile(c(1:nrow(Life_exp)))[c(2,4)],col="pink")
+         v=quantile(c(1:nrow(Life_exp)))[c(2,4)],col="pink",lwd=3,lty=2)
 par(mfrow=c(1,1))
 ```
 
-Spread of data -  work with plots (6/6)
+Spread of data -  work with plots (7/9)
 ========================================================
 **summary()**
 ```{r,prompt=T}
@@ -245,16 +252,16 @@ range(Life_exp$life.expectancy)
 IQR(Life_exp$life.expectancy)
 ```
 
-Spread of data - Variance and Standard deviation
+Spread of data - Variance and Standard deviation (8/9)
 ========================================================
 
 $$
   \begin{aligned}
-  \overline x & = \frac{{\displaystyle\sum_{i=1}^n}x_i}n \\
+  \overline x  = \frac{{\displaystyle\sum_{i=1}^n}x_i}n \\
   \\ \\
-  Variance & =\frac{{\displaystyle\sum_{i=1}^n}(\left|x_i-\overline x\right|)^2}{n-1} \\
+  \text{Variance} = \sigma^2 = \frac{{\displaystyle\sum_{i=1}^n}(\left|x_i-\overline x\right|)^2}{n-1} \\
   \\ \\
-  Stan dard\;deviation & =\sqrt{Variance} \\
+  \text{Standard deviation} = \sigma =\sqrt{\text{Variance}} \\
   \\ \\
   \end{aligned}
 $$
@@ -264,7 +271,7 @@ sd.life.exp<-sqrt(var.life.exp)
 c(var.life.exp, sd.life.exp)
 ```
 
-Spread of data - var() and sd() function
+Spread of data - var() and sd() function (9/9)
 ========================================================
 ```{r,prompt=T}
 var(Life_exp$life.expectancy)
@@ -272,14 +279,14 @@ sd(Life_exp$life.expectancy)
 ```
 
 
-Data shape - histogram
+Data shape - histogram (1/4)
 ========================================================
 
 ```{r,prompt=T}
 hist(Life_exp$life.expectancy,breaks=10)
 ```
 
-Data shape - histogram
+Data shape - histogram (2/4)
 ========================================================
 
 ```{r,prompt=T}
@@ -288,7 +295,7 @@ lines(density(Life_exp$life.expectancy),col="red")
 
 ```
 
-Data shape - histogram
+Data shape - histogram (3/4)
 ========================================================
 
 ```{r,echo=F}
@@ -301,7 +308,7 @@ par(mfrow=c(1,1))
 ```
 
 
-Data shape - violin plot
+Data shape - violin plot (4/4)
 ========================================================
 Left: 40%
 
@@ -338,13 +345,13 @@ Answers can be found here  [here]
 R code for solutions can be found here  [here]
 
 
-Distributions
+Distributions (1/)
 ========================================================
 - Binomial distribution
 - Normal distribution
 
 
-Distributions
+Distributions (2/)
 ========================================================
 R comes with functions for extracting information from most common distibutions types. An example of standard R functions for dealing with distibution can be seen here using the normal distributions.
 
@@ -358,9 +365,9 @@ Distributions
 Similar functions are available for other distibution types including:
 
 - pbinom (binomial)
+- pt (T distribution)
 - pnbinom (negative binomial),
 - phyper (hypergeometric)
-- pt (T distribution)
 
 
 Binomial distribution
@@ -379,9 +386,54 @@ Normal distribution
 
 pdf (probability density function), cdf (cumulative distribution function)
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+$$X \sim Normal(\mu,\sigma^2)$$
+
+```{r,echo=F}
+x <- seq(-4, 4, length=100)
+hx <- dnorm(x)
+plot(x, hx, type="l", lty=2, lwd=2, cor="blue4",
+     xlab="x value",ylab="Density", main="Normal distribution",xaxt='n')
+axis(side=1, at=c(-4,-2,0,2,4),
+     labels=c(expression(paste(-2,sigma)),expression(-sigma),expression(mu),
+              expression(sigma),expression(paste(2,sigma))))
+
+```
+
+Standard Normal distribution
+========================================================
+
+$$X \sim Normal(\mu,\sigma^2)$$
+
+```{r,echo=F}
+x <- seq(-4, 4, length=100)
+hx <- dnorm(x)
+plot(x, hx, type="l", lty=2, lwd=2, cor="blue4",
+     xlab="x value",ylab="Density", main="Normal distribution",xaxt='n')
+axis(side=1, at=c(-4,-2,0,2,4),
+     labels=c(expression(paste(-2,sigma)),expression(-sigma),expression(mu),
+              expression(sigma),expression(paste(2,sigma))))
+
+```
+***
+
+Z-score transformation
+
+$$
+Z=\frac{X-\mu}\sigma
+\\
+\\
+Z \sim Normal(0,1)
+$$
+
+```{r,echo=F}
+x <- seq(-4, 4, length=200)
+hx <- dnorm(x)
+plot(x, hx, type="l", lty=2, lwd=2, cor="blue4",
+     xlab="z score",ylab="Density", main="standardised Normal distribution",xaxt='n')
+axis(side=1, at=c(-4,-2,0,2,4),
+     labels=c(-2,-1,0,1,2))
+
+```
 
 Normal distribution example 1 (1/2)
 ========================================================
