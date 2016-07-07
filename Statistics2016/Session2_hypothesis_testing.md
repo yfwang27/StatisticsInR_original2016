@@ -37,12 +37,12 @@ SD and SE - sampling distribution for the mean (2/7)
 If we flip a fair coin 10 times, what is the mean of this experiment?
 
 ```r
-# always do set.seed() before the random sampling
-set.seed(123)
-# observation number, number of trials and probability of success on each trial
-no.observation=10;
-test1<-rbinom(no.observation,1,0.5)
-test1
+> # always do set.seed() before the random sampling
+> set.seed(123)
+> # observation number, number of trials and probability of success on each trial
+> no.observation=10;
+> test1<-rbinom(no.observation,1,0.5)
+> test1
 ```
 
 ```
@@ -50,8 +50,8 @@ test1
 ```
 
 ```r
-showmean<-mean(test1)
-showmean
+> showmean<-mean(test1)
+> showmean
 ```
 
 ```
@@ -62,9 +62,9 @@ showmean
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
 
 ```r
-test2<-rbinom(no.observation,1,0.5)
-showmean2<-mean(test2)
-showmean2
+> test2<-rbinom(no.observation,1,0.5)
+> showmean2<-mean(test2)
+> showmean2
 ```
 
 ```
@@ -78,12 +78,12 @@ SD and SE - sampling distribution for the mean (3/7)
 If we flip a fair coin 10 times, what is the mean of this experiment?
 
 ```r
-# always do set.seed() before the random sampling
-set.seed(123)
-# observation number, number of trials and probability of success on each trial
-no.observation=10;
-test1<-rbinom(no.observation,1,0.5)
-test1
+> # always do set.seed() before the random sampling
+> set.seed(123)
+> # observation number, number of trials and probability of success on each trial
+> no.observation=10;
+> test1<-rbinom(no.observation,1,0.5)
+> test1
 ```
 
 ```
@@ -91,8 +91,8 @@ test1
 ```
 
 ```r
-showmean<-mean(test1)
-showmean
+> showmean<-mean(test1)
+> showmean
 ```
 
 ```
@@ -103,9 +103,9 @@ showmean
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
 
 ```r
-test2<-rbinom(no.observation,1,0.5)
-showmean2<-mean(test2)
-showmean2
+> test2<-rbinom(no.observation,1,0.5)
+> showmean2<-mean(test2)
+> showmean2
 ```
 
 ```
@@ -119,16 +119,16 @@ SD and SE - sampling distribution for the mean (4/7)
 What will happen if we repeat this experiment for 10 times, rather than only 2 times
 
 ```r
-set.seed(123)
-no.experiment=10
-mat4plot<-matrix(nrow=no.experiment,ncol=1);
-no.observation<-10
-for (i in 1:no.experiment){
-  mat4plot[i,1]<-mean(rbinom(no.observation,1,0.5))
-}
-hist(mat4plot[,1],xlim=c(0,1),breaks=100,
-     xlab="mean",ylab="observed frequency",
-     main="flip a coin 10 times, and repeat it for 10 times")
+> set.seed(123)
+> no.experiment=10
+> mat4plot<-matrix(nrow=no.experiment,ncol=1);
+> no.observation<-10
+> for (i in 1:no.experiment){
++   mat4plot[i,1]<-mean(rbinom(no.observation,1,0.5))
++ }
+> hist(mat4plot[,1],xlim=c(0,1),breaks=100,
++      xlab="mean",ylab="observed frequency",
++      main="flip a coin 10 times, and repeat it for 10 times")
 ```
 
 ![plot of chunk unnamed-chunk-6](Session2_hypothesis_testing-figure/unnamed-chunk-6-1.png)
@@ -435,106 +435,119 @@ binom.confint(vote.leave, total.vote, conf.level = 0.95, methods = "asymptotic")
 1 asymptotic 17410742 33551983 0.5189184 0.5187494 0.5190875
 ```
 
+Hypothesis testing for propotions - one sided
+========================================================
+
+$$H_0:\text{ Remaining vote is equal to 50%; p=0.5}
+\\
+H_a:\text{ Remaining vote is less than 50%; p<0.5 }$$
+
+$$
+p:\text{ true ratio for the remaining vote is unknow}
+\\
+\hat{p}:\text{ estimated ratio for the remaining vote}
+\\
+\\
+\frac{\hat{p}-p}{\sqrt{\displaystyle\frac{p(1-p)}n}}\approx N(0,1)
+\\
+\text{p-value: under }H_0\text{ ,}
+\\
+\text{the probability of observing such extreme value }\hat{p}-p
+\\
+P\left(\hat p-p\leq0.4810816-0.5\right)
+\\
+=P\left(Normal\left(0,1\right)\leq\frac{0.4810816-0.5}{\sqrt{\displaystyle\frac{0.5(1-0.5)}{33551983}}}\right)
+$$
+***
+
+```r
+> alpha.vote=0.05;
+> p.vote=0.5;
+> phat.vote<-vote.remain/total.vote;
+> d=phat.vote-p.vote
+> pnorm(d/sqrt(p.vote*(1-p.vote)/total.vote))
+```
+
+```
+[1] 0
+```
+
 Hypothesis testing for propotions
 ========================================================
 
-$$H_0:\text{ Leaving vote is equal 50%}
+$$H_0:\text{ Remaining vote is equal to 50%}
 \\
-H_a:\text{ Leaving vote is not equal to 50%}$$
+H_a:\text{ Remaining vote is not equal to 50%}$$
 
 ```r
-binom.test(vote.leave, total.vote, p=0.5, alternative = "two.sided")
+binom.test(vote.remain, total.vote, p=0.5, alternative = "two.sided")
 ```
 
 ```
 
 	Exact binomial test
 
-data:  vote.leave and total.vote
-number of successes = 17411000, number of trials = 33552000,
+data:  vote.remain and total.vote
+number of successes = 16141000, number of trials = 33552000,
 p-value < 2.2e-16
 alternative hypothesis: true probability of success is not equal to 0.5
 95 percent confidence interval:
- 0.5187493 0.5190875
+ 0.4809125 0.4812507
 sample estimates:
 probability of success 
-             0.5189184 
+             0.4810816 
 ```
 ***
 
-$$H_0:\text{ Leaving vote is >= 50%}
+$$H_0:\text{ Remaining vote is equal to 50%}
 \\
-H_a:\text{ Leaving vote is < 50%}$$
+H_a:\text{ Remaining vote is < 50%}$$
 
 ```r
-binom.test(vote.leave, total.vote, p=0.5, alternative = "less")
+binom.test(vote.remain, total.vote, p=0.5, alternative = "less")
 ```
 
 ```
 
 	Exact binomial test
 
-data:  vote.leave and total.vote
-number of successes = 17411000, number of trials = 33552000,
-p-value = 1
+data:  vote.remain and total.vote
+number of successes = 16141000, number of trials = 33552000,
+p-value < 2.2e-16
 alternative hypothesis: true probability of success is less than 0.5
 95 percent confidence interval:
- 0.0000000 0.5190603
+ 0.0000000 0.4812235
 sample estimates:
 probability of success 
-             0.5189184 
+             0.4810816 
 ```
 
-Hypothesis testing for mean - Load data (1/)
+Hypothesis testing for mean - Load data (1/9)
 ========================================================
 
 We use "PlantGrowth" as example
 
 ```r
-data("PlantGrowth")
-PlantGrowth
+> data("PlantGrowth")
+> head(PlantGrowth)
 ```
 
 ```
-   weight group
-1    4.17  ctrl
-2    5.58  ctrl
-3    5.18  ctrl
-4    6.11  ctrl
-5    4.50  ctrl
-6    4.61  ctrl
-7    5.17  ctrl
-8    4.53  ctrl
-9    5.33  ctrl
-10   5.14  ctrl
-11   4.81  trt1
-12   4.17  trt1
-13   4.41  trt1
-14   3.59  trt1
-15   5.87  trt1
-16   3.83  trt1
-17   6.03  trt1
-18   4.89  trt1
-19   4.32  trt1
-20   4.69  trt1
-21   6.31  trt2
-22   5.12  trt2
-23   5.54  trt2
-24   5.50  trt2
-25   5.37  trt2
-26   5.29  trt2
-27   4.92  trt2
-28   6.15  trt2
-29   5.80  trt2
-30   5.26  trt2
+  weight group
+1   4.17  ctrl
+2   5.58  ctrl
+3   5.18  ctrl
+4   6.11  ctrl
+5   4.50  ctrl
+6   4.61  ctrl
 ```
 ***
 data visualisation
 
-![plot of chunk unnamed-chunk-19](Session2_hypothesis_testing-figure/unnamed-chunk-19-1.png)
+![plot of chunk unnamed-chunk-20](Session2_hypothesis_testing-figure/unnamed-chunk-20-1.png)
 
 
-Hypothesis testing for mean - Load data (2/)
+Hypothesis testing for mean - Load data (2/9)
 ========================================================
 
 Convert the input data into the proper format
@@ -563,7 +576,7 @@ head(PlantGrowth_wide)
 
 
 
-T-test example - Calculating variance (3/)
+T-test example - Calculating variance (3/9)
 ========================================================
 
 First we can specify the columns of interest using $ and calculate their variance using var().
@@ -592,7 +605,7 @@ var(PlantGrowth_wide$trt2)
 [1] 0.1958711
 ```
 
-T-test example - Comparing variance (4/)
+T-test example - Comparing variance (4/9)
 ========================================================
 
 Now we can test for any differences in variances between ctrl and trt1 and ctrl and trt2 with an F-test using the var.test() function.
@@ -636,7 +649,7 @@ ratio of variances
           1.735813 
 ```
 
-R objects (s3 and s4) (5/)
+R objects (s3 and s4) (5/9)
 ========================================================
 Left:30% The data type holding the result var.test() is a little more complex than the data types we have looked.
 
@@ -668,7 +681,8 @@ List of 9
  - attr(*, "class")= chr "htest"
 ```
 
-R objects (s3 and s4) (6/)
+
+R objects (s3 and s4) (6/9)
 ========================================================
 Now we know the structure and class of the htest object we can access the slots containing information we want just as with a named list.
 
@@ -701,13 +715,13 @@ result$data.name
 [1] "PlantGrowth_wide$ctrl and PlantGrowth_wide$trt1"
 ```
 
-T-test example - Equal Variance (7/)
+T-test example - Equal Variance (7/9)
 ========================================================
 We have ascertained that ctrl and trt1 have similar variances. We can therefore perform a standard t-test to assess the significance of differences between these groups.
 
 ```r
-Result <- t.test(PlantGrowth_wide$ctrl,PlantGrowth_wide$trt1,alternative ="two.sided", var.equal = T)
-Result
+test_res <- t.test(PlantGrowth_wide$ctrl,PlantGrowth_wide$trt1,alternative ="two.sided", var.equal = T)
+test_res
 ```
 
 ```
@@ -724,13 +738,13 @@ mean of x mean of y
     5.032     4.661 
 ```
 
-T-test example - Unequal Variance (8/)
+T-test example - Unequal Variance (8/9)
 ========================================================
 To compare groups of unequal variance then the var.equal argument may be set to FALSE (which is the default).
 
 note: [see exercise]
 
-T-test example - Specifying a formula (9/)
+T-test example - Specifying a formula (9/9)
 ========================================================
 The same result to that shown could be achieved by specifying a formula for the comparison. Here we wish to compare ctrl versus trt1 so we could simply specify the formula and the data to be used.
 
@@ -804,22 +818,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Wilcoxon test
 ========================================================
 
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
+[need example for the Wilconxon test]
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
 
-First Slide
+fisher.test()
 ========================================================
 
-For more details on authoring R presentations click the
-**Help** button on the toolbar.
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
+[need example for the Fisher exact test]
 
 
 

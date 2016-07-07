@@ -35,7 +35,7 @@ SD and SE - sampling distribution for the mean (2/7)
 ========================================================
 
 If we flip a fair coin 10 times, what is the mean of this experiment?
-```{r}
+```{r, prompt=T}
 # always do set.seed() before the random sampling
 set.seed(123)
 # observation number, number of trials and probability of success on each trial
@@ -48,7 +48,7 @@ showmean
 ***
 
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
-```{r}
+```{r, prompt=T}
 test2<-rbinom(no.observation,1,0.5)
 showmean2<-mean(test2)
 showmean2
@@ -59,7 +59,7 @@ SD and SE - sampling distribution for the mean (3/7)
 ========================================================
 
 If we flip a fair coin 10 times, what is the mean of this experiment?
-```{r}
+```{r, prompt=T}
 # always do set.seed() before the random sampling
 set.seed(123)
 # observation number, number of trials and probability of success on each trial
@@ -72,7 +72,7 @@ showmean
 ***
 
 If we flip a fair coin 10 times ***again***, what is the mean of this experiment?
-```{r}
+```{r, prompt=T}
 test2<-rbinom(no.observation,1,0.5)
 showmean2<-mean(test2)
 showmean2
@@ -94,7 +94,7 @@ SD and SE - sampling distribution for the mean (4/7)
 ========================================================
 
 What will happen if we repeat this experiment for 10 times, rather than only 2 times
-```{r}
+```{r, prompt=T}
 set.seed(123)
 no.experiment=10
 mat4plot<-matrix(nrow=no.experiment,ncol=1);
@@ -448,31 +448,64 @@ library("binom")
 binom.confint(vote.leave, total.vote, conf.level = 0.95, methods = "asymptotic")
 ```
 
+Hypothesis testing for propotions - one sided
+========================================================
+
+$$H_0:\text{ Remaining vote is equal to 50%; p=0.5}
+\\
+H_a:\text{ Remaining vote is less than 50%; p<0.5 }$$
+
+$$
+p:\text{ true ratio for the remaining vote is unknow}
+\\
+\hat{p}:\text{ estimated ratio for the remaining vote}
+\\
+\\
+\frac{\hat{p}-p}{\sqrt{\displaystyle\frac{p(1-p)}n}}\approx N(0,1)
+\\
+\text{p-value: under }H_0\text{ ,}
+\\
+\text{the probability of observing such extreme value }\hat{p}-p
+\\
+P\left(\hat p-p\leq0.4810816-0.5\right)
+\\
+=P\left(Normal\left(0,1\right)\leq\frac{0.4810816-0.5}{\sqrt{\displaystyle\frac{0.5(1-0.5)}{33551983}}}\right)
+$$
+***
+```{r, prompt=T}
+alpha.vote=0.05;
+p.vote=0.5;
+phat.vote<-vote.remain/total.vote;
+d=phat.vote-p.vote
+pnorm(d/sqrt(p.vote*(1-p.vote)/total.vote))
+
+```
+
 Hypothesis testing for propotions
 ========================================================
 
-$$H_0:\text{ Leaving vote is equal 50%}
+$$H_0:\text{ Remaining vote is equal to 50%}
 \\
-H_a:\text{ Leaving vote is not equal to 50%}$$
+H_a:\text{ Remaining vote is not equal to 50%}$$
 ```{r}
-binom.test(vote.leave, total.vote, p=0.5, alternative = "two.sided")
+binom.test(vote.remain, total.vote, p=0.5, alternative = "two.sided")
 ```
 ***
 
-$$H_0:\text{ Leaving vote is >= 50%}
+$$H_0:\text{ Remaining vote is equal to 50%}
 \\
-H_a:\text{ Leaving vote is < 50%}$$
+H_a:\text{ Remaining vote is < 50%}$$
 ```{r}
-binom.test(vote.leave, total.vote, p=0.5, alternative = "less")
+binom.test(vote.remain, total.vote, p=0.5, alternative = "less")
 ```
 
-Hypothesis testing for mean - Load data (1/)
+Hypothesis testing for mean - Load data (1/9)
 ========================================================
 
 We use "PlantGrowth" as example
-```{r}
+```{r, prompt=T}
 data("PlantGrowth")
-PlantGrowth
+head(PlantGrowth)
 ```
 ***
 data visualisation
@@ -485,7 +518,7 @@ boxplot(weight~group,data=PlantGrowth,
 ```
 
 
-Hypothesis testing for mean - Load data (2/)
+Hypothesis testing for mean - Load data (2/9)
 ========================================================
 
 Convert the input data into the proper format
@@ -502,7 +535,7 @@ head(PlantGrowth_wide)
 
 
 
-T-test example - Calculating variance (3/)
+T-test example - Calculating variance (3/9)
 ========================================================
 
 First we can specify the columns of interest using $ and calculate their variance using var().
@@ -512,7 +545,7 @@ var(PlantGrowth_wide$trt1)
 var(PlantGrowth_wide$trt2)
 ```
 
-T-test example - Comparing variance (4/)
+T-test example - Comparing variance (4/9)
 ========================================================
 
 Now we can test for any differences in variances between ctrl and trt1 and ctrl and trt2 with an F-test using the var.test() function.
@@ -526,7 +559,7 @@ var.test(PlantGrowth_wide$ctrl,
          PlantGrowth_wide$trt2)
 ```
 
-R objects (s3 and s4) (5/)
+R objects (s3 and s4) (5/9)
 ========================================================
 Left:30% The data type holding the result var.test() is a little more complex than the data types we have looked.
 
@@ -538,7 +571,8 @@ result <- var.test(PlantGrowth_wide$ctrl, PlantGrowth_wide$trt1)
 str(result)
 ```
 
-R objects (s3 and s4) (6/)
+
+R objects (s3 and s4) (6/9)
 ========================================================
 Now we know the structure and class of the htest object we can access the slots containing information we want just as with a named list.
 
@@ -555,21 +589,21 @@ The data used in function call
 result$data.name
 ```
 
-T-test example - Equal Variance (7/)
+T-test example - Equal Variance (7/9)
 ========================================================
 We have ascertained that ctrl and trt1 have similar variances. We can therefore perform a standard t-test to assess the significance of differences between these groups.
 ```{r}
-Result <- t.test(PlantGrowth_wide$ctrl,PlantGrowth_wide$trt1,alternative ="two.sided", var.equal = T)
-Result
+test_res <- t.test(PlantGrowth_wide$ctrl,PlantGrowth_wide$trt1,alternative ="two.sided", var.equal = T)
+test_res
 ```
 
-T-test example - Unequal Variance (8/)
+T-test example - Unequal Variance (8/9)
 ========================================================
 To compare groups of unequal variance then the var.equal argument may be set to FALSE (which is the default).
 
 note: [see exercise]
 
-T-test example - Specifying a formula (9/)
+T-test example - Specifying a formula (9/9)
 ========================================================
 The same result to that shown could be achieved by specifying a formula for the comparison. Here we wish to compare ctrl versus trt1 so we could simply specify the formula and the data to be used.
 ```{r}
