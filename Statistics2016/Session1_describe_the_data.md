@@ -518,7 +518,7 @@ $$
 
 ![plot of chunk unnamed-chunk-30](Session1_describe_the_data-figure/unnamed-chunk-30-1.png)
 
-Normal distribution example (1/)
+Normal distribution example (1/3)
 ========================================================
 
 We can use **rnorm()** function to generate random values following a normal distribution. Here we produce 10 normally distributed numeric values with mean 8 and standard deviation of 3
@@ -539,7 +539,7 @@ If you want to regenerate the exact random numbers, use the **set.seed()** funct
 ![plot of chunk unnamed-chunk-32](Session1_describe_the_data-figure/unnamed-chunk-32-1.png)
 
 
-Normal distribution example (2/)
+Normal distribution example (2/3)
 ========================================================
 We can also use these functions to interrogate values assuming a normal distribution for the data.
 
@@ -555,17 +555,23 @@ dnorm(8,mean=8,sd=3)
 ```
 
 ![plot of chunk unnamed-chunk-34](Session1_describe_the_data-figure/unnamed-chunk-34-1.png)
-Normal distribution example (3/)
+
+Normal distribution example (3/3)
 ========================================================
 The probablity of a value being less than 8 for a distribution of mean 8 and standard deviation 3.
 
 ```r
-pnorm(8,mean=8,sd=3)
+pnorm(11,mean=8,sd=3)
 ```
 
 ```
-[1] 0.5
+[1] 0.8413447
 ```
+
+![plot of chunk unnamed-chunk-36](Session1_describe_the_data-figure/unnamed-chunk-36-1.png)
+
+***
+
 The value for which i have a 50 percent being greater than given a normal distribution of mean 8 and standard deviation 3.
 
 
@@ -578,4 +584,16 @@ qnorm(0.5,mean=8,sd=3)
 ```
 
 
+Time for an exercise!
+========================================================
+
+Exercise on distribution can be found [here]
+
+
+Answers to exercise.
+========================================================
+
+Answers can be found here  [here]
+
+R code for solutions can be found here  [here]
 
