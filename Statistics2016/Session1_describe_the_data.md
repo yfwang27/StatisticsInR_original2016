@@ -561,11 +561,11 @@ Normal distribution example (3/3)
 The probablity of a value being less than 8 for a distribution of mean 8 and standard deviation 3.
 
 ```r
-pnorm(11,mean=8,sd=3)
+pnorm(8,mean=8,sd=3)
 ```
 
 ```
-[1] 0.8413447
+[1] 0.5
 ```
 
 ![plot of chunk unnamed-chunk-36](Session1_describe_the_data-figure/unnamed-chunk-36-1.png)
