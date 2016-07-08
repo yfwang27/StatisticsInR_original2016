@@ -126,7 +126,7 @@ Correlation between vectors (3/8)
 ```
 
 ```
-[1] -0.1274763
+[1] 0.1277083
 ```
 ***
 ![plot of chunk unnamed-chunk-7](Session3_linear_regression-figure/unnamed-chunk-7-1.png)
@@ -548,6 +548,12 @@ Statistics (Extra) - Calculating R-squared
 
 The fraction of variability in the independent variable (Y; or the *Petal.Length* in this example) that can be explained by the explanatory variable (X; or the *Petal.Width* in this example).
 
+$$
+TSS=\text{Total Sum of Squares}=\sum_{i=1}^n(y_i-\overline y)
+\\
+SSE=\text{Sum of the Square of the residuals}=\sum_{i=1}^n(y_i-\bar y)
+$$
+
 
 ```r
 > SSE <- sum(resid(lmResult)^2)
@@ -575,11 +581,26 @@ Statistics (Extra) - Calculating F-stat
 Statistics (Extra) - Calculating F-stat
 =========================================================
 
+$$
+F=\frac{MSM}{MSE}=\frac{\text{mean of the explained variance}}{\text{mean of the unexplained variance}}=\frac{({\displaystyle\frac{SSM}1})}{({\displaystyle\frac{SSE}{n-2}})}
+$$
+
 
 ```r
-> MSE <- mean(lmResult$residuals^2)
+> #MSE <- mean(lmResult$residuals^2)
+> n=nrow(iris_versi)
+> MSE <-sum(lmResult$residuals^2)/(n-2)
 > RSS <- sum((predict(lmResult) - mean(iris_versi$Petal.Length))^2)
+> MSM <-RSS/1
 > 
+> MSM/MSE
+```
+
+```
+[1] 77.93357
+```
+
+```r
 > summary(lmResult)$fstatistic
 ```
 
