@@ -769,7 +769,7 @@ mean in group ctrl mean in group trt1
 ```
 
 
-ANOVA (1/)
+ANOVA (1/3)
 ========================================================
 
 Compute analysis of variance (or deviance) tables for one or more fitted model objects
@@ -778,7 +778,7 @@ Compute analysis of variance (or deviance) tables for one or more fitted model o
 - anova()
 
 
-ANOVA - use the anova() function (2/)
+ANOVA - use the anova() function (2/3)
 ========================================================
 
 ```r
@@ -814,6 +814,24 @@ Residuals 27 10.4921  0.3886
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
+ANOVA - results (3/3)
+========================================================
+More details in the next session
+
+```r
+PG.anova
+```
+
+```
+Analysis of Variance Table
+
+Response: weight
+          Df  Sum Sq Mean Sq F value  Pr(>F)  
+group      2  3.7663  1.8832  4.8461 0.01591 *
+Residuals 27 10.4921  0.3886                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
 
 Wilcoxon test
 ========================================================
@@ -826,5 +844,19 @@ fisher.test()
 
 [need example for the Fisher exact test]
 
+
+Time for an exercise!
+========================================================
+
+Exercise on this session can be found [here]
+
+
+
+Answers to exercise.
+========================================================
+
+Answers can be found here  [here]
+
+R code for solutions can be found here  [here]
 
 
