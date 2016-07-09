@@ -485,9 +485,9 @@ $$
 Hypothesis testing for propotions
 ========================================================
 
-$$H_0:\text{ Remaining vote is equal to 50%}
+$$H_0:\text{ Vote for remain is equal to 50%}
 \\
-H_a:\text{ Remaining vote is < 50%}$$
+H_a:\text{ Vote for remain is < 50%}$$
 
 ```r
 binom.test(vote.remain, total.vote, p=0.5, alternative = "less")
@@ -878,6 +878,37 @@ $$H_0:\text{ the odds ratio is no larger than 1}
 \\
 H_a:\text{ the odds ratio is larger than 1 }$$
 
+Assuming there are 20,000 genes in the mouse genome, we have gene list A (300 genes) and B (50 genes). The number of overlap genes between list A and B is 5. Is the overlap between the two list significant?
+
+
+```r
+fmatrix<-matrix(c(5,40,295,19960),byrow=T,ncol=2,dimnames=list(c("In.B","Not.In.B"),c("In.A","Not.In.A")))
+fmatrix
+```
+
+```
+         In.A Not.In.A
+In.B        5       40
+Not.In.B  295    19960
+```
+
+```r
+fisher.test(fmatrix)
+```
+
+```
+
+	Fisher's Exact Test for Count Data
+
+data:  fmatrix
+p-value = 0.0005133
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+  2.585939 21.637276
+sample estimates:
+odds ratio 
+  8.454877 
+```
 
 
 Time for an exercise!
