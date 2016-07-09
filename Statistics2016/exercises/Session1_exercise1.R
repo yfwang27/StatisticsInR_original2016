@@ -1,5 +1,7 @@
 # subset the data for "England" area from Life_expectancy_at_birth.csv
 
+# What are the min, median, mean and max 
+
 # step1: load the data
 Life_exp<-read.csv("data/Life_expectancy_at_birth.csv",header=T)
 # step2: subset data

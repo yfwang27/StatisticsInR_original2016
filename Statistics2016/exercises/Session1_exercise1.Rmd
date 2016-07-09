@@ -1,0 +1,19 @@
+---
+title: "Exercise for Session1: data summary"
+author: "MRC Clinical Sciences Centre (http://mrccsc.github.io/)"
+date: "12/July/2016"
+output: html_document
+---
+
+These exercises cover the sections of Statistics in R [Session1: data summary]("Session1_describe_the_data.md").
+
+**Exercise 1**
+
+- Read in the file Life_expectancy_at_birth.csv.
+- How many males and females in England.
+- What is the mean of the life.expectancy in the area England? 
+- What are the means of the life.expectancy of Males and Females, respectively, in area England?
+- What are quantiles of the life.expectancy in the area Wales, N.Ireland, and in Scotland, respectively.
+
+
+
