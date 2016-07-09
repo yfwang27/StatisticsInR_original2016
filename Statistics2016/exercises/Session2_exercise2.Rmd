@@ -5,7 +5,7 @@ date: "12/July/2016"
 output: html_document
 ---
 
-These exercises cover the sections of Statistics in R [Session1: data summary]("Session1_describe_the_data.md").
+These exercises cover the sections of Statistics in R [Session2: Hypothesis Testing and ANOVA]("Session1_describe_the_data.md").
 
 **Exercise 1**
 
@@ -15,11 +15,4 @@ These exercises cover the sections of Statistics in R [Session1: data summary]("
 - How many genes were selected and in glycolysis pathway.
 - Given a normal distibution for the data, what is the probablity of selecting a gene with at least the expression level of "Gene18"
 - Perform a t-test to evaluate the difference between Selected and NotSelected genes and Glycolysis and TGFb pathway.
-
-**Exercise 2**
-
-- Read in the file lmExercise.txt.
-- What is the formula for the best fit lines for X vs Y and X vs Z
-- What are the Rsquared for X vs Y and X vs Z.
-- Predict values for X when Y is 100 and Z is 100.
 

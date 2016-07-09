@@ -9,7 +9,7 @@ These exercises cover the sections of Statistics in R [Session2: data summary]("
 
 **Exercise 1**
 
-- Read in the file Life_expectancy_at_birth.csv..
+- Read in the file Life_expectancy_at_birth.csv.
 ```{r,message=T}
  Life_exp<-read.csv("../data/Life_expectancy_at_birth.csv",header=T)
 ```
@@ -33,7 +33,12 @@ These exercises cover the sections of Statistics in R [Session2: data summary]("
  summary(Life_exp[Life_exp$area == "Scotland",])
 ```
 
+**Exercise 2**
 
+- What is the probablity of a value being less than or equal to 2 for a normal distribution of mean 0 and standard deviation 1
+```{r,message=T}
+ pnorm(2,mean=0,sd=1)
+```
 
 
 

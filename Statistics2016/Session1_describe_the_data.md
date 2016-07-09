@@ -427,25 +427,6 @@ library("vioplot")
 
 ![plot of chunk unnamed-chunk-26](Session1_describe_the_data-figure/unnamed-chunk-26-1.png)
 
-Time for an exercise!
-========================================================
-
-Exercise on this part can be found [here]
-
-purpose of this exercise:
-
-1. recap some basic R functions, i.e. read.table(), subsetting, dim(), nrow()
-
-2. get familiar with some basic stat functions that mentioned in the course
-
-
-Answers to exercise.
-========================================================
-
-Answers can be found here  [here]
-
-R code for solutions can be found here  [here]
-
 
 Distributions (1/6)
 ========================================================
@@ -594,15 +575,13 @@ qnorm(0.5,mean=8,sd=3)
 Time for an exercise!
 ========================================================
 
-Exercise on distribution can be found [here]
-
-
+Exercise on this part can be found [here](./exercises/Session1_exercise1.html)
 
 
 Answers to exercise.
 ========================================================
 
-Answers can be found here  [here]
+Answers can be found [here](./answers/Session1_answers1.html)
 
 R code for solutions can be found here  [here]
 

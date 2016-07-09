@@ -125,7 +125,7 @@ $(document).ready(function () {
 <p>These exercises cover the sections of Statistics in R <a href="&quot;Session1_describe_the_data.md&quot;">Session2: data summary</a>.</p>
 <p><strong>Exercise 1</strong></p>
 <ul>
-<li>Read in the file Life_expectancy_at_birth.csv..</li>
+<li>Read in the file Life_expectancy_at_birth.csv.</li>
 </ul>
 <pre class="r"><code> Life_exp&lt;-read.csv(&quot;../data/Life_expectancy_at_birth.csv&quot;,header=T)</code></pre>
 <ul>
@@ -180,6 +180,12 @@ $(document).ready(function () {
 ##  1995-1997: 2                  3rd Qu.:78.81               
 ##  1996-1998: 2                  Max.   :80.83               
 ##  (Other)  :28</code></pre>
+<p><strong>Exercise 2</strong></p>
+<ul>
+<li>What is the probablity of a value being less than or equal to 2 for a normal distribution of mean 0 and standard deviation 1</li>
+</ul>
+<pre class="r"><code> pnorm(2,mean=0,sd=1)</code></pre>
+<pre><code>## [1] 0.9772499</code></pre>
 
 
 

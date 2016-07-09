@@ -754,7 +754,7 @@ T-test example - Unequal Variance (8/9)
 ========================================================
 To compare groups of unequal variance then the var.equal argument may be set to FALSE (which is the default).
 
-note: [see exercise]
+note: [see exercise](exercises/Session2_exercise2.html)
 
 T-test example - Specifying a formula (9/9)
 ========================================================
@@ -914,14 +914,14 @@ odds ratio
 Time for an exercise!
 ========================================================
 
-Exercise on this session can be found [here]
+Exercise on this session can be found [here](exercises/Session2_exercise2.html)
 
 
 
 Answers to exercise.
 ========================================================
 
-Answers can be found here  [here]
+Answers can be found [here](answers/Session2_answers2.html)
 
 R code for solutions can be found here  [here]
 

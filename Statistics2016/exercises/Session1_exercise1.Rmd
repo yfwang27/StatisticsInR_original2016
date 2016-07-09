@@ -5,7 +5,7 @@ date: "12/July/2016"
 output: html_document
 ---
 
-These exercises cover the sections of Statistics in R [Session1: data summary]("../Session1_describe_the_data.md").
+These exercises cover the sections of Statistics in R [Session1: data summary]("Session1_describe_the_data-rpubs.html").
 
 **Exercise 1**
 
@@ -16,4 +16,7 @@ These exercises cover the sections of Statistics in R [Session1: data summary]("
 - What are quantiles of the life.expectancy in Wales, N.Ireland, and in Scotland, respectively.
 
 
+**Exercise 2**
+
+- What is the probablity of a value being less than or equal to 2 for a normal distribution of mean 0 and standard deviation 1
 
