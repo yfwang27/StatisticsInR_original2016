@@ -79,7 +79,7 @@ Dataset - use the "iris" data (3/3)
 > # tbl_df()
 ```
 
-Correlation (1/8)
+Correlation (1/5)
 =========================================================
 
 A common task in statistical analysis is to investigate the relationship between pairs of numeric vectors.
@@ -92,13 +92,8 @@ In this example we use **cor()** to identify the Pearson correlation between two
 - Perfectly negatively correlated vectors will return -1
 - Vectors showing no or little correlation will be close to 0.
 
-Correlation (2/8)
-========================================================
-- pearson
 
-- spearman
-
-Correlation between vectors (3/8)
+Correlation between vectors (2/5)
 =========================================================
 
 
@@ -126,13 +121,13 @@ Correlation between vectors (3/8)
 ```
 
 ```
-[1] 0.1277083
+[1] 0.1767082
 ```
 ***
 ![plot of chunk unnamed-chunk-7](Session3_linear_regression-figure/unnamed-chunk-7-1.png)
 
 
-Correlation over a matrix (4/8)
+Correlation over a matrix (3/5)
 =========================================================
 left: 70%
 Often we wish to apply correlation analysis to all columns or rows in a matrix in a pair-wise manner. To do this in R, we can simply pass the **cor()** function a single argument of the numeric matrix of interest. The **cor()** function will then perform all pair-wise correlations between columns.
@@ -159,7 +154,7 @@ Often we wish to apply correlation analysis to all columns or rows in a matrix i
 6       5.4       3.9       1.7       0.4
 ```
 
-Correlation over a matrix (5/8)
+Correlation over a matrix (4/5)
 =========================================================
 
 ```r
@@ -175,8 +170,7 @@ Petal.Wid  0.8179411 -0.3661259  0.9628654  1.0000000
 ```
 <img src="Session3_linear_regression-figure/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="820px" />
 
-
-Correlation (6/8)
+Correlation (5/6)
 ========================================================
 
 ```r
@@ -184,10 +178,6 @@ Correlation (6/8)
 ```
 
 ![plot of chunk unnamed-chunk-12](Session3_linear_regression-figure/unnamed-chunk-12-1.png)
-
-Correlation (7/8)
-========================================================
-[find an example that requires the spearman method]
 
 
 Regression and linear models (1/12)
@@ -261,7 +251,7 @@ If we only know the Petal.Length, and would like to use this information to pred
 > abline(h=PetalLen.mean, col="forestgreen",lwd=3)
 ```
 
-![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
+![plot of chunk unnamed-chunk-15](Session3_linear_regression-figure/unnamed-chunk-15-1.png)
 
 
 Regression and linear models (4/12)
@@ -269,7 +259,7 @@ Regression and linear models (4/12)
 
 If we only know the *Petal.Length*, and would like to use this information to predict the *Petal.Length*
 
-![plot of chunk unnamed-chunk-17](Session3_linear_regression-figure/unnamed-chunk-17-1.png)
+![plot of chunk unnamed-chunk-16](Session3_linear_regression-figure/unnamed-chunk-16-1.png)
 ***
 
 $$\text{In this case, the expected value is mean } = \overline y $$
@@ -289,7 +279,7 @@ Regression and linear models (5/12)
 
 Zoom in [just see first 4 data points]
 
-![plot of chunk unnamed-chunk-18](Session3_linear_regression-figure/unnamed-chunk-18-1.png)
+![plot of chunk unnamed-chunk-17](Session3_linear_regression-figure/unnamed-chunk-17-1.png)
 ***
 
 $$\text{In this case, the expected values is mean } = \overline y $$
@@ -325,7 +315,7 @@ Now we use the "iris_versi" *Petal.Width* to predict *Petal.Length*
 
 We can plot *Petal.Width* as X and *Petal.Length* as Y
 
-![plot of chunk unnamed-chunk-19](Session3_linear_regression-figure/unnamed-chunk-19-1.png)
+![plot of chunk unnamed-chunk-18](Session3_linear_regression-figure/unnamed-chunk-18-1.png)
 ***
 $$
   x = \text{independent or explanatory variable}
@@ -417,7 +407,7 @@ $$b_0\text{: the value of f(x) when x =0}$$
 $$b_1\text{: the amount of f(x) will change when x changes 1 unit}$$
 
 ***
-![plot of chunk unnamed-chunk-23](Session3_linear_regression-figure/unnamed-chunk-23-1.png)
+![plot of chunk unnamed-chunk-22](Session3_linear_regression-figure/unnamed-chunk-22-1.png)
 
 Regression and linear models - residuals (10/12)
 =========================================================
@@ -475,7 +465,7 @@ $$
 
 Plot the residuals against the independent variable (X)
 
-![plot of chunk unnamed-chunk-26](Session3_linear_regression-figure/unnamed-chunk-26-1.png)
+![plot of chunk unnamed-chunk-25](Session3_linear_regression-figure/unnamed-chunk-25-1.png)
 
 Regression and linear models - R-squared (12/12)
 =========================================================
@@ -608,4 +598,18 @@ $$
    value    numdf    dendf 
 77.93357  1.00000 48.00000 
 ```
+
+Time for an exercise!
+========================================================
+
+Exercise on this session can be found [here](exercises/Session3_exercise3.html)
+
+
+
+Answers to exercise.
+========================================================
+
+Answers can be found [here](answers/Session3_answers3.html)
+
+R code for solutions can be found here  [here]
 

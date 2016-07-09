@@ -56,8 +56,8 @@ You may navigate to the unarchived Reproducible-R folder in the Rstudio menu
 or in the console.
 
 ```{r,eval=F}
-setwd("/CSC/workshop/StatInR")
-# e.g. setwd("~/Downloads/StatInR")
+setwd("/CSC/workshop/StatisticsInR/Statistics2016")
+# e.g. setwd("~/Downloads/StatisticsInR/Statistics2016")
 ```
 
 Session1 - data summary

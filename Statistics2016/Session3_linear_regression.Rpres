@@ -48,7 +48,7 @@ library("dplyr")
 # tbl_df()
 ```
 
-Correlation (1/8)
+Correlation (1/5)
 =========================================================
 
 A common task in statistical analysis is to investigate the relationship between pairs of numeric vectors.
@@ -61,13 +61,8 @@ In this example we use **cor()** to identify the Pearson correlation between two
 - Perfectly negatively correlated vectors will return -1
 - Vectors showing no or little correlation will be close to 0.
 
-Correlation (2/8)
-========================================================
-- pearson
 
-- spearman
-
-Correlation between vectors (3/8)
+Correlation between vectors (2/5)
 =========================================================
 
 ```{r,prompt=T}
@@ -89,7 +84,7 @@ par(mfrow=c(1,1))
 ```
 
 
-Correlation over a matrix (4/8)
+Correlation over a matrix (3/5)
 =========================================================
 left: 70%
 Often we wish to apply correlation analysis to all columns or rows in a matrix in a pair-wise manner. To do this in R, we can simply pass the **cor()** function a single argument of the numeric matrix of interest. The **cor()** function will then perform all pair-wise correlations between columns.
@@ -105,7 +100,7 @@ head(iris4cor)
 
 ```
 
-Correlation over a matrix (5/8)
+Correlation over a matrix (4/5)
 =========================================================
 ```{r,prompt=T}
 cor(iris4cor)
@@ -117,19 +112,12 @@ mtext(colnames(iris4cor),side=1,at=seq(0,1,length.out=4),las=2,cex=0.8)
 
 ```
 
-
-Correlation (6/8)
+Correlation (5/6)
 ========================================================
 ```{r,prompt=T}
 pairs(iris4cor)
 ```
 
-Correlation (7/8)
-========================================================
-[find an example that requires the spearman method]
-```{r,prompt=T}
-
-```
 
 Regression and linear models (1/12)
 =========================================================
@@ -437,14 +425,14 @@ summary(lmResult)$fstatistic
 Time for an exercise!
 ========================================================
 
-Exercise on this session can be found [here]
+Exercise on this session can be found [here](exercises/Session3_exercise3.html)
 
 
 
 Answers to exercise.
 ========================================================
 
-Answers can be found here  [here]
+Answers can be found [here](answers/Session3_answers3.html)
 
 R code for solutions can be found here  [here]
 

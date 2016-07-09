@@ -5,7 +5,7 @@ date: "12/July/2016"
 output: html_document
 ---
 
-These exercises cover the sections of Statistics in R [Session2: Hypothesis Testing and ANOVA]("Session2_hypothesis_testing.md").
+These exercises cover the sections of Statistics in R [Session2: Hypothesis Testing and ANOVA]("../Session2_hypothesis_testing.html").
 
 **Exercise 1**
 
@@ -49,5 +49,17 @@ var.test(glycolysisExpression,tgfbExpression)
 t.test(glycolysisExpression,tgfbExpression,var.equal = FALSE)
 ```
 
+**Exercise 2**
 
+- Read in the file Life_expectancy_at_birth.csv.
+```{r,message=T}
+  Life_exp<-read.csv("../data/Life_expectancy_at_birth.csv",header=T)
+  head(Life_exp)
+```
+- Perform an ANOVA analysis and see whether the mean life expectancy differs across different areas in the UK.
+```{r,message=T}
+  LifeExp.lm<-lm(formula = life.expectancy ~ area, data = Life_exp)
+  LifeExp.anova<-anova(LifeExp.lm)
+  LifeExp.anova
+```
 

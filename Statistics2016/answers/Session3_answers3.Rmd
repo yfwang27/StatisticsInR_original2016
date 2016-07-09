@@ -5,13 +5,13 @@ date: "12/July/2016"
 output: html_document
 ---
 
-These exercises cover the sections of Statistics in R [Session3: Correlation and Linear Regression]("Session3_linear_regression.md").
+These exercises cover the sections of Statistics in R [Session3: Correlation and Linear Regression]("../Session3_linear_regression.html").
 
-**Exercise 3**
+**Exercise 1**
 
 - Read in the file lmExercise.txt.
 ```{r,message=T}
- lmExercise <- read.delim("data/lmExercise.txt")
+ lmExercise <- read.delim("../data/lmExercise.txt")
 ```
 
 - What is the formula for the best fit lines for X vs Y and X vs Z

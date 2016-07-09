@@ -57,8 +57,8 @@ or in the console.
 
 
 ```r
-setwd("/CSC/workshop/StatInR")
-# e.g. setwd("~/Downloads/StatInR")
+setwd("/CSC/workshop/StatisticsInR/Statistics2016")
+# e.g. setwd("~/Downloads/StatisticsInR/Statistics2016")
 ```
 
 Session1 - data summary

@@ -122,7 +122,7 @@ $(document).ready(function () {
 </div>
 
 
-<p>These exercises cover the sections of Statistics in R <a href="&quot;Session2_hypothesis_testing.md&quot;">Session2: Hypothesis Testing and ANOVA</a>.</p>
+<p>These exercises cover the sections of Statistics in R <a href="&quot;../Session2_hypothesis_testing.html&quot;">Session2: Hypothesis Testing and ANOVA</a>.</p>
 <p><strong>Exercise 1</strong></p>
 <ul>
 <li>Read in the file categoriesAndExpression.txt.</li>
@@ -224,6 +224,33 @@ var.test(glycolysisExpression,tgfbExpression)</code></pre>
 ## sample estimates:
 ## mean of x mean of y 
 ##  29.77779  54.23573</code></pre>
+<p><strong>Exercise 2</strong></p>
+<ul>
+<li>Read in the file Life_expectancy_at_birth.csv.</li>
+</ul>
+<pre class="r"><code>  Life_exp&lt;-read.csv(&quot;../data/Life_expectancy_at_birth.csv&quot;,header=T)
+  head(Life_exp)</code></pre>
+<pre><code>##        time    area life.expectancy gender
+## 1 1991-1993 England           73.69  Males
+## 2 1992-1994 England           74.02  Males
+## 3 1993-1995 England           74.18  Males
+## 4 1994-1996 England           74.44  Males
+## 5 1995-1997 England           74.61  Males
+## 6 1996-1998 England           74.84  Males</code></pre>
+<ul>
+<li>Perform an ANOVA analysis and see whether the mean life expectancy differs across different areas in the UK.</li>
+</ul>
+<pre class="r"><code>  LifeExp.lm&lt;-lm(formula = life.expectancy ~ area, data = Life_exp)
+  LifeExp.anova&lt;-anova(LifeExp.lm)
+  LifeExp.anova</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: life.expectancy
+##            Df  Sum Sq Mean Sq F value  Pr(&gt;F)   
+## area        3  107.99  35.997  4.4288 0.00511 **
+## Residuals 156 1267.96   8.128                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 
 
 
