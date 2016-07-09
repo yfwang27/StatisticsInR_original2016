@@ -372,9 +372,11 @@ Some common tests include:
 Hypothesis testing for propotions
 ========================================================
 
-[example: EU referendum reuslt 2016]
+example: EU referendum result 2016
+
 [data/EU-referendum-result-data.csv]
-Is the leaving vote more than the 50%?
+
+Did more than 50% percent of the voting UK population support remaining in the EU?
 
 ```r
 vote.leave=17410742
@@ -390,10 +392,18 @@ total.vote
 [1] 33551983
 ```
 
-CI for the leaving vote
+```r
+vote.leave/total.vote
+```
+
+```
+[1] 0.5189184
+```
+
+CI for the vote for leave
 ========================================================
 
-Calculate the 95% CI
+The vote for leave is 0.5189184, is it confident? Calculate the 95% CI
 
 
 ```r
@@ -438,14 +448,14 @@ binom.confint(vote.leave, total.vote, conf.level = 0.95, methods = "asymptotic")
 Hypothesis testing for propotions - one sided
 ========================================================
 
-$$H_0:\text{ Remaining vote is equal to 50%; p=0.5}
+$$H_0:\text{ Vote for remain equal to 50%; p=0.5}
 \\
-H_a:\text{ Remaining vote is less than 50%; p<0.5 }$$
+H_a:\text{ Vote for remain is less than 50%; p<0.5 }$$
 
 $$
-p:\text{ true ratio for the remaining vote is unknow}
+p:\text{ true ratio for the vote for remain is unknow}
 \\
-\hat{p}:\text{ estimated ratio for the remaining vote}
+\hat{p}:\text{ estimated ratio for the vote for remain}
 \\
 \\
 \frac{\hat{p}-p}{\sqrt{\displaystyle\frac{p(1-p)}n}}\approx N(0,1)
@@ -477,30 +487,6 @@ Hypothesis testing for propotions
 
 $$H_0:\text{ Remaining vote is equal to 50%}
 \\
-H_a:\text{ Remaining vote is not equal to 50%}$$
-
-```r
-binom.test(vote.remain, total.vote, p=0.5, alternative = "two.sided")
-```
-
-```
-
-	Exact binomial test
-
-data:  vote.remain and total.vote
-number of successes = 16141000, number of trials = 33552000,
-p-value < 2.2e-16
-alternative hypothesis: true probability of success is not equal to 0.5
-95 percent confidence interval:
- 0.4809125 0.4812507
-sample estimates:
-probability of success 
-             0.4810816 
-```
-***
-
-$$H_0:\text{ Remaining vote is equal to 50%}
-\\
 H_a:\text{ Remaining vote is < 50%}$$
 
 ```r
@@ -521,6 +507,32 @@ sample estimates:
 probability of success 
              0.4810816 
 ```
+***
+
+$$H_0:\text{ Vote for remain is equal to 50%}
+\\
+H_a:\text{ Vote for remain is not equal to 50%}$$
+
+```r
+binom.test(vote.remain, total.vote, p=0.5, alternative = "two.sided")
+```
+
+```
+
+	Exact binomial test
+
+data:  vote.remain and total.vote
+number of successes = 16141000, number of trials = 33552000,
+p-value < 2.2e-16
+alternative hypothesis: true probability of success is not equal to 0.5
+95 percent confidence interval:
+ 0.4809125 0.4812507
+sample estimates:
+probability of success 
+             0.4810816 
+```
+
+
 
 Hypothesis testing for mean - Load data (1/9)
 ========================================================
@@ -835,14 +847,37 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Wilcoxon test
 ========================================================
+**wilcox.test()**
 
-[need example for the Wilconxon test]
+Wilcoxon Signed-Rank Test is one of the Non-parametric statistical hypothesis tests. It can compart of the means between 2 paired samples without assuming them to follow the normal distribution.
+
+
+```r
+a <- c(214, 159, 169, 202, 103, 119, 200, 109, 132, 142, 194, 104, 219, 119, 234)
+b <- c(159, 135, 141, 101, 102, 168, 62, 167, 174, 159, 66, 118, 181, 171, 112)
+
+wilcox.test(a,b, paired=TRUE)
+```
+
+```
+
+	Wilcoxon signed rank test
+
+data:  a and b
+V = 80, p-value = 0.2769
+alternative hypothesis: true location shift is not equal to 0
+```
 
 
 fisher.test()
 ========================================================
 
-[need example for the Fisher exact test]
+Given two gene lists, tests the significance of their overlap in comparison with a genomic background. 
+
+$$H_0:\text{ the odds ratio is no larger than 1}
+\\
+H_a:\text{ the odds ratio is larger than 1 }$$
+
 
 
 Time for an exercise!
