@@ -1,5 +1,5 @@
 ---
-title: "Answer for Session1: data summary"
+title: "Answer 1 for Session1: data summary"
 author: "MRC Clinical Sciences Centre (http://mrccsc.github.io/)"
 date: "12/July/2016"
 output: html_document
@@ -11,7 +11,7 @@ These exercises cover the sections of Statistics in R [Session2: data summary]("
 
 - Read in the file Life_expectancy_at_birth.csv..
 ```{r,message=T}
- Life_exp<-read.csv("data/Life_expectancy_at_birth.csv",header=T)
+ Life_exp<-read.csv("../data/Life_expectancy_at_birth.csv",header=T)
 ```
 - How many males and females in England.
 ```{r,message=T}
