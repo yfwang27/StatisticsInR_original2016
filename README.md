@@ -50,12 +50,15 @@ To install these,
 
 # Install the packages in the R console
 
+<pre>
+install.packages("ggplot2",dependencies=TRUE)
+install.packages("rmarkdown",dependencies=TRUE)
+</pre>
 
-
-
-
-
-```
-Error in contrib.url(repos, "source") : 
-  trying to use CRAN without setting a mirror
-```
+#### Download the material
+The material can either be downloaded as a [zip](https://github.com/mrccsc/StatisticsInR/archive/master.zip)
+<pre>
+wget https://github.com/mrccsc/StatisticsInR/archive/master.zip ./
+</pre>
+or checked out from our Github repository
+https://github.com/mrccsc/StatisticsInR/
