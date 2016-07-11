@@ -872,7 +872,7 @@ alternative hypothesis: true location shift is not equal to 0
 fisher.test()
 ========================================================
 
-Given two gene lists, tests the significance of their overlap in comparison with a genomic background. 
+Given two gene lists, tests the significance of their overlap in comparison with a genomic background.
 
 $$H_0:\text{ the odds ratio is no larger than 1}
 \\
