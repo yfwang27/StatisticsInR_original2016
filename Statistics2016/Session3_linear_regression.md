@@ -117,7 +117,7 @@ Correlation between vectors (2/5)
 ```
 
 ```
-[1] -0.06843003
+[1] -0.07431685
 ```
 ***
 ![plot of chunk unnamed-chunk-7](Session3_linear_regression-figure/unnamed-chunk-7-1.png)
@@ -176,7 +176,7 @@ Correlation (5/6)
 ![plot of chunk unnamed-chunk-12](Session3_linear_regression-figure/unnamed-chunk-12-1.png)
 
 
-Regression and linear models (1/12)
+Regression and linear models (1/14)
 =========================================================
 
 We have seen how we can find the correlation between two sets of variables using **cor()** function.
@@ -185,7 +185,7 @@ R also provides a comprehensive set of tools for regression analysis including t
 
 To fit a linear regression we use a similar set of arguments as passed to the t-test fuction in the previous slide.
 
-Regression and linear models (2/12)
+Regression and linear models (2/14)
 =========================================================
 Use the *Petal.Width* to predict the *Petal.Length* from the iris data as example
 
@@ -218,7 +218,7 @@ We will focus on *Iris.versicolor* as example
 ```
 
 
-Regression and linear models (3/12)
+Regression and linear models (3/14)
 =========================================================
 
 If we only know the Petal.Length, and would like to use this information to predict the Petal.Length
@@ -250,7 +250,7 @@ If we only know the Petal.Length, and would like to use this information to pred
 ![plot of chunk unnamed-chunk-15](Session3_linear_regression-figure/unnamed-chunk-15-1.png)
 
 
-Regression and linear models (4/12)
+Regression and linear models (4/14)
 =========================================================
 
 If we only know the *Petal.Length*, and would like to use this information to predict the *Petal.Length*
@@ -270,7 +270,7 @@ $$
   \end{aligned}
 $$
 
-Regression and linear models (5/12)
+Regression and linear models (5/14)
 =========================================================
 
 Zoom in [just see first 4 data points]
@@ -304,7 +304,7 @@ $$
   \end{aligned}
 $$
 
-Regression and linear models (6/12)
+Regression and linear models (6/14)
 =========================================================
 
 Now we use the "iris_versi" *Petal.Width* to predict *Petal.Length*
@@ -327,7 +327,7 @@ $$b_0\text{(intercept): the value of f(x) when x =0}$$
 $$b_1\text{(slope): the amount of f(x) will change when x changes 1 unit}$$
 
 
-Regression and linear models (7/12)
+Regression and linear models (7/14)
 =========================================================
 The **lm()** function fits a linear regression to your data and provides useful information on the generated fit.
 
@@ -348,7 +348,7 @@ Coefficients:
       1.781        1.869  
 ```
 
-Interpreting output of lm() (8/12)
+Interpreting output of lm() (8/14)
 =========================================================
 
 As we have seen, printing the model result provides the intercept and slope of line.
@@ -379,7 +379,7 @@ Multiple R-squared:  0.6188,	Adjusted R-squared:  0.6109
 F-statistic: 77.93 on 1 and 48 DF,  p-value: 1.272e-11
 ```
 
-Regression and linear models - coefficients (9/12)
+Regression and linear models - coefficients (9/14)
 =========================================================
 
 ```r
@@ -405,7 +405,7 @@ $$b_1\text{: the amount of f(x) will change when x changes 1 unit}$$
 ***
 ![plot of chunk unnamed-chunk-22](Session3_linear_regression-figure/unnamed-chunk-22-1.png)
 
-Regression and linear models - residuals (10/12)
+Regression and linear models - residuals (10/14)
 =========================================================
 
 The **residuals** are the difference between the predicted and actual values.
@@ -432,7 +432,28 @@ To retrieve the residuals we can access the slot or use the **resid()** function
 Ideally you would want your residuals to be normally distributed around 0.
 
 
-Regression and linear models - residuals (11/12)
+Regression and linear models - residuals (11/14)
+=========================================================
+
+
+```r
+> IrisLm.res<-lmResult$residual
+> head(IrisLm.res)
+```
+
+```
+        51         52         53         54         55         56 
+ 0.3016700 -0.0852625  0.3147375 -0.2113976  0.0147375  0.2886024 
+```
+
+***
+
+Plot the residuals against the independent variable (X)
+
+![plot of chunk unnamed-chunk-25](Session3_linear_regression-figure/unnamed-chunk-25-1.png)
+
+
+Regression and linear models - residuals (12/14)
 =========================================================
 
 
@@ -448,16 +469,53 @@ Regression and linear models - residuals (11/12)
 $$
 Error_i = y_i - \hat{y}
 \\
-\sum_{i=1}^nError=\sum_{i=1}^ny_i-\hat{y} \equiv 0
+
+Error_i^2  = (y_i - \hat{y})^2
+\\
+\text{- sum of the square of the residuals (SSE)}
+\\
+SSE  = \sum_{i=1}^{n}(y_i-\hat{y})^2
 $$
 
 ***
 
 Plot the residuals against the independent variable (X)
 
-![plot of chunk unnamed-chunk-25](Session3_linear_regression-figure/unnamed-chunk-25-1.png)
+![plot of chunk unnamed-chunk-27](Session3_linear_regression-figure/unnamed-chunk-27-1.png)
 
-Regression and linear models - R-squared (12/12)
+
+
+Regression and linear models - residuals (13/14)
+=========================================================
+
+Residuals from the model
+
+![plot of chunk unnamed-chunk-28](Session3_linear_regression-figure/unnamed-chunk-28-1.png)
+
+- Sum of the square of the residuals (SSE)
+$$
+SSE  = \sum_{i=1}^{n}(y_i-\hat{y})^2
+$$
+
+***
+
+Residuals from the mean
+
+![plot of chunk unnamed-chunk-29](Session3_linear_regression-figure/unnamed-chunk-29-1.png)
+
+- Total Sum of Squares (TSS)
+
+$$
+  \begin{aligned}
+  TSS  = \sum_{i=1}^{n}(y_i-\overline y)^2
+  \end{aligned}
+$$
+
+
+
+
+
+Regression and linear models - R-squared (14/14)
 =========================================================
 Left: 70%
 
@@ -531,7 +589,7 @@ The fraction of variability in the independent variable (Y; or the *Petal.Length
 $$
 TSS=\text{Total Sum of Squares}=\sum_{i=1}^n(y_i-\overline y)
 \\
-SSE=\text{Sum of the Square of the residuals}=\sum_{i=1}^n(y_i-\bar y)
+SSE=\text{Sum of the Square of the residuals}=\sum_{i=1}^n(y_i-\hat{y})
 $$
 
 
