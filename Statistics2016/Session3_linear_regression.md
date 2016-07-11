@@ -16,11 +16,7 @@ Outline
 - linear regression
 
 
-Dataset - use the "iris" data (1/3)
-========================================================
-We have used the "iris" data for the [Intermediate R course]. We are going to work with this dataset again for this session.
-
-Dataset - use the "iris" data (2/3)
+Dataset - use the "iris" data (1/2)
 ========================================================
 
 
@@ -65,7 +61,7 @@ Some basic checks
 6          5.4         3.9          1.7         0.4  setosa
 ```
 
-Dataset - use the "iris" data (3/3)
+Dataset - use the "iris" data (2/2)
 ========================================================
 [*intermediate R; add a link to the intermediate R]
 
@@ -121,7 +117,7 @@ Correlation between vectors (2/5)
 ```
 
 ```
-[1] 0.1767082
+[1] 0.1369652
 ```
 ***
 ![plot of chunk unnamed-chunk-7](Session3_linear_regression-figure/unnamed-chunk-7-1.png)
