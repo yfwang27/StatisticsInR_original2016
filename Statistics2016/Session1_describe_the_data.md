@@ -23,7 +23,7 @@ Materials.
 id: materials
 
 All prerequisites, links to material and slides for this course can be found on github.
-* [Reproducible-R](http://mrccsc.github.io/StatisticsInR/)
+* [StatisticsInR](http://mrccsc.github.io/StatisticsInR/)
 
 Or can be downloaded as a zip archive from here.
 * [Download zip](https://github.com/mrccsc/StatisticsInR/zipball/master)
