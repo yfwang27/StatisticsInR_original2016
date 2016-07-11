@@ -50,12 +50,18 @@ To install these,
 
 * Install the packages in the R console
 
-
-
-
-
-
+```{r,message=F,warning=F,results='hide'}
+install.packages("ggplot2",dependencies=TRUE)
+install.packages("rmarkdown",dependencies=TRUE)
 ```
-Error in contrib.url(repos, "source") : 
-  trying to use CRAN without setting a mirror
+
+- Download the material
+The material can either be downloaded as a [zip](https://github.com/mrccsc/StatisticsInR/archive/master.zip)
+
+```{r}
+"wget https://github.com/mrccsc/Reproducible-R/archive/master.zip ./"
 ```
+
+or checked out from our Github repository
+https://github.com/mrccsc/StatisticsInR/
+
