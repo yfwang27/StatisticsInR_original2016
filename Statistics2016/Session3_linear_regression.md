@@ -63,7 +63,7 @@ Some basic checks
 
 Dataset - use the "iris" data (2/2)
 ========================================================
-[*intermediate R; add a link to the intermediate R]
+[Use the dplyr package to make data tidy](http://bioinformatics-core-shared-training.github.io/r-intermediate/)
 
 ```r
 > #install.packages("dplyr")
@@ -117,7 +117,7 @@ Correlation between vectors (2/5)
 ```
 
 ```
-[1] 0.1369652
+[1] -0.06843003
 ```
 ***
 ![plot of chunk unnamed-chunk-7](Session3_linear_regression-figure/unnamed-chunk-7-1.png)
@@ -445,16 +445,10 @@ Regression and linear models - residuals (11/12)
         51         52         53         54         55         56 
  0.3016700 -0.0852625  0.3147375 -0.2113976  0.0147375  0.2886024 
 ```
-
-```r
-> sum(IrisLm.res)
-```
-
-```
-[1] 3.469447e-16
-```
 $$
-\sum_{i=1}^nError=\sum_{i=1}^ny_i-\overline{y} \equiv 0
+Error_i = y_i - \hat{y}
+\\
+\sum_{i=1}^nError=\sum_{i=1}^ny_i-\hat{y} \equiv 0
 $$
 
 ***

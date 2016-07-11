@@ -34,7 +34,7 @@ head(iris)
 
 Dataset - use the "iris" data (2/2)
 ========================================================
-[*intermediate R; add a link to the intermediate R]
+[Use the dplyr package to make data tidy](http://bioinformatics-core-shared-training.github.io/r-intermediate/)
 ```{r, warning=FALSE, eval=T,prompt=T}
 #install.packages("dplyr")
 library("dplyr")
@@ -329,10 +329,11 @@ Regression and linear models - residuals (11/12)
 IrisLm.res<-lmResult$residual
 head(IrisLm.res)
 
-sum(IrisLm.res)
 ```
 $$
-\sum_{i=1}^nError=\sum_{i=1}^ny_i-\overline{y} \equiv 0
+Error_i = y_i - \hat{y}
+\\
+\sum_{i=1}^nError=\sum_{i=1}^ny_i-\hat{y} \equiv 0
 $$
 
 ***
