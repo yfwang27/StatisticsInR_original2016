@@ -27,28 +27,28 @@ This course is free for MRC CSC and Imperial staff and students. If you would li
 Setting up.
 ========================================================
 
-# Install R.
+## Install R.
 
 R can be installed from the R-project website.
 R 3.1.0 or higher is required for this course.
 
 http://www.r-project.org/
 
-# Install RStudio.
+#### Install RStudio.
 
 RStudio can be installed from the R-project website.
 
 http://www.rstudio.com/
 
 
-# Install required packages.
+#### Install required packages.
 
 Having downloaded R and RStudio, some additional packages are required (rmarkdown and ggplot2).
 To install these,
 
-# First launch RStudio
+#### First launch RStudio
 
-# Install the packages in the R console
+#### Install the packages in the R console
 
 <pre>
 install.packages("ggplot2",dependencies=TRUE)
