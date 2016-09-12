@@ -5,8 +5,7 @@ date:
 
 The Course
 ========================================================
-
-This course introduces statistics in R and practices.
+This course introduces statistics in R and practices. It is the original version of the statistics in R course that generated in 2016.
 
 The course consists of 3 sections; session1: data summary, session2: hypothesis testing and anova and session3: correlation and linear regression.
 Each section is presented as both HTMl and Rpres markdown ( to allow for intergration of the presentation in the RStudion enviroment itself). Exercises and answer sheets are included after all subsections to practice techniques and provide future reference examples.
